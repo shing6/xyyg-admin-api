@@ -73,7 +73,7 @@ public class apipayController {
 			response.getWriter().write(form); // 直接将完整的表单html输出到页面
 			response.getWriter().flush();
 			response.getWriter().close();
-			System.out.println("支付成功");
+			
 		}
 
 		/**
@@ -83,9 +83,9 @@ public class apipayController {
 		 * @throws Exception
 		 */
 		@RequestMapping("/returnUrl")
-		public ModelAndView returnUrl(HttpServletRequest request) throws Exception {
-			ModelAndView mav = new ModelAndView();
-			 System.out.println("支付成功1");
+		public void returnUrl(HttpServletRequest request) throws Exception {
+			//ModelAndView mav = new ModelAndView();
+			 
 			// 获取支付宝GET过来反馈信息（官方固定代码）
 			Map<String, String> params = new HashMap<String, String>();
 			Map<String, String[]> requestParams = request.getParameterMap();
@@ -103,12 +103,13 @@ public class apipayController {
 			// 返回界面
 			if (signVerified) {
 				System.out.println("前往支付成功页面");
-				mav.setViewName("successReturn");
+				System.out.println(params);
+				
 			} else {
 				System.out.println("前往支付失败页面");
-				mav.setViewName("failReturn");
+				
 			}
-			return mav;
+			
 		}
 
 		/**
@@ -119,7 +120,7 @@ public class apipayController {
 		 */
 		@RequestMapping("/notifyUrl")
 		public void notifyUrl(HttpServletRequest request) throws Exception {
-			 System.out.println("支付成功2");
+			 
 			// 获取支付宝GET过来反馈信息
 			Map<String, String> params = new HashMap<String, String>();
 			Map<String, String[]> requestParams = request.getParameterMap();
@@ -141,6 +142,7 @@ public class apipayController {
 				String out_trade_no = request.getParameter("out_trade_no");
 				// 交易状态
 				String trade_status = request.getParameter("trade_status");
+				System.out.println(params);
 				// 修改数据库
 			} else {
 				System.out.println("异步通知失败");
