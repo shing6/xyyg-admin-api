@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.addressDao">
+
+	
+     <!-- 添加微信用户地址 -->
+    <insert id="insertAddress" parameterType="cn.xyyg.pojo.address" >
+      INSERT INTO `xyyg`.`address` ( `name`, `mobile`, `address`, `detailAddr`, `latitude`, `longitude`,`isDefault`, `wechatUserId`) 
+      VALUES ( #{name}, #{mobile}, #{address}, #{detailAddr}, #{latitude}, #{longitude},#{isDefault}, #{wechatUserId});
+    </insert>
+	
+    <!-- 根据用户id查询收货地址 -->
+    <select id="getAddressById"  parameterType="Integer" resultType="cn.xyyg.pojo.address">
+		select * from address where wechatUserId = #{wechatUserId}
+	</select>
+	<!-- 把地址都设为非默认 -->
+	<update id="updateIsDefaultAddr" parameterType="Integer">
+	   UPDATE `xyyg`.`address` SET `isDefault`='0' WHERE `wechatUserId`=#{wechatUserId};
+    </update>
+    
+	<!-- 根据地址id修改地址 -->
+	<update id="updateAddressById" parameterType="cn.xyyg.pojo.address">
+	   UPDATE `xyyg`.`address` SET `name`=#{name}, `mobile`=#{mobile}, `address`=#{address}, 
+	   `detailAddr`=#{detailAddr}, `latitude`=#{latitude}, `longitude`=#{longitude}, `isDefault`=#{isDefault} WHERE `id`=#{id};
+    </update>
+    
+	<!-- 根据地址id删除地址 -->
+	<delete id="deleteAddressById" parameterType="Integer">
+	   DELETE FROM `xyyg`.`address` WHERE `id`=#{id};
+    </delete>
+    
+	 <!-- 根据用户id查询默认收货地址 -->
+    <select id="getDefaultAddressById"  parameterType="Integer" resultType="cn.xyyg.pojo.address">
+		select * from address where wechatUserId = #{wechatUserId} and isDefault=1
+	</select>
+</mapper>

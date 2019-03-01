@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>基于amaze-ui的充值界面</title>
+		<link rel="stylesheet" type="text/css" href="css/amazeui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+	</head>
+
+	<body>
+		<div class="pay">
+			<!--主内容开始编辑-->
+			<div class="tr_recharge">
+				<div class="tr_rechtext">
+					<p class="te_retit"><img src="image/coin.png" alt="" />充值中心</p>
+					
+				</div>
+				<form action="/alipay/pay" class="am-form" >
+					<div class="tr_rechbox">
+						<div class="tr_rechhead">
+							<img src="image/ys_head2.jpg" />
+							<p>充值卡号：
+								<a>王凯</a>
+							</p>
+							<div class="tr_rechheadcion">
+								<img src="image/coin.png" alt="" />
+								<span>当前余额：<span>1000招兵币</span></span>
+							</div>
+						</div>
+						<div class="tr_rechli am-form-group">
+							<ul class="ui-choose am-form-group" id="uc_01">
+								<li>
+									<label class="am-radio-inline">
+								        	<input type="radio"  name="money" value="10" required data-validation-message="请选择一项充值额度"> ￥10
+									    </label>
+								</li>
+								<li>
+									<label class="am-radio-inline">
+									        <input type="radio" name="money"  value="20" data-validation-message="请选择一项充值额度"> ￥20
+								      	</label>
+								</li>
+
+								<li>
+									<label class="am-radio-inline">
+									        <input type="radio" name="money" value="50" data-validation-message="请选择一项充值额度"> ￥50
+								        </label>
+								</li>
+								<li>
+									<label class="am-radio-inline">
+									        <input type="radio"  name="money"  value="" data-validation-message="请选择一项充值额度"> 其他金额
+								        </label>
+								</li>
+							</ul>
+							<!--<span></span>-->
+						</div>
+						<div class="tr_rechoth am-form-group">
+							<span>其他金额：</span>
+							<input type="number" min="10" max="1000"    class="othbox" data-validation-message="充值金额范围：10-1000元" />
+							<!--<p>充值金额范围：10-10000元</p>-->
+						</div>
+						
+						<div class="tr_rechnum">
+							<span>应付金额：</span>
+							<p class="rechnum">0.00元</p>
+						</div>
+					</div>
+					<div class="tr_paybox">
+						<input type="submit" value="确认支付" class="tr_pay am-btn" />
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/amazeui.min.js"></script>
+		<script type="text/javascript" src="js/ui-choose.js"></script>
+
+		<script type="text/javascript">
+		     
+			// 将所有.ui-choose实例化
+			$('.ui-choose').ui_choose();
+			// uc_01 ul 单选
+			var uc_01 = $('#uc_01').data('ui-choose'); // 取回已实例化的对象
+			
+			$(function() {
+				$('#uc_01 li:eq(3)').click(function() {
+					$('.tr_rechoth').show();
+					$('.tr_rechoth').find("input").attr('required', 'true')
+					$('.am-radio-inline input ').val();
+					
+				})
+				$('#uc_01 li:eq(0)').click(function() {
+					$('.tr_rechoth').hide();
+					$('.rechnum').text('10.00元');
+					$('.othbox').val('');
+					$('.othbox').attr('required','true')
+					$('.othbox').removeAttr('required')
+				})
+				$('#uc_01 li:eq(1)').click(function() {
+					$('.tr_rechoth').hide();
+					$('.rechnum').text('20.00元');
+					$('.othbox').val('');
+					$('.othbox').attr('required','true')
+					$('.othbox').removeAttr('required')
+				})
+				$('#uc_01 li:eq(2)').click(function() {
+					$('.tr_rechoth').hide();
+					$('.rechnum').text('50.00元');
+					$('.am-radio-inline input ').val('');
+					$('.othbox').removeAttr('required')
+					$('.othbox').val('')
+				})
+				$(document).ready(function() {
+					$('.othbox').on('input propertychange', function() {
+						var num = $(this).val();
+						$('.rechnum').html(num + ".00元");
+					});
+				});
+			})
+
+			$('.othbox').bind('input propertychange', function()
+
+			{
+				$('.am-radio-inline input ').val($('.othbox').val());
+			})
+
+			
+		</script>
+	</body>
+
+</html>

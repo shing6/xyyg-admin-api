@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.orderDao">
+
+	
+     <!-- 创建订单-->
+    <insert id="createOrder"  parameterType="cn.xyyg.pojo.order" >
+		INSERT INTO `xyyg`.`order` ( `orderNo`, `snapAddr`, `freight`, `totalCount`, `totalPrice`, `needPrice`,`createTime`, `status`, `wechatUserId`, `sellerId`) 
+		VALUES ( #{orderNo}, #{snapAddr}, #{freight}, #{totalCount}, #{totalPrice},#{needPrice}, #{createTime}, #{status}, #{wechatUserId}, #{sellerId});
+
+	</insert>
+	
+    <!-- 根据商品id更新库存-->
+    <update id="updateStockById"  parameterType="Integer" >
+	 UPDATE `xyyg`.`goods` SET `stock`=#{stock} WHERE `id`=#{id};
+    </update>
+	
+	<!-- 创建订单详情-->
+    <insert id="createOrderGoods"  parameterType="cn.xyyg.pojo.orderGoods" >
+    INSERT INTO `xyyg`.`order_goods` (`orderId`, `id`, `mainPic`, `goodsName`, `price`, `counts`,`isComment`) 
+    VALUES (#{orderId}, #{id}, #{mainPic}, #{goodsName}, #{price}, #{counts},#{isComment});
+    </insert>
+    
+     <!-- 根据订单编号查询订单 -->
+    <select id="getOrderByNo"  resultType="cn.xyyg.pojo.order" parameterType="String">
+		select * from xyyg.order where orderNo=#{orderNo}
+	</select>
+	
+     <!-- 一对多查询订单 -->
+    <select id="getAllOrderList"   resultMap="orderWithGoods" parameterType="cn.xyyg.pojo.page">
+		select `order`.* , order_goods.orderId as orderId,order_goods.id as goodsId,order_goods.mainPic as mainPic,
+		order_goods.goodsName as goodsName,order_goods.price as price,order_goods.counts as counts ,order_goods.isComment as isComment  
+		from `order` LEFT JOIN order_goods  on `order`.id=order_goods.orderId  where `order`.id in
+        (SELECT temp.id from (SELECT id from `order`  order by `order`.createTime DESC  limit #{pageNum},#{pageSize}) as temp)
+	</select>
+	
+    <resultMap type="cn.xyyg.pojo.orderWithGoods" id="orderWithGoods">
+	    <id property="id" column="id"/>
+	    <result property="orderNo" column="orderNo"/>
+	    <result property="snapAddr" column="snapAddr"/>
+	    <result property="freight" column="freight"/>
+	    <result property="totalCount" column="totalCount"/>
+	    <result property="totalPrice" column="totalPrice"/>
+	    <result property="needPrice" column="needPrice"/>
+	    <result property="payPrice" column="payPrice"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="longitude" column="longitude"/>
+	    <result property="status" column="status"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="orderGoodsList" ofType="cn.xyyg.pojo.orderGoods">
+	       <id property="orderId" column="orderId"/>
+	       <id property="id" column="goodsId"/>
+	       <result property="goodsName" column="goodsName"/>
+	       <result property="price" column="price"/>
+	       <result property="mainPic" column="mainPic"/>
+	       <result property="counts" column="counts"/>
+	       <result property="isComment" column="isComment"/>
+	    </collection>
+	    
+	</resultMap>
+	
+     <!-- 获取订单数量 -->
+    <select id="getOrderCount"  resultType="Integer"  parameterType="Integer" >
+		select count(*) from xyyg.order where wechatUserId =#{wechatUserId}
+	</select>
+	
+     <!-- 根据订单状态一对多查询订单 -->
+    <select id="getAllOrderListByStatus"   resultMap="orderWithGoodsByStatus" parameterType="cn.xyyg.pojo.page">
+		 select `order`.* , order_goods.orderId as orderId,order_goods.id as goodsId,order_goods.mainPic as mainPic,
+		order_goods.goodsName as goodsName,order_goods.price as price,order_goods.counts as counts,order_goods.isComment as isComment  
+		from `order`  LEFT JOIN order_goods  on `order`.id=order_goods.orderId    where `order`.id in
+        (SELECT temp.id from (SELECT id from `order` where `status`= #{status} order by `order`.createTime   limit #{pageNum},#{pageSize}) as temp)
+	</select>
+	
+    <resultMap type="cn.xyyg.pojo.orderWithGoods" id="orderWithGoodsByStatus">
+	    <id property="id" column="id"/>
+	    <result property="orderNo" column="orderNo"/>
+	    <result property="snapAddr" column="snapAddr"/>
+	    <result property="freight" column="freight"/>
+	    <result property="totalCount" column="totalCount"/>
+	    <result property="totalPrice" column="totalPrice"/>
+	    <result property="needPrice" column="needPrice"/>
+	    <result property="payPrice" column="payPrice"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="longitude" column="longitude"/>
+	    <result property="status" column="status"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="orderGoodsList" ofType="cn.xyyg.pojo.orderGoods">
+	       <id property="orderId" column="orderId"/>
+	       <id property="id" column="goodsId"/>
+	       <result property="goodsName" column="goodsName"/>
+	       <result property="price" column="price"/>
+	       <result property="mainPic" column="mainPic"/>
+	       <result property="counts" column="counts"/>
+	       <result property="isComment" column="isComment"/>
+	    </collection>
+	    
+	</resultMap>
+	
+     <!-- 根据订单状态获取订单数量 -->
+    <select id="getOrderCountByStatus"  resultType="Integer"  parameterType="Integer" >
+		select count(*) from xyyg.order where wechatUserId =#{wechatUserId} and status=#{status}
+	</select>
+	
+      <!-- 获取订单详情-->
+    <select id="getOrderDetailById"   resultMap="orderDetail" parameterType="Integer">
+		select `order`.* , order_goods.orderId as orderId,order_goods.id as goodsId,order_goods.mainPic as mainPic,
+		order_goods.goodsName as goodsName,order_goods.price as price,order_goods.counts as counts ,order_goods.isComment as isComment  
+		from `order`  LEFT JOIN order_goods  on `order`.id=order_goods.orderId    where `order`.id =#{id}
+	</select>
+	
+     <resultMap type="cn.xyyg.pojo.orderWithGoods" id="orderDetail">
+	    <id property="id" column="id"/>
+	    <result property="orderNo" column="orderNo"/>
+	    <result property="snapAddr" column="snapAddr"/>
+	    <result property="freight" column="freight"/>
+	    <result property="totalCount" column="totalCount"/>
+	    <result property="totalPrice" column="totalPrice"/>
+	    <result property="needPrice" column="needPrice"/>
+	    <result property="payPrice" column="payPrice"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="longitude" column="longitude"/>
+	    <result property="status" column="status"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="orderGoodsList" ofType="cn.xyyg.pojo.orderGoods">
+	       <id property="orderId" column="orderId"/>
+	       <id property="id" column="goodsId"/>
+	       <result property="goodsName" column="goodsName"/>
+	       <result property="price" column="price"/>
+	       <result property="mainPic" column="mainPic"/>
+	       <result property="counts" column="counts"/>
+	       <result property="isComment" column="isComment"/>
+	    </collection>
+	    
+	</resultMap>
+     
+     <!-- 更改订单某商品可评论状态 -->
+	<update id="updateCommentStatus" parameterType="Integer">
+	  UPDATE `xyyg`.`order_goods` SET `isComment`='1' WHERE `orderId`=#{orderId} and`id`=#{goodsId};
+
+    </update>  
+    
+	
+	 <!-- 根据订单编号查询订单评论状态 -->
+    <select id="getIsCommentById"  resultType="Integer" parameterType="Integer">
+		select isComment from order_goods where orderId=#{orderId};
+	</select>
+	
+     <!-- 更改订单状态 -->
+	<update id="updateOrderStaus" parameterType="Integer">
+	  UPDATE `xyyg`.`order` SET `status`=#{status} WHERE `id`=#{orderId};
+    </update>
+    
+	
+	<!-- 根据商店id查询订单 -->
+     <select id="getOrderBySellerId"  resultType="cn.xyyg.pojo.order" parameterType="Integer">
+		select * from xyyg.order where sellerId=#{sellerId}
+	</select>
+	
+      <!-- 根据商家id获取订单数量 -->
+    <select id="getOrderCountBySellerId"  resultType="Integer"  parameterType="Integer" >
+		select count(*) from xyyg.order where sellerId=#{sellerId}
+	</select>
+	
+     <!-- 支付后根据订单号更改订单状态 和付款金额-->
+	<update id="updateOrderStausAfterPay" parameterType="String">
+	  UPDATE `xyyg`.`order` SET `payPrice`=needPrice, `status`='2' WHERE `orderNo`=#{orderNo};
+    </update>
+    
+	  <!-- 根据订单号获取订单需要支付的价钱 -->
+    <select id="getOrderNeedPrice"  resultType="BigDecimal"  parameterType="String" >
+		select needPrice from `order` where orderNo=#{orderNo};
+	</select>
+	
+      <!-- 查找未付款订单 -->
+    <select id="getNotPayOrder"  resultType="cn.xyyg.pojo.order" >
+		select * from `order` where `status` = 1
+	</select>
+	
+      <!-- 自动取消超时未付款订单 -->
+    <update id="cancelOrder"  parameterType="String" >
+		 UPDATE `xyyg`.`order` SET  `status`='6' WHERE `orderNo`=#{orderNo};
+	</update>
+	
+    <!-- 根据订单id获取订单详情 -->
+    <select id="getGoodById"  resultType="cn.xyyg.pojo.orderGoods" parameterType="Integer">
+		select * from xyyg.order_goods where orderId=#{orderId}
+	</select>
+	
+     <!-- 卖家发货-->
+	<update id="sendGoods" parameterType="String">
+	  UPDATE `xyyg`.`order` SET  `status`='3' WHERE `orderNo`=#{orderNo};
+    </update>
+	
+     <!-- 买家确认收货-->
+	<update id="takeGoods" parameterType="String">
+	  UPDATE `xyyg`.`order` SET `payPrice`=needPrice, `status`='4' WHERE `orderNo`=#{orderNo};
+    </update>
+	
+ </mapper>

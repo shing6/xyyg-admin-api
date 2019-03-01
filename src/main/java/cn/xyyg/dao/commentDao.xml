@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.commentDao">
+
+	
+     <!-- 添加评论 -->
+    <insert id="insertComment" parameterType="cn.xyyg.pojo.comment" >
+     INSERT INTO `xyyg`.`comment` (`goodsId`, `wechatUserId`, `content`,`score`, `createTime`) 
+     VALUES (#{goodsId}, #{wechatUserId}, #{content}, #{score}, #{createTime});
+     
+     <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+     
+    </insert>
+    
+    <!-- 批量插入评论图片 -->
+    <insert id="insertCommentPicture" parameterType="java.util.List">
+        INSERT INTO `xyyg`.`comment_picture` ( `picAddr`, `commentId`) VALUES 
+        <foreach collection ="list" item="commentPicture" index= "index" separator =",">
+        (#{commentPicture.picAddr}, #{commentPicture.commentId})
+        </foreach >
+        
+    </insert>
+    
+    <!-- 根据商品id查询评论 -->
+    <select id="getCommentById" parameterType="Integer" resultType="cn.xyyg.pojo.comment">
+      select * from `comment`  WHERE goodsId=#{goodsId} order by score DESC
+    </select>
+    
+    <!-- 根据商品id一对多查询评论 -->
+    <select id="getCommentWithPictureById" parameterType="cn.xyyg.pojo.page" resultMap="commentWithPicture" >
+     select comment.* , comment_picture.id as commentPictureId,comment_picture.picAddr  as picAddr , nickName as nickName,avatarUrl as avatarUrl ,reply.id as replyId,reply.content as replyContent ,reply.createTime as replyCreateTime from comment LEFT JOIN comment_picture  
+     on comment.id=comment_picture.commentId LEFT JOIN wechat_user on `comment`.wechatUserId=wechat_user.id LEFT JOIN reply on comment.id = reply.commentId where comment.id in
+     (SELECT temp.id from (SELECT id from comment where comment.goodsId=#{goodsId} order by comment.id  limit #{pageNum},#{pageSize}) as temp)
+     
+    </select>
+    
+    <resultMap type="cn.xyyg.pojo.commentWithPicture" id="commentWithPicture">
+	    <id property="id" column="id"/>
+	    <result property="goodsId" column="goodsId"/>
+	    <result property="wechatUserId" column="wechatUserId"/>
+	    <result property="content" column="content"/>
+	    <result property="score" column="score"/>
+	    <result property="createTime" column="createTime"/>
+	    <collection property="commentPictureList" ofType="cn.xyyg.pojo.commentPicture">
+	       <id property="id" column="commentPictureId"/>
+	       <result property="picAddr" column="picAddr"/>
+	    </collection>
+	    <collection property="wechatUser" ofType="cn.xyyg.pojo.wechatUser">
+	       
+	       <result property="nickName" column="nickName"/>
+	       <result property="avatarUrl" column="avatarUrl"/>
+	    </collection>
+	    <collection property="reply" ofType="cn.xyyg.pojo.reply">
+	       <id property="id" column="replyId"/>
+	       <result property="content" column="replyContent"/>
+	       <result property="createTime" column="replyCreateTime"/>
+	    </collection>
+	    
+	</resultMap>
+	
+    <!-- 一对多获取好评 -->
+    <select id="getGoodCommentById" parameterType="cn.xyyg.pojo.page" resultMap="goodComment" >
+     select comment.* , comment_picture.id as commentPictureId,comment_picture.picAddr  as picAddr , nickName as nickName,avatarUrl as avatarUrl ,reply.id as replyId,reply.content as replyContent ,reply.createTime as replyCreateTime from comment LEFT JOIN comment_picture  
+     on comment.id=comment_picture.commentId LEFT JOIN wechat_user on `comment`.wechatUserId=wechat_user.id LEFT JOIN reply on comment.id = reply.commentId where comment.id in
+     (SELECT temp.id from (SELECT id from comment where comment.goodsId=#{goodsId} and  (score=4 or score=5) order by comment.id  limit #{pageNum},#{pageSize}) as temp)
+     
+    </select>
+    
+    <resultMap type="cn.xyyg.pojo.commentWithPicture" id="goodComment">
+	    <id property="id" column="id"/>
+	    <result property="goodsId" column="goodsId"/>
+	    <result property="wechatUserId" column="wechatUserId"/>
+	    <result property="content" column="content"/>
+	    <result property="score" column="score"/>
+	    <result property="createTime" column="createTime"/>
+	    <collection property="commentPictureList" ofType="cn.xyyg.pojo.commentPicture">
+	       <id property="id" column="commentPictureId"/>
+	       <result property="picAddr" column="picAddr"/>
+	    </collection>
+	    <collection property="wechatUser" ofType="cn.xyyg.pojo.wechatUser">
+	       
+	       <result property="nickName" column="nickName"/>
+	       <result property="avatarUrl" column="avatarUrl"/>
+	    </collection>
+	    <collection property="reply" ofType="cn.xyyg.pojo.reply">
+	       <id property="id" column="replyId"/>
+	       <result property="content" column="replyContent"/>
+	       <result property="createTime" column="replyCreateTime"/>
+	    </collection>
+	    
+	</resultMap>
+	
+    <!-- 一对多获取中评 -->
+    <select id="getMiddleCommentById" parameterType="cn.xyyg.pojo.page" resultMap="middleComment" >
+     select comment.* , comment_picture.id as commentPictureId,comment_picture.picAddr  as picAddr , nickName as nickName,avatarUrl as avatarUrl ,reply.id as replyId,reply.content as replyContent ,reply.createTime as replyCreateTime from comment LEFT JOIN comment_picture  
+     on comment.id=comment_picture.commentId LEFT JOIN wechat_user on `comment`.wechatUserId=wechat_user.id LEFT JOIN reply on comment.id = reply.commentId where comment.id in
+     (SELECT temp.id from (SELECT id from comment where comment.goodsId=#{goodsId} and  score=3 order by comment.id  limit #{pageNum},#{pageSize}) as temp)
+     
+    </select>
+    
+    <resultMap type="cn.xyyg.pojo.commentWithPicture" id="middleComment">
+	    <id property="id" column="id"/>
+	    <result property="goodsId" column="goodsId"/>
+	    <result property="wechatUserId" column="wechatUserId"/>
+	    <result property="content" column="content"/>
+	    <result property="score" column="score"/>
+	    <result property="createTime" column="createTime"/>
+	    <collection property="commentPictureList" ofType="cn.xyyg.pojo.commentPicture">
+	       <id property="id" column="commentPictureId"/>
+	       <result property="picAddr" column="picAddr"/>
+	    </collection>
+	    <collection property="wechatUser" ofType="cn.xyyg.pojo.wechatUser">
+	       
+	       <result property="nickName" column="nickName"/>
+	       <result property="avatarUrl" column="avatarUrl"/>
+	    </collection>
+	    <collection property="reply" ofType="cn.xyyg.pojo.reply">
+	       <id property="id" column="replyId"/>
+	       <result property="content" column="replyContent"/>
+	       <result property="createTime" column="replyCreateTime"/>
+	    </collection>
+	    
+	</resultMap>
+	
+    <!-- 一对多获取差评 -->
+    <select id="getBadCommentById" parameterType="cn.xyyg.pojo.page" resultMap="badComment" >
+     select comment.* , comment_picture.id as commentPictureId,comment_picture.picAddr  as picAddr , nickName as nickName,avatarUrl as avatarUrl ,reply.id as replyId,reply.content as replyContent ,reply.createTime as replyCreateTime from comment LEFT JOIN comment_picture  
+     on comment.id=comment_picture.commentId LEFT JOIN wechat_user on `comment`.wechatUserId=wechat_user.id LEFT JOIN reply on comment.id = reply.commentId where comment.id in
+     (SELECT temp.id from (SELECT id from comment where comment.goodsId=#{goodsId} and  (score=1 or score=2) order by comment.id  limit #{pageNum},#{pageSize}) as temp)
+     
+    </select>
+    
+    <resultMap type="cn.xyyg.pojo.commentWithPicture" id="badComment">
+	    <id property="id" column="id"/>
+	    <result property="goodsId" column="goodsId"/>
+	    <result property="wechatUserId" column="wechatUserId"/>
+	    <result property="content" column="content"/>
+	    <result property="score" column="score"/>
+	    <result property="createTime" column="createTime"/>
+	    <collection property="commentPictureList" ofType="cn.xyyg.pojo.commentPicture">
+	       <id property="id" column="commentPictureId"/>
+	       <result property="picAddr" column="picAddr"/>
+	    </collection>
+	    <collection property="wechatUser" ofType="cn.xyyg.pojo.wechatUser">
+	       
+	       <result property="nickName" column="nickName"/>
+	       <result property="avatarUrl" column="avatarUrl"/>
+	    </collection>
+	    <collection property="reply" ofType="cn.xyyg.pojo.reply">
+	       <id property="id" column="replyId"/>
+	       <result property="content" column="replyContent"/>
+	       <result property="createTime" column="replyCreateTime"/>
+	    </collection>
+	    
+	</resultMap>
+    
+    <!-- 根据商品id查询评论数量 -->
+    <select id="getCommentCountById" parameterType="Integer" resultType="Integer">
+      select count(*) from comment where goodsId=#{goodsId}
+    </select>
+    
+    <!-- 根据商品id查询好评数量 -->
+    <select id="getGoodCommentCount" parameterType="Integer" resultType="Integer">
+      select count(*) from comment where goodsId=#{goodsId} and (score=4 or score=5)
+    </select>
+    
+    <!-- 根据商品id查询中评数量 -->
+    <select id="getMiddleCommentCount" parameterType="Integer" resultType="Integer">
+      select count(*) from comment where goodsId=#{goodsId} and score=3
+    </select>
+    
+    <!-- 根据商品id查询差评数量 -->
+    <select id="getBadCommentCount" parameterType="Integer" resultType="Integer">
+      select count(*) from comment where goodsId=#{goodsId} and (score=1 or score=2)
+    </select>
+    
+    
+     <!-- 根据商家id一对多查询评论 -->
+    <select id="getCommentWithPictureBySellerId" parameterType="cn.xyyg.pojo.page" resultMap="commentWithPictures" >
+     select comment.* , comment_picture.id as commentPictureId,comment_picture.picAddr  as picAddr , nickName as nickName,avatarUrl as avatarUrl , reply.id as replyId,reply.content as replyContent ,reply.createTime as replyCreateTime from comment LEFT JOIN comment_picture  
+     on comment.id=comment_picture.commentId LEFT JOIN wechat_user on `comment`.wechatUserId=wechat_user.id LEFT JOIN reply on comment.id = reply.commentId where comment.id in
+     (SELECT temp.id from (SELECT id from comment where comment.goodsId in (select id from goods where sellerId = #{sellerId}) order by comment.id  limit #{pageNum},#{pageSize}) as temp)
+    </select>
+    
+    <resultMap type="cn.xyyg.pojo.commentWithPicture" id="commentWithPictures">
+	    <id property="id" column="id"/>
+	    <result property="goodsId" column="goodsId"/>
+	    <result property="wechatUserId" column="wechatUserId"/>
+	    <result property="content" column="content"/>
+	    <result property="score" column="score"/>
+	    <result property="createTime" column="createTime"/>
+	    <collection property="commentPictureList" ofType="cn.xyyg.pojo.commentPicture">
+	       <id property="id" column="commentPictureId"/>
+	       <result property="picAddr" column="picAddr"/>
+	    </collection>
+	    <collection property="wechatUser" ofType="cn.xyyg.pojo.wechatUser">
+	       <result property="nickName" column="nickName"/>
+	       <result property="avatarUrl" column="avatarUrl"/>
+	    </collection>
+	    <collection property="reply" ofType="cn.xyyg.pojo.reply">
+	       <id property="id" column="replyId"/>
+	       <result property="content" column="replyContent"/>
+	       <result property="createTime" column="replyCreateTime"/>
+	    </collection>
+	    
+	</resultMap>
+	
+     <!-- 添加评论 -->
+    <insert id="insertReply" parameterType="cn.xyyg.pojo.reply" >
+     INSERT INTO `xyyg`.`reply` (`content`,`commentId`, `createTime`) 
+     VALUES (#{content}, #{commentId},  #{createTime});
+    
+    </insert>
+</mapper>

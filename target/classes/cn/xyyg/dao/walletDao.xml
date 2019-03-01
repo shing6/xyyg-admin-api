@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.walletDao">
+
+	
+    <!-- 添加微信用户钱包信息 -->
+    <insert id="insertWechatWallet" parameterType="cn.xyyg.pojo.wallet" >
+       INSERT INTO `xyyg`.`wallet` ( `money`, `wechatUserId`) VALUES ( #{money}, #{wechatUserId});
+    </insert>
+    
+    <!-- 添加微信用户支付密码-->
+    <update id="insertWechatWalletPassword" parameterType="cn.xyyg.pojo.wallet" >
+       UPDATE `xyyg`.`wallet` SET `password`=#{password} WHERE wechatUserId = #{wechatUserId};
+    </update>
+    
+    <!-- 获取用户余额 -->
+    <select id="getWechatMoney"  resultType="cn.xyyg.pojo.wallet" parameterType="Integer">
+		select id,money from wallet where wechatUserId = #{wechatUserId};
+	</select>
+	
+     <!-- 支付后减掉用户余额-->
+	<update id="updateWallet" parameterType="cn.xyyg.pojo.wallet">
+	  UPDATE `xyyg`.`wallet` SET `money`=`money` - #{money} WHERE `wechatUserId`=#{wechatUserId}
+    </update>
+    
+	 <!-- 订单总额支付到运营商-->
+	<update id="updateAdminWallet" parameterType="BigDecimal">
+	  UPDATE `xyyg`.`admin_wallet` SET `money`=`money` + #{money} WHERE `userId`=11001
+    </update>
+    
+	<!-- 运营商支付给商家后减掉余额-->
+	<update id="deleteAdminWallet" parameterType="BigDecimal">
+	  UPDATE `xyyg`.`admin_wallet` SET `money`=`money`-#{money} WHERE  `userId`=11001
+    </update>
+    
+	<!-- 订单总额支付到商家-->
+	<update id="updateAdminWalletToSeller" parameterType="cn.xyyg.pojo.adminWallet">
+	  UPDATE `xyyg`.`admin_wallet` SET `money`=`money` + #{money} WHERE `userId`=#{userId}
+    </update>
+	
+	<!-- 获取用户支付密码比较-->
+    <select id="getWechatPassword"  resultType="cn.xyyg.pojo.wallet" parameterType="Integer">
+		select password from wallet where wechatUserId = #{wechatUserId};
+	</select>
+    
+</mapper>

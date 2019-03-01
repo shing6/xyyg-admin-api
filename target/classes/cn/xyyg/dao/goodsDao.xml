@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.goodsDao">
+
+	
+    <!-- 一对多获取所有商品 -->
+    <select id="getAllGoodsDescPic"  resultMap="goodsWithDescWithPic">
+		select goods.*,goods_desc.id as goodsDescId ,goods_desc.name,goods_desc.detail,
+		goods_picture.id as goodsPictureId ,goods_picture.picAddr
+		from  goods ,goods_desc ,goods_picture where goods.id=goods_desc.goodsId 
+		and goods.id=goods_picture.goodsId
+	</select>
+	<resultMap type="cn.xyyg.pojo.goodsDescPic" id="goodsWithDescWithPic">
+	    <id property="id" column="id"/>
+	    <result property="goodsName" column="goodsName"/>
+	    <result property="oldPrice" column="oldPrice"/>
+	    <result property="price" column="price"/>
+	    <result property="mainPic" column="mainPic"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="updateTime" column="updateTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="stock" column="stock"/>
+	    <result property="status" column="status"/>
+	    <result property="categoryId" column="categoryId"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="goodsDescList" ofType="cn.xyyg.pojo.goodsDesc">
+	        <id property="id" column="goodsDescId"/>
+	        <result property="name" column="name"/>
+	        <result property="detail" column="detail"/>
+	    </collection>
+	    <collection property="goodsPictureList" ofType="cn.xyyg.pojo.goodsPicture">
+	        <id property="id" column="goodsPictureId"/>
+	        <result property="picAddr" column="picAddr"/>
+	    </collection>
+	</resultMap>
+	<!-- 根据分类id查询商品 -->
+    <select id="getGoodsByCategoryId"  parameterType="Integer" resultType="cn.xyyg.pojo.goodsWithCounts">
+		
+		select goods.* , (select count(*) from order_goods   where id = goods.id) AS counts  
+		from goods where categoryId = #{id}
+	</select>
+	
+    <!-- 根据商品id查询商品详细信息 -->
+    <select id="getGoodsById"  parameterType="Integer" resultMap="goodsWithDescWithPicById">
+		select goods.*,goods_desc.id as goodsDescId ,goods_desc.name,goods_desc.detail,
+		goods_picture.id as goodsPictureId ,goods_picture.picAddr
+		from  goods LEFT JOIN goods_desc on goods.id=goods_desc.goodsId LEFT JOIN goods_picture
+    on goods.id=goods_picture.goodsId where  goods.id=#{id}
+		
+	</select>
+	<resultMap type="cn.xyyg.pojo.goodsDescPic" id="goodsWithDescWithPicById">
+	    <id property="id" column="id"/>
+	    <result property="goodsName" column="goodsName"/>
+	    <result property="oldPrice" column="oldPrice"/>
+	    <result property="price" column="price"/>
+	    <result property="mainPic" column="mainPic"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="updateTime" column="updateTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="stock" column="stock"/>
+	    <result property="status" column="status"/>
+	    <result property="categoryId" column="categoryId"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="goodsDescList" ofType="cn.xyyg.pojo.goodsDesc">
+	        <id property="id" column="goodsDescId"/>
+	        <result property="name" column="name"/>
+	        <result property="detail" column="detail"/>
+	    </collection>
+	    <collection property="goodsPictureList" ofType="cn.xyyg.pojo.goodsPicture">
+	        <id property="id" column="goodsPictureId"/>
+	        <result property="picAddr" column="picAddr"/>
+	    </collection>
+	</resultMap>
+	
+	 <!-- 批量传入商品id查询商品信息 -->
+	<select id="getGoodsByIds" resultType="cn.xyyg.pojo.goods">
+        select * from goods where id in
+        <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+            #{id}
+        </foreach>
+    </select>
+    
+	<!-- 根据名字模糊查询商品 -->
+    <select id="getGoodsByName"  parameterType="String" resultType="cn.xyyg.pojo.goods">
+		select * from goods where goodsName like concat(concat('%',#{name}),'%')
+	</select>
+	
+    <!-- 根据名字模糊查询商品根据condition排序 -->
+    <select id="getGoodsByNameOrderBySort"  parameterType="String" resultType="cn.xyyg.pojo.goodsWithCounts">
+		select * ,(select count(*) from order_goods   where id = goods.id) AS counts 
+		from goods where goodsName like concat(concat('%',#{name}),'%') order by ${condition}  ${sort}
+		
+	</select>
+	
+    <!-- 根据名字模糊查询商品的数量 -->
+    <select id="getGoodsByNameOrderBySortCount"  parameterType="String" resultType="Integer">
+		select count(*) from goods where goodsName like concat(concat('%',#{name}),'%')
+		
+	</select>
+	
+     <!-- 根据id获取商品简要信息 -->
+    <select id="getGoodById"  parameterType="Integer" resultType="cn.xyyg.pojo.goods">
+		select * from goods where id=#{id}
+	</select>
+	
+    
+    <!-- 根据商家id分页查询商品详细信息  后台使用-->
+    <select id="getGoodsBySellerId"  parameterType="cn.xyyg.pojo.page" resultMap="goodsWithDescWithPicBySellerId">
+		
+     select goods.* , goods_desc.id as goodsDescId ,goods_desc.name,goods_desc.detail,
+		goods_picture.id as goodsPictureId ,goods_picture.picAddr
+		from  goods LEFT JOIN goods_desc on goods.id=goods_desc.goodsId LEFT JOIN goods_picture
+    on goods.id=goods_picture.goodsId where goods.id in
+     (SELECT temp.id from (SELECT id from goods where goods.sellerId=#{sellerId} order by goods.id  limit #{pageNum},#{pageSize}) as temp)
+		
+	</select>
+	<resultMap type="cn.xyyg.pojo.goodsDescPic" id="goodsWithDescWithPicBySellerId">
+	    <id property="id" column="id"/>
+	    <result property="goodsName" column="goodsName"/>
+	    <result property="oldPrice" column="oldPrice"/>
+	    <result property="price" column="price"/>
+	    <result property="mainPic" column="mainPic"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="updateTime" column="updateTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="stock" column="stock"/>
+	    <result property="status" column="status"/>
+	    <result property="categoryId" column="categoryId"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="goodsDescList" ofType="cn.xyyg.pojo.goodsDesc">
+	        <id property="id" column="goodsDescId"/>
+	        <result property="name" column="name"/>
+	        <result property="detail" column="detail"/>
+	    </collection>
+	    <collection property="goodsPictureList" ofType="cn.xyyg.pojo.goodsPicture">
+	        <id property="id" column="goodsPictureId"/>
+	        <result property="picAddr" column="picAddr"/>
+	    </collection>
+	</resultMap>
+	
+	<!-- 根据商家id查询商品的数量 -->
+    <select id="getGoodsCountBySellerId"  parameterType="Integer" resultType="Integer">
+		select count(*) from goods where sellerId=#{sellerId}
+		
+	</select>
+	
+     <!-- 添加商品 -->
+    <insert id="insertGoods" parameterType="cn.xyyg.pojo.goods" >
+     INSERT INTO `xyyg`.`goods` (`goodsName`, `oldPrice`, `price`, `mainPic`, `createTime`, 
+     `stock`, `status`, `categoryId`, `sellerId`) 
+     VALUES (#{goodsName}, #{oldPrice}, #{price}, #{mainPic}, #{createTime}, #{stock}, #{status}, #{categoryId}, #{sellerId});
+
+     
+     <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+     
+    </insert>
+    
+    <!-- 批量插入商品详情图-->
+    <insert id="insertGoodsPicture" parameterType="java.util.List">
+        INSERT INTO `xyyg`.`goods_picture` (`picAddr`, `goodsId`) VALUES 
+        <foreach collection ="list" item="goodsPicture" index= "index" separator =",">
+        (#{goodsPicture.picAddr}, #{goodsPicture.goodsId})
+        </foreach >
+        
+    </insert>
+    
+     <!-- 批量插入商品参数-->
+    <insert id="insertGoodsDesc" parameterType="java.util.List">
+       INSERT INTO `xyyg`.`goods_desc` (`name`, `detail`, `goodsId`) VALUES 
+
+        <foreach collection ="list" item="goodsDesc" index= "index" separator =",">
+        (#{goodsDesc.name},#{goodsDesc.detail}, #{goodsDesc.goodsId})
+        </foreach >
+        
+    </insert>
+    
+     <!-- 修改商品 -->
+    <update id="updateGoods" parameterType="cn.xyyg.pojo.goods" >
+        UPDATE `xyyg`.`goods` SET `goodsName`=#{goodsName}, `oldPrice`=#{oldPrice}, `price`=#{price},
+       `mainPic`=#{mainPic}, `updateTime`=#{updateTime}, `stock`=#{stock}, `status`=#{status}, `categoryId`=#{categoryId}
+        WHERE `id`=#{id};
+     </update>
+     
+    <!-- 修改参数 -->
+    <update id="updateGoodsDesc" parameterType="cn.xyyg.pojo.goodsDesc" >
+        UPDATE `xyyg`.`goods_desc` SET `name`=#{name}, `detail`=#{detail} WHERE `id`=#{id};
+     </update>
+  
+     <!-- 修改商品详情图 -->
+    <update id="updateGoodsPic" parameterType="cn.xyyg.pojo.goodsPicture" >
+         UPDATE `xyyg`.`goods_picture` SET `picAddr`=#{picAddr} WHERE `id`=#{id};
+     </update>
+    
+    
+    
+    
+    
+</mapper>

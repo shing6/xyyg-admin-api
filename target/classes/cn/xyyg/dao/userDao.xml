@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.userDao">
+
+	
+    <!-- 通过openId获取用户信息 -->
+    <select id="getUserByOpenId"  resultType="cn.xyyg.pojo.wechatUser">
+		select * from wechat_user where openId=#{openId}
+	</select>
+	<!-- 通过微信用户Id查找用户信息 -->
+    <select id="getWechatUserById"  resultType="cn.xyyg.pojo.wechatUser">
+		select * from wechat_user where id=#{id}
+	</select>
+	
+    <!-- 添加微信用户信息 -->
+    <insert id="insertWechatUser" parameterType="cn.xyyg.pojo.wechatUser" >
+       INSERT INTO `xyyg`.`wechat_user` ( `openId`, `nickName`, `avatarUrl`) VALUES ( #{openId}, #{nickName}, #{avatarUrl});
+    </insert>
+    
+   
+    <!-- 修改微信用户信息 -->
+    <update id="updateByOpenId" parameterType="cn.xyyg.pojo.wechatUser">
+        UPDATE `xyyg`.`wechat_user` SET `nickName`=#{nickName}, `avatarUrl`=#{avatarUrl} WHERE `openId`=#{openId};
+        
+    </update>
+    
+    
+    <!-- 根据用户id查询用户信息 -->
+    <select resultType="cn.xyyg.pojo.user" parameterType="Integer" id="getUserById">
+       select * from user where id=#{id}; 
+    </select>
+    
+    <!-- 用户密码判断用户是否存在,后台 -->
+    <select resultType="cn.xyyg.pojo.user" parameterType="String" id="findUser">
+    select * from user where username = #{username} and password = #{password} 
+    </select>
+    
+    
+     
+     <!-- 查找用户名判断是否存在 -->
+    <select resultType="cn.xyyg.pojo.user" parameterType="String" id="findUserName">
+    select * from user where username = #{username} and (role = 2 or role = 3)
+    </select>
+    
+    <!-- 添加商家用户信息 -->
+    <insert id="insertUser"  parameterType="cn.xyyg.pojo.user">
+		
+        INSERT INTO `xyyg`.`user` (`name`, `phone`, `username`, `password`, `role`) 
+        VALUES (#{name}, #{phone}, #{username}, #{password}, '1');
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+
+	</insert>
+	
+     <!-- 查询订单关联查询用户信息，使用resultMap -->
+    <select id="getUserWithShop" resultMap="userWithShop">
+        SELECT
+            seller.*,
+            user.name as uname,
+            user.phone as phone,
+            user.id as userId
+            FROM
+            seller,user
+        WHERE seller.userId=user.id
+    </select> 
+    <resultMap type="cn.xyyg.pojo.userWithShop" id="userWithShop">
+         <!-- 配置订单的映射信息 -->
+         <!-- 
+             id:指定查询列中的唯一标识，订单信息中的唯一标识，若有多个列组成唯一标识，需配置多个id
+             column: 订单信息的唯一标识列
+             property: 订单信息的唯一标识列所映射到的 Orders的对应的属性
+          -->
+          <id column="userId" property="id"/>
+          <result column="uname" property="name"/>
+          <result column="phone" property="phone" />
+         
+          
+          <!-- 配置映射的关联的用户信息 -->
+          <!-- association：用于映射关联查询单个对象的信息
+              property：要将关联查询的用户信息映射到Orders中的对应属性
+           -->
+           <association property="shop" javaType="cn.xyyg.pojo.shop">
+               <!-- 
+                   id：关联查询用户的唯一标识
+                   column：指定唯一标识用户信息的列
+                   javaType：映射到user的对应属性
+                -->
+                <id column="id" property="id"/>
+                <result column="name" property="name"/>
+                <result column="logoPic" property="logoPic"/>
+                <result column="address" property="address"/>
+                <result column="lowPrice" property="lowPrice"/>
+                <result column="freight" property="freight"/>
+                <result column="status" property="status"/>
+                <result column="createTime" property="createTime"/>
+                <result column="address" property="address"/>
+                <result column="detailAddr" property="detailAddr"/>
+                <result column="detailAddr" property="detailAddr"/>
+                <result column="longitude" property="longitude"/>
+                <result column="latitude" property="latitude"/>
+                <result column="sellerCategoryId" property="sellerCategoryId"/>
+               
+           </association>
+     </resultMap>
+     
+     <!-- 审核通过可登陆 -->
+    <update id="updateUserRole" parameterType="Integer">
+        UPDATE `xyyg`.`user` SET `role`='2' WHERE `id`=#{id};
+    </update>
+    
+	
+       
+</mapper>

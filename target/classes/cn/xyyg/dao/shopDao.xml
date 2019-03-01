@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.shopDao">
+
+	
+    <!-- 获取所有商家 -->
+    <select id="getAllShop"  resultType="cn.xyyg.pojo.shop">
+		select * from seller
+	</select>
+	
+    <!-- 根据id查询商家 -->
+    <select id="getShopById"  parameterType="Integer" resultType="cn.xyyg.pojo.shop">
+		select * from seller where id = #{id}
+	</select>
+	
+	<!-- 获取所有商家数量 -->
+    <select id="getAllShopCount"  resultType="Integer">
+		select count(*) from seller
+	</select>
+	
+     <!-- 获取所有商家及所属商品 -->
+    <select id="getAllShopWithGoods"  resultMap="shopWithGoods" parameterType="cn.xyyg.pojo.page">
+		select seller.* , goods.id  as goodsId , goods.goodsName as goodsName, goods.oldPrice as oldPrice,
+        goods.price as price,goods.mainPic as mainPic, goods.stock as stock,goods.`status` as `status`,
+        goods.categoryId as categoryId  from seller LEFT JOIN goods  on seller.id=goods.sellerId  where seller.id in
+        (SELECT temp.id from (SELECT id from seller  order by seller.id  limit #{pageNum},#{pageSize}) as temp)
+       
+	</select>
+	
+    <resultMap type="cn.xyyg.pojo.shopWithGoods" id="shopWithGoods">
+	    <id property="id" column="id"/>
+	    <result property="name" column="name"/>
+	    <result property="logoPic" column="logoPic"/>
+	    <result property="lowPrice" column="lowPrice"/>
+	    <result property="freight" column="freight"/>
+	    <result property="status" column="status"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="updateTime" column="updateTime"/>
+	    <result property="longitude" column="longitude"/>
+	    <result property="latitude" column="latitude"/>
+	    <result property="address" column="address"/>
+	    <result property="detailAddr" column="detailAddr"/>
+	    <result property="userId" column="userId"/>
+	    <result property="sellerCategoryId" column="sellerCategoryId"/>
+	    <collection property="goodsList" ofType="cn.xyyg.pojo.goods">
+	       <id property="id" column="goodsId"/>
+	       <result property="goodsName" column="goodsName"/>
+	       <result property="oldPrice" column="oldPrice"/>
+	       <result property="price" column="price"/>
+	       <result property="mainPic" column="mainPic"/>
+	       <result property="stock" column="stock"/>
+	       <result property="status" column="status"/>
+	       <result property="categoryId" column="categoryId"/>
+	       <result property="sellerId" column="sellerId"/>
+	    </collection>
+	    
+	</resultMap>
+	
+     <!-- 批量传入商家id查询商家信息 -->
+	<select id="getShopByIds" resultType="cn.xyyg.pojo.shop">
+        select * from seller where id in
+        <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+            #{id}
+        </foreach>
+    </select>
+    
+	<!-- 根据用户id查询商家 -->
+    <select id="getShopByUserId"  parameterType="Integer" resultType="cn.xyyg.pojo.shop">
+		select * from seller where userId = #{userId}
+	</select>
+	
+    <!-- 商家入驻 -->
+    <insert id="insertShop"  parameterType="cn.xyyg.pojo.shop" >
+		INSERT INTO `xyyg`.`seller` (`name`, `logoPic`, `status`, `createTime`, `longitude`, `latitude`, `address`, `detailAddr`, `userId`, `sellerCategoryId`) 
+		VALUES (#{name}, #{logoPic}, '1', #{createTime}, #{longitude}, #{latitude}, #{address}, #{detailAddr}, #{userId}, #{sellerCategoryId});
+    </insert>
+    
+      <!-- 审核通过 -->
+    <update id="passShop"  parameterType="Integer" >
+		 UPDATE `xyyg`.`seller` SET  `status`='3' WHERE `id`=#{id};
+	</update>
+	 <!-- 审核未通过 -->
+    <update id="notPassShop"  parameterType="Integer" >
+		 UPDATE `xyyg`.`seller` SET  `status`='0' WHERE `id`=#{id};
+	</update>
+       
+</mapper>
