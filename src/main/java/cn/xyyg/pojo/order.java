@@ -22,6 +22,7 @@ public class order {
       private Timestamp deleteTime;
       private Integer status;
       private String fromId;
+      private String fromId2;
       private Integer wechatUserId;
       private Integer sellerId;
 	public Integer getId() {
@@ -101,6 +102,13 @@ public class order {
 	}
 	public void setFromId(String fromId) {
 		this.fromId = fromId;
+	}
+	
+	public String getFromId2() {
+		return fromId2;
+	}
+	public void setFromId2(String fromId2) {
+		this.fromId2 = fromId2;
 	}
 	public Integer getWechatUserId() {
 		return wechatUserId;

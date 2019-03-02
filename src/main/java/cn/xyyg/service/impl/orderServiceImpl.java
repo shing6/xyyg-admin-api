@@ -96,6 +96,7 @@ public class orderServiceImpl implements orderService {
 		if(isCreate){
 			Timestamp buydate=createTimeUtil.getTime();
 			List<String> orderNoList =new ArrayList<String>();
+			int f=0;
 			for(int i=0;i<shopsList.size();i++){
 				int totalCount=0;//订单商品总数
 				int count=0;//每种商品的数量
@@ -108,7 +109,11 @@ public class orderServiceImpl implements orderService {
 				order.setOrderNo(No);
 				order.setSnapAddr(address);
 				order.setFreight(shop.getFreight());
-				order.setFromId(formId.get(i));
+				order.setFromId(formId.get(f));
+				order.setFromId2(formId.get(f+1));
+				f+=3;
+				
+				
 				//循环计算商品数量价格
 				for(int j=0;j<goodsList.size();j++){
 					orderGoods orderGoods=new orderGoods();
