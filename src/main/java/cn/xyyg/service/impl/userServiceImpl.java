@@ -59,10 +59,21 @@ public class userServiceImpl implements userService {
 	public boolean insertWechatUser(wechatUser wechatUser) {
 		wechatUser wcUser =userDao.getUserByOpenId(wechatUser.getOpenId());
 		if(wcUser==null){
+			String password = null;
 			userDao.insertWechatUser(wechatUser);
 			wechatUser newwcUser =userDao.getUserByOpenId(wechatUser.getOpenId());
 			wallet wallet =new wallet();
 			wallet.setMoney(new BigDecimal(0));//初始化钱包
+			try {
+				 password = MD5.EncoderByMd5("123456");
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			wallet.setPassword(password);//初始化密码为123456
 			wallet.setWechatUserId(newwcUser.getId());
 			walletDao.insertWechatWallet(wallet);
 			return true;
