@@ -55,7 +55,7 @@ public class orderServiceImpl implements orderService {
 	@Override
 	@Transactional(rollbackFor = {IllegalArgumentException.class})
 	public Object createOrder(order order, List<ordersExtends> goodsList,  List<Integer>  shopsList,
-			String address,int wechatUserId) 
+			String address,List<String> formId,int wechatUserId) 
 	{
 		
         boolean isCreate=true;//商品能否购买标志
@@ -107,7 +107,7 @@ public class orderServiceImpl implements orderService {
 				order.setOrderNo(No);
 				order.setSnapAddr(address);
 				order.setFreight(shop.getFreight());
-				
+				order.setFromId(formId.get(i));
 				//循环计算商品数量价格
 				for(int j=0;j<goodsList.size();j++){
 					orderGoods orderGoods=new orderGoods();

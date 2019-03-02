@@ -6,8 +6,8 @@
 	
      <!-- 创建订单-->
     <insert id="createOrder"  parameterType="cn.xyyg.pojo.order" >
-		INSERT INTO `xyyg`.`order` ( `orderNo`, `snapAddr`, `freight`, `totalCount`, `totalPrice`, `needPrice`,`createTime`, `status`, `wechatUserId`, `sellerId`) 
-		VALUES ( #{orderNo}, #{snapAddr}, #{freight}, #{totalCount}, #{totalPrice},#{needPrice}, #{createTime}, #{status}, #{wechatUserId}, #{sellerId});
+		INSERT INTO `xyyg`.`order` ( `orderNo`, `snapAddr`, `freight`, `totalCount`, `totalPrice`, `needPrice`,`createTime`, `status`, `fromId`,`wechatUserId`, `sellerId`) 
+		VALUES ( #{orderNo}, #{snapAddr}, #{freight}, #{totalCount}, #{totalPrice},#{needPrice}, #{createTime}, #{status},#{fromId}, #{wechatUserId}, #{sellerId});
 
 	</insert>
 	

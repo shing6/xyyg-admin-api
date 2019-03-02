@@ -62,21 +62,21 @@ public class orderController {
         String openId=request.getParameter("open_id");
         String shopIdList=request.getParameter("shopIdList");
         String address=request.getParameter("address");
-        String fromIdList=request.getParameter("fromId");
+        String formIdList=request.getParameter("formId");
         JSONObject addressJson = JSONObject.fromObject(address);
         JSONArray ordersJson = JSONArray.fromObject(orders);
         JSONArray shopIdListJson = JSONArray.fromObject(shopIdList);
-        JSONArray fromIdListJson = JSONArray.fromObject(fromIdList);
-        System.out.println(fromIdListJson);
+        JSONArray formIdListJson = JSONArray.fromObject(formIdList);
         List<ordersExtends> goodsList = JSONArray.toList(ordersJson, new ordersExtends(), new JsonConfig());//参数1为要转换的JSONArray数据，参数2为要转换的目标数据，即List盛装的数据
         List<Integer> shopsList = JSONArray.toList(shopIdListJson, new Integer(0), new JsonConfig());
+        List<String> formId = JSONArray.toList(formIdListJson, new String(), new JsonConfig());
         order order=new order();
         
         // 根据返回的user实体类，判断用户是否存在
         wechatUser wechatUser = userService.getUserByOpenId(openId);
         int wechatUserId=wechatUser.getId();
         if(wechatUser != null){
-        	  Object object=this.orderService.createOrder(order,goodsList,shopsList,address,wechatUserId);
+        	  Object object=this.orderService.createOrder(order,goodsList,shopsList,address,formId,wechatUserId);
         	  return object;
         }
         else

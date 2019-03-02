@@ -18,6 +18,7 @@ public interface orderService {
 	 * 创建订单
 	 * @param order
 	 * @param address 
+	 * @param formId 
 	 * @param shopslist 
 	 * @param goodslist 
 	 * @return
@@ -25,7 +26,7 @@ public interface orderService {
 //   public Object createOrder(order order, List<ordersExtends> goodsList, List<Integer> shopsList, String address);
 
 	public Object createOrder(order order, List<ordersExtends> goodsList, List<Integer> shopsList, String address,
-			int wechatUserId);
+			List<String> formId, int wechatUserId);
 	
 	   /**
 	    * 分页查询全部订单
