@@ -159,5 +159,11 @@ public interface orderDao {
    */
   public int takeGoods(String orderNo);
   
+  /**
+   * 买家申请退款
+   * @return
+   */
+  public int applyRefund(String orderNo);
+  
  
 }

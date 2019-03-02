@@ -24,6 +24,7 @@ import cn.xyyg.pojo.orderWithGoods;
 import cn.xyyg.pojo.ordersExtends;
 import cn.xyyg.pojo.page;
 import cn.xyyg.pojo.shop;
+import cn.xyyg.pojo.wallet;
 import cn.xyyg.service.orderService;
 import cn.xyyg.util.ResponseUtil;
 import cn.xyyg.util.createTimeUtil;
@@ -317,6 +318,20 @@ public class orderServiceImpl implements orderService {
 	public order getOrderByNo(String orderNo) {
 		
 		return this.orderDao.getOrderByNo(orderNo);
+	}
+	
+	/**
+	 * 买家申请退款
+	 */
+	@Override
+	public Object applyRefund(String orderNo) {
+		int rows = this.orderDao.applyRefund(orderNo);
+		if(rows>0){
+			return ResponseUtil.ok();
+		}
+		else{
+			return ResponseUtil.fail();
+		}
 	}
 	
 	

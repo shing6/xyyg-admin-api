@@ -10,6 +10,7 @@ import cn.xyyg.pojo.orderShop;
 import cn.xyyg.pojo.orderWithGoods;
 import cn.xyyg.pojo.ordersExtends;
 import cn.xyyg.pojo.page;
+import cn.xyyg.pojo.wallet;
 import net.sf.json.JSONObject;
 
 public interface orderService {
@@ -127,5 +128,11 @@ public interface orderService {
 	    * @return
 	    */
 	   public order getOrderByNo(String orderNo);
+	   
+	   /**
+	    * 买家申请退款
+	    * @return
+	    */
+	   public Object applyRefund(String orderNo);
   
 }

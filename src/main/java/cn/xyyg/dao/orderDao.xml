@@ -200,5 +200,10 @@
 	<update id="takeGoods" parameterType="String">
 	  UPDATE `xyyg`.`order` SET `payPrice`=needPrice, `status`='4' WHERE `orderNo`=#{orderNo};
     </update>
+    
+	 <!-- 买家申请退款-->
+	<update id="applyRefund" parameterType="String">
+	  UPDATE `xyyg`.`order` SET  `status`='7' WHERE `orderNo`=#{orderNo};
+    </update>
 	
  </mapper>

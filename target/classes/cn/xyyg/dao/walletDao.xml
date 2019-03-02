@@ -43,5 +43,15 @@
     <select id="getWechatPassword"  resultType="cn.xyyg.pojo.wallet" parameterType="Integer">
 		select password from wallet where wechatUserId = #{wechatUserId};
 	</select>
+	
+      <!-- 商家同意退款，钱退回给客户-->
+	<update id="userRefund" parameterType="cn.xyyg.pojo.wallet">
+	  UPDATE `xyyg`.`wallet` SET `money`=`money` + #{money} WHERE `wechatUserId`=#{wechatUserId}
+    </update>
+    
+	<!-- 运营商退钱-->
+	<update id="shopRefund" parameterType="BigDecimal">
+	  UPDATE `xyyg`.`admin_wallet` SET `money`=`money`-#{money} WHERE  `userId`=11001
+    </update>
     
 </mapper>

@@ -62,4 +62,19 @@ public interface walletDao {
 	 * @return
 	 */
 	public int insertWechatWalletPassword(wallet wallet);
+	
+	
+	/**
+	 * 商家同意退款
+	 * @param wechatUserId
+	 * @return
+	 */
+	public int userRefund(wallet wallet);
+	
+	/**
+	 * 运营商退回订单总价给客户
+	 * @param money
+	 * @return
+	 */
+	public int shopRefund(BigDecimal money);
 }

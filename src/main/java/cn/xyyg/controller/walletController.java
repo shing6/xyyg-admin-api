@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.xyyg.pojo.category;
 import cn.xyyg.pojo.wallet;
 import cn.xyyg.pojo.wechatUser;
+import cn.xyyg.service.orderService;
 import cn.xyyg.service.userService;
 import cn.xyyg.service.walletService;
 import cn.xyyg.util.MD5;
@@ -30,6 +31,9 @@ public class walletController {
 	
 	@Autowired
     private userService userService;
+	
+	@Autowired
+	private orderService orderService;
 	
 	/**
 	 * 获取钱包余额
@@ -134,6 +138,33 @@ public class walletController {
 		
     	
     }
+	
+	/**
+	 * 申请退款
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/applyRefund")
+    public Object applyRefund(HttpServletRequest request){
+    	String openId =request.getParameter("open_id");
+    	String orderNo=request.getParameter("orderNo");
+    	//查看用户是否存在
+        wechatUser wechatUser = userService.getUserByOpenId(openId);
+        if(wechatUser != null){
+        	
+        	Object obj = orderService.applyRefund(orderNo);
+        	return obj;
+        }
+        
+        else{
+        	return ResponseUtil.unlogin();
+        }
+		
+    	
+    }
+	
+	
+	
 	
 	
 	
