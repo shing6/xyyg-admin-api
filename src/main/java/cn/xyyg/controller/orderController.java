@@ -340,7 +340,7 @@ public class orderController {
 
                 wxMssVo.setRequest_url("https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + token.getAccessToken());
 
-                wxMssVo.setForm_id(order.getFromId());
+                wxMssVo.setForm_id(order.getFromId2());
 
                 List<TemplateData> list = new ArrayList<>();
 
