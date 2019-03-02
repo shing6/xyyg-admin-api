@@ -52,6 +52,7 @@ public class userController {
 	        param.put("grant_type", UserConstantInterface.WX_LOGIN_GRANT_TYPE);
 	        // 发送请求
 	        String wxResult = HttpClientUtil.doGet(UserConstantInterface.WX_LOGIN_URL, param);
+	        
 	        JSONObject jsonObject = JSONObject.fromObject(wxResult);
 	        
 	        // 获取参数返回的
@@ -60,6 +61,7 @@ public class userController {
 	        // 根据返回的user实体类，判断用户是否是新用户，不是的话，更新最新登录时间，是的话，将用户信息存到数据库
 	        wechatUser wechatUser = userService.getUserByOpenId(openId);
 	        if(wechatUser != null){
+	        	
 	        	wechatUser.setNickName(nickName);
 	        	wechatUser.setAvatarUrl(avatarUrl);
 	            userService.updateByOpenId(wechatUser);

@@ -266,7 +266,7 @@ public class orderController {
     		wechatUser  wechatUser =  this.userService.getWechatUserById(order.getWechatUserId());
             boolean sendflag = this.orderService.sendGoods(orderNo);
             if(sendflag){
-            	Token token = CommonUtil.getToken("wx7671a8f065d92af5","31f6c2fc8f1c75e5a7daf90486d9950a");
+            	Token token = CommonUtil.getToken("wx7671a8f065d92af5","a78afeab52d6212d45eb3f9e8c762d79");
 
                 WxMssVo wxMssVo = new WxMssVo();
 
