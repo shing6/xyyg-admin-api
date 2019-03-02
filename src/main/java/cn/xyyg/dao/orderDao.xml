@@ -205,5 +205,10 @@
 	<update id="applyRefund" parameterType="String">
 	  UPDATE `xyyg`.`order` SET  `status`='7' WHERE `orderNo`=#{orderNo};
     </update>
+    
+	<!-- 商家同意退款-->
+	<update id="agreeRefund" parameterType="String">
+	  UPDATE `xyyg`.`order` SET  `status`='8' WHERE `orderNo`=#{orderNo};
+    </update>
 	
  </mapper>

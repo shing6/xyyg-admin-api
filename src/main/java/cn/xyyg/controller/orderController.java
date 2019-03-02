@@ -259,7 +259,12 @@ public class orderController {
     	
     }
     
-
+    /**
+     * 商家發貨
+     * @param request
+     * @param response
+     * @return
+     */
     @PostMapping("/sendGoods")
     public Object publishModelMessage(HttpServletRequest request, HttpServletResponse response){
     	boolean  flag= JwtUtil.verify(request.getParameter("token"));
@@ -307,7 +312,55 @@ public class orderController {
        
 
     }
-
     
+    /**
+     * 商家同意退款
+     * @param request
+     * @param response
+     * @return
+     */
+    @PostMapping("/agreeRefund")
+    public Object agreeRefund(HttpServletRequest request, HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		String orderNo = request.getParameter("orderNo");
+    		order order = this.orderService.getOrderByNo(orderNo);
+    		wechatUser  wechatUser =  this.userService.getWechatUserById(order.getWechatUserId());
+            boolean agreeflag = this.orderService.agreeRefund(orderNo, wechatUser.getId());
+            if(agreeflag ){
+            	Token token = CommonUtil.getToken("wx7671a8f065d92af5","a78afeab52d6212d45eb3f9e8c762d79");
+                order orderM = orderService.getOrderByNo(orderNo);
+                WxMssVo wxMssVo = new WxMssVo();
+
+                wxMssVo.setTemplate_id("pbNFKMiTnwqSi_qmcWFps_Al7rgoeK1PAQPnxUhvOHo");
+
+                wxMssVo.setTouser(wechatUser.getOpenId());
+
+                wxMssVo.setPage("pages/profile/order/order");
+
+                wxMssVo.setRequest_url("https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + token.getAccessToken());
+
+                wxMssVo.setForm_id(order.getFromId());
+
+                List<TemplateData> list = new ArrayList<>();
+
+                list.add(new TemplateData(orderNo,"#ffffff"));
+
+                list.add(new TemplateData(orderM.getPayPrice(),"#ffffff"));
+
+                list.add(new TemplateData("用户余额","#ffffff"));
+
+                wxMssVo.setParams(list);
+
+                CommonUtil.sendTemplateMessage(wxMssVo);
+            	
+            }
+            return ResponseUtil.ok();
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+
+    }
     
 }

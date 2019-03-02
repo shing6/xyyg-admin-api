@@ -1,5 +1,6 @@
 package cn.xyyg.pojo;
 
+import java.math.BigDecimal;
 
 public class TemplateData {
 
@@ -8,6 +9,10 @@ public class TemplateData {
     private String value;
 
     private String color;
+
+	private BigDecimal value2;
+
+	private String color2;
 
  
 
@@ -21,10 +26,42 @@ public class TemplateData {
 
 
 
+	public TemplateData(BigDecimal value2, String color2) {
+		 this.value2 = value2;
+
+	     this.color2 = color2;
+	}
+
+    
+      
+	public BigDecimal getValue2() {
+		return value2;
+	}
+
+
+
+	public void setValue2(BigDecimal value2) {
+		this.value2 = value2;
+	}
+
+
+
+	public String getColor2() {
+		return color2;
+	}
+
+
+
+	public void setColor2(String color2) {
+		this.color2 = color2;
+	}
+
+
+
 	public String getKey() {
 		return key;
 	}
-
+ 
 
 
 	public void setKey(String key) {

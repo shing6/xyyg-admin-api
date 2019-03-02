@@ -134,5 +134,12 @@ public interface orderService {
 	    * @return
 	    */
 	   public Object applyRefund(String orderNo);
+	   
+	   /**
+	    * 商家同意退款
+	    * @param orderNo
+	    * @return
+	    */
+	   public boolean agreeRefund(String orderNo,int wechatUserId);
   
 }

@@ -35,5 +35,8 @@ public interface walletService {
 	 * @return
 	 */
 	public Object insertWechatWalletPassword(wallet wallet);
+	
+	
+	
 
 }

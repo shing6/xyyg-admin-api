@@ -161,9 +161,17 @@ public interface orderDao {
   
   /**
    * 买家申请退款
+   * @param orderNo
    * @return
    */
   public int applyRefund(String orderNo);
+  
+  /**
+   * 商家同意退款
+   * @param orderNo
+   * @return
+   */
+  public int agreeRefund(String orderNo);
   
  
 }

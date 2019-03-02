@@ -339,6 +339,24 @@ public class orderServiceImpl implements orderService {
 		}
 	}
 	
+	/**
+	 * 商家同意退款
+	 */
+	@Override
+	public boolean agreeRefund(String orderNo,int wechatUserId) {
+		int rows = this.orderDao.agreeRefund(orderNo);
+		if(rows>0){
+			order order = this.orderDao.getOrderByNo(orderNo);
+			this.walletDao.shopRefund(order.getPayPrice());
+			wallet wallet = new wallet();
+			wallet.setWechatUserId(wechatUserId);
+			wallet.setMoney(order.getPayPrice());
+			this.walletDao.userRefund(wallet);
+			return true;
+		}
+		return false;
+	}
+	
 	
 	
 	
