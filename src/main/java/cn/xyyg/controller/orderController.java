@@ -62,9 +62,12 @@ public class orderController {
         String openId=request.getParameter("open_id");
         String shopIdList=request.getParameter("shopIdList");
         String address=request.getParameter("address");
+        String fromIdList=request.getParameter("fromId");
         JSONObject addressJson = JSONObject.fromObject(address);
         JSONArray ordersJson = JSONArray.fromObject(orders);
         JSONArray shopIdListJson = JSONArray.fromObject(shopIdList);
+        JSONArray fromIdListJson = JSONArray.fromObject(fromIdList);
+        System.out.println(fromIdListJson);
         List<ordersExtends> goodsList = JSONArray.toList(ordersJson, new ordersExtends(), new JsonConfig());//参数1为要转换的JSONArray数据，参数2为要转换的目标数据，即List盛装的数据
         List<Integer> shopsList = JSONArray.toList(shopIdListJson, new Integer(0), new JsonConfig());
         order order=new order();
