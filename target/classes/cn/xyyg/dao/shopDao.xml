@@ -70,6 +70,11 @@
 		select * from seller where userId = #{userId}
 	</select>
 	
+    <!-- 根据分类id查询商家 -->
+    <select id="getShopByCategoryId"  parameterType="Integer" resultType="cn.xyyg.pojo.shop">
+		select * from seller where sellerCategoryId = #{sellerCategoryId}
+	</select>
+	
     <!-- 商家入驻 -->
     <insert id="insertShop"  parameterType="cn.xyyg.pojo.shop" >
 		INSERT INTO `xyyg`.`seller` (`name`, `logoPic`, `status`, `createTime`, `longitude`, `latitude`, `address`, `detailAddr`, `userId`, `sellerCategoryId`) 

@@ -9,5 +9,10 @@
 		select * from category where sellerId = #{id}
 	</select>
 	
+     <!-- 获取所有商家分类-->
+    <select id="getShopCategory"   resultType="cn.xyyg.pojo.categoryShop">
+		select * from seller_category
+	</select>
+	
     
 </mapper>

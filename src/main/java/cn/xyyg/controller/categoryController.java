@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.xyyg.pojo.category;
+import cn.xyyg.pojo.categoryShop;
 import cn.xyyg.pojo.orderWithGoods;
 import cn.xyyg.pojo.shop;
 import cn.xyyg.pojo.user;
@@ -63,6 +64,18 @@ public class categoryController {
         
         
 		
+    	
+    }
+    
+    /**
+	 * 获取所有分类
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/getShopCategory")
+    public List<categoryShop> getShopCategory(){
+        List<categoryShop> categoryShopList=categoryService.getShopCategory();
+		return categoryShopList;
     	
     }
 }

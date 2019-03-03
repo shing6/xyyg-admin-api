@@ -71,6 +71,17 @@ public class shopController {
     	}
     
     /**
+     * 根据分类id查商家信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/getShopBySellerId")
+    public shop getShopBySellerId(int sellerCategoryId){
+    	shop shop=shopService.getShopByCategoryId(sellerCategoryId);
+		return shop;
+    	}
+    
+    /**
      * 分页查询所有商家及其商品
      * @param pageNum
      * @param pageSize

@@ -68,4 +68,11 @@ public interface shopDao {
      * @return
      */
     public int notPassShop(Integer id);
+    
+    /**
+     * 通过分类id查找商家
+     * @param sellerCategoryId
+     * @return
+     */
+    public shop getShopByCategoryId(Integer sellerCategoryId);
 }

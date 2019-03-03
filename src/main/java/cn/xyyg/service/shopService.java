@@ -58,6 +58,13 @@ public interface shopService {
      */
     public boolean auditing(Integer id,Integer isPass);
     
+    /**
+     * 通过分类id查找商家
+     * @param sellerCategoryId
+     * @return
+     */
+    public shop getShopByCategoryId(Integer sellerCategoryId);
+    
     
 
 }
