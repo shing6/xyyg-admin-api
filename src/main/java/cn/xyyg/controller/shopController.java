@@ -75,8 +75,8 @@ public class shopController {
      * @param id
      * @return
      */
-    @GetMapping("/getShopBySellerId")
-    public shop getShopBySellerId(int sellerCategoryId){
+    @GetMapping("/getShopByCategoryId")
+    public shop getShopByCategoryId(int sellerCategoryId){
     	shop shop=shopService.getShopByCategoryId(sellerCategoryId);
 		return shop;
     	}
