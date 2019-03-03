@@ -74,5 +74,5 @@ public interface shopDao {
      * @param sellerCategoryId
      * @return
      */
-    public shop getShopByCategoryId(Integer sellerCategoryId);
+    public List<shop> getShopByCategoryId(Integer sellerCategoryId);
 }

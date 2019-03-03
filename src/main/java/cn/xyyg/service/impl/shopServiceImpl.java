@@ -121,7 +121,7 @@ public class shopServiceImpl implements shopService {
 	 * 通过分类id查找商家
 	 */
 	@Override
-	public shop getShopByCategoryId(Integer sellerCategoryId) {
+	public List<shop> getShopByCategoryId(Integer sellerCategoryId) {
 		
 		return this.shopDao.getShopByCategoryId(sellerCategoryId);
 	}
