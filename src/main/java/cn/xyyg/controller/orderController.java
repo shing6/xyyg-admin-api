@@ -86,7 +86,7 @@ public class orderController {
      }
 	
 	/**
-     * 分页查询所有商家及其商品
+     * 分页查询个人订单
      * @param pageNum
      * @param pageSize
      * @return
@@ -102,7 +102,7 @@ public class orderController {
         wechatUser wechatUser = userService.getUserByOpenId(openId);
         if(wechatUser!=null){
         	if(status==0){
-        		List<orderWithGoods> orderWithGoodsList=orderService.getAllOrderList(pageNum, pageSize);
+        		List<orderWithGoods> orderWithGoodsList=orderService.getAllOrderList(pageNum, pageSize,wechatUser.getId());
             	int count=orderService.getOrderCount(wechatUser.getId());
             	response.setIntHeader("X-Total-Count",count);
             	
@@ -110,7 +110,7 @@ public class orderController {
         		
         	}
         	else{
-        		List<orderWithGoods> orderWithGoodsList=orderService.getAllOrderListByStatus(pageNum, pageSize, status);
+        		List<orderWithGoods> orderWithGoodsList=orderService.getAllOrderListByStatus(pageNum, pageSize, status,wechatUser.getId());
             	int count=orderService.getOrderCountByStatus(wechatUser.getId(), status);
             	response.setIntHeader("X-Total-Count",count);
             	
@@ -142,7 +142,7 @@ public class orderController {
     	// 根据返回的user实体类，判断用户是否存在
         wechatUser wechatUser = userService.getUserByOpenId(openId);
         if(wechatUser!=null){
-        	List<orderWithGoods> orderWithGoodsList=orderService.getAllOrderListByStatus(pageNum, pageSize, status);
+        	List<orderWithGoods> orderWithGoodsList=orderService.getAllOrderListByStatus(pageNum, pageSize, status,wechatUser.getId());
         	int count=orderService.getOrderCountByStatus(wechatUser.getId(), status);
         	response.setIntHeader("X-Total-Count",count);
             return orderWithGoodsList;
@@ -346,7 +346,7 @@ public class orderController {
 
                 list.add(new TemplateData(orderNo,"#ffffff"));
 
-                list.add(new TemplateData(orderM.getPayPrice(),"#ffffff"));
+                list.add(new TemplateData(orderM.getPayPrice().toString(),"#ffffff"));
 
                 list.add(new TemplateData("用户余额","#ffffff"));
 

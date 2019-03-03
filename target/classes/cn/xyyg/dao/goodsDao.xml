@@ -37,7 +37,8 @@
 	<!-- 根据分类id查询商品 -->
     <select id="getGoodsByCategoryId"  parameterType="Integer" resultType="cn.xyyg.pojo.goodsWithCounts">
 		
-		select goods.* , (select count(*) from order_goods   where id = goods.id) AS counts  
+		select goods.* , (select sum(order_goods.counts) from order_goods ,`order`  where order_goods.id = goods.id
+		and (`order`.status=4 or `order`.`status`=5) and `order`.id=order_goods.orderId) AS counts  
 		from goods where categoryId = #{id}
 	</select>
 	
@@ -88,7 +89,8 @@
 	
     <!-- 根据名字模糊查询商品根据condition排序 -->
     <select id="getGoodsByNameOrderBySort"  parameterType="String" resultType="cn.xyyg.pojo.goodsWithCounts">
-		select * ,(select count(*) from order_goods   where id = goods.id) AS counts 
+		select * ,(select sum(order_goods.counts) from order_goods ,`order`  where order_goods.id = goods.id
+		and (`order`.status=4 or `order`.`status`=5) and `order`.id=order_goods.orderId) AS counts 
 		from goods where goodsName like concat(concat('%',#{name}),'%') order by ${condition}  ${sort}
 		
 	</select>

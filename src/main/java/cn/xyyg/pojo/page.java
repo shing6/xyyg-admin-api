@@ -10,8 +10,8 @@ public class page {
      private int pageSize;
      private int status;
      private Integer goodsId;
-     private Integer sellerId;
-     
+     private Integer sellerId; 
+     private Integer wechatUserId;
      
      
 	public Integer getGoodsId() {
@@ -43,6 +43,12 @@ public class page {
 	}
 	public void setSellerId(Integer sellerId) {
 		this.sellerId = sellerId;
+	}
+	public Integer getWechatUserId() {
+		return wechatUserId;
+	}
+	public void setWechatUserId(Integer wechatUserId) {
+		this.wechatUserId = wechatUserId;
 	}
 	
      

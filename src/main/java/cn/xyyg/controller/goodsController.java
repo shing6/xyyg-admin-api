@@ -112,7 +112,8 @@ public class goodsController {
      * @return
      */
     @GetMapping("/getGoodsByName")
-    public List<goods> getGoodsByName(String name){
+    public List<goods> getGoodsByName(HttpServletRequest request){
+    	String name = request.getParameter("name");
     	List<goods> goodsList =goodsService.getGoodsByName(name);
 		return goodsList ;
     	
@@ -125,8 +126,13 @@ public class goodsController {
      * @param sort
      * @return
      */
-    @GetMapping("/getGoodsByNameOrderBySort")
-    public List<goodsWithCounts> getGoodsByNameOrderBySort(HttpServletResponse response,String name,String condition,String sort,int pageNum, int pageSize){
+    @PostMapping("/getGoodsByNameOrderBySort")
+    public List<goodsWithCounts> getGoodsByNameOrderBySort(HttpServletResponse response,HttpServletRequest request){
+    	String name = request.getParameter("name");
+    	String condition = request.getParameter("condition");
+    	String sort = request.getParameter("sort");
+    	int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+    	int pageSize=Integer.parseInt(request.getParameter("pageSize"));
     	//使用分页插件,核心代码就这一行
         PageHelper.startPage(pageNum, pageSize);
     	List<goodsWithCounts> goodsList =goodsService.getGoodsByNameOrderBySort(name, condition, sort,pageNum,pageSize);

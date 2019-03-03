@@ -27,12 +27,12 @@
 		select * from xyyg.order where orderNo=#{orderNo}
 	</select>
 	
-     <!-- 一对多查询订单 -->
+     <!-- 用户一对多查询自己订单 -->
     <select id="getAllOrderList"   resultMap="orderWithGoods" parameterType="cn.xyyg.pojo.page">
 		select `order`.* , order_goods.orderId as orderId,order_goods.id as goodsId,order_goods.mainPic as mainPic,
 		order_goods.goodsName as goodsName,order_goods.price as price,order_goods.counts as counts ,order_goods.isComment as isComment  
 		from `order` LEFT JOIN order_goods  on `order`.id=order_goods.orderId  where `order`.id in
-        (SELECT temp.id from (SELECT id from `order`  order by `order`.createTime DESC  limit #{pageNum},#{pageSize}) as temp)
+        (SELECT temp.id from (SELECT id from `order` where wechatUserId = #{wechatUserId}  order by `order`.createTime DESC  limit #{pageNum},#{pageSize}) as temp)
 	</select>
 	
     <resultMap type="cn.xyyg.pojo.orderWithGoods" id="orderWithGoods">
@@ -66,12 +66,12 @@
 		select count(*) from xyyg.order where wechatUserId =#{wechatUserId}
 	</select>
 	
-     <!-- 根据订单状态一对多查询订单 -->
+     <!-- 用户根据订单状态一对多查询订单 -->
     <select id="getAllOrderListByStatus"   resultMap="orderWithGoodsByStatus" parameterType="cn.xyyg.pojo.page">
 		 select `order`.* , order_goods.orderId as orderId,order_goods.id as goodsId,order_goods.mainPic as mainPic,
 		order_goods.goodsName as goodsName,order_goods.price as price,order_goods.counts as counts,order_goods.isComment as isComment  
 		from `order`  LEFT JOIN order_goods  on `order`.id=order_goods.orderId    where `order`.id in
-        (SELECT temp.id from (SELECT id from `order` where `status`= #{status} order by `order`.createTime   limit #{pageNum},#{pageSize}) as temp)
+        (SELECT temp.id from (SELECT id from `order` where `status`= #{status} and   wechatUserId = #{wechatUserId} order by `order`.createTime   limit #{pageNum},#{pageSize}) as temp)
 	</select>
 	
     <resultMap type="cn.xyyg.pojo.orderWithGoods" id="orderWithGoodsByStatus">

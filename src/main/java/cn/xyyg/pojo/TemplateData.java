@@ -26,11 +26,7 @@ public class TemplateData {
 
 
 
-	public TemplateData(BigDecimal value2, String color2) {
-		 this.value2 = value2;
-
-	     this.color2 = color2;
-	}
+	
 
     
       

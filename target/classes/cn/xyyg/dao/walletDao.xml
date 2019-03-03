@@ -6,7 +6,7 @@
 	
     <!-- 添加微信用户钱包信息 -->
     <insert id="insertWechatWallet" parameterType="cn.xyyg.pojo.wallet" >
-       INSERT INTO `xyyg`.`wallet` ( `money`, `wechatUserId`) VALUES ( #{money}, #{wechatUserId});
+       INSERT INTO `xyyg`.`wallet` ( `money`,`password`, `wechatUserId`) VALUES ( #{money},#{password}, #{wechatUserId});
     </insert>
     
     <!-- 添加微信用户支付密码-->

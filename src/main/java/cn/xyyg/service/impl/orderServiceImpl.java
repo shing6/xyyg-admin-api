@@ -168,12 +168,13 @@ public class orderServiceImpl implements orderService {
 		
 	}
 	/**
-	 * 分页查询全部订单
+	 * 客户分页查询全部订单
 	 */
 	@Override
-	public List<orderWithGoods> getAllOrderList(int pageNum, int pageSize) {
+	public List<orderWithGoods> getAllOrderList(int pageNum, int pageSize,int wechatUserId) {
 		int newPageNum=pageNum*pageSize;
         page page=new page();
+        page.setWechatUserId(wechatUserId);
 		page.setPageNum(newPageNum);
 		page.setPageSize(pageSize);
 		return this.orderDao.getAllOrderList(page);
@@ -189,12 +190,13 @@ public class orderServiceImpl implements orderService {
 	}
 	
 	/**
-	 * 根据订单状态查询订单
+	 * 客户根据订单状态查询订单
 	 */
 	@Override
-	public List<orderWithGoods> getAllOrderListByStatus(int pageNum, int pageSize, int status) {
+	public List<orderWithGoods> getAllOrderListByStatus(int pageNum, int pageSize, int status,int wechatUserId) {
 		int newPageNum=pageNum*pageSize;
         page page=new page();
+        page.setWechatUserId(wechatUserId);
 		page.setPageNum(newPageNum);
 		page.setPageSize(pageSize);
 		page.setStatus(status);
@@ -202,7 +204,7 @@ public class orderServiceImpl implements orderService {
 	}
 	
 	/**
-	 * 根据状态查询订单数量
+	 * 客户根据状态查询订单数量
 	 */
 	@Override
 	public int getOrderCountByStatus(int wechatUserId, int status) {

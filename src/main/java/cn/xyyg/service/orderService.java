@@ -30,12 +30,12 @@ public interface orderService {
 			List<String> formId, int wechatUserId);
 	
 	   /**
-	    * 分页查询全部订单
+	    * 客户分页查询全部订单
 	 * @param status 
 	    * @param page
 	    * @return
 	    */
-	   public List<orderWithGoods> getAllOrderList(int pageNum, int pageSize);
+	   public List<orderWithGoods> getAllOrderList(int pageNum, int pageSize,int wechatUserId);
 	   /**
 	    * 查询订单数量
 	    * @return
@@ -43,11 +43,11 @@ public interface orderService {
 	   public int getOrderCount(int wechatUserId);
 	   
 	   /**
-	    * 根据订单状态一对多查询订单
+	    * 客户根据订单状态一对多查询订单
 	    * @param page
 	    * @return
 	    */
-	   public List<orderWithGoods> getAllOrderListByStatus(int pageNum, int pageSize, int status);
+	   public List<orderWithGoods> getAllOrderListByStatus(int pageNum, int pageSize, int status,int wechatUserId);
 	   
 	   /**
 	    * 根据用户id和状态查询订单
