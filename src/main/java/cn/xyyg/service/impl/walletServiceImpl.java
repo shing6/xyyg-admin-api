@@ -97,8 +97,8 @@ public class walletServiceImpl implements walletService {
 	 */
 	@Override
 	@Transactional(rollbackFor = {IllegalArgumentException.class})
-	public Object insertWechatWalletPassword(wallet wallet) {
-		int rows =this.walletDao.insertWechatWalletPassword(wallet);
+	public Object updateWechatWalletPassword(wallet wallet) {
+		int rows =this.walletDao.updateWechatWalletPassword(wallet);
 		 if(rows > 0){
 			 return ResponseUtil.ok();
 		 }

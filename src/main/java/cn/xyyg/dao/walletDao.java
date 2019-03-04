@@ -58,10 +58,10 @@ public interface walletDao {
 	public wallet getWechatPassword(int wechatUserId);
 	
 	/**
-	 * 添加用户支付密码
+	 * 修改用户支付密码
 	 * @return
 	 */
-	public int insertWechatWalletPassword(wallet wallet);
+	public int updateWechatWalletPassword(wallet wallet);
 	
 	
 	/**

@@ -9,8 +9,8 @@
        INSERT INTO `xyyg`.`wallet` ( `money`,`password`, `wechatUserId`) VALUES ( #{money},#{password}, #{wechatUserId});
     </insert>
     
-    <!-- 添加微信用户支付密码-->
-    <update id="insertWechatWalletPassword" parameterType="cn.xyyg.pojo.wallet" >
+    <!-- 修改微信用户支付密码-->
+    <update id="updateWechatWalletPassword" parameterType="cn.xyyg.pojo.wallet" >
        UPDATE `xyyg`.`wallet` SET `password`=#{password} WHERE wechatUserId = #{wechatUserId};
     </update>
     

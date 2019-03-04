@@ -31,10 +31,10 @@ public interface walletService {
 	public Object SecondPay(int wechatUserId,String pwd,String orderNo);
 	
 	/**
-	 * 添加用户支付密码
+	 * 修改用户支付密码
 	 * @return
 	 */
-	public Object insertWechatWalletPassword(wallet wallet);
+	public Object updateWechatWalletPassword(wallet wallet);
 	
 	
 	

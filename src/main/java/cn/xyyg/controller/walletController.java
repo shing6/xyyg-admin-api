@@ -59,12 +59,12 @@ public class walletController {
 	
 	
 	/**
-	 * 添加密码
+	 * 修改支付密码
 	 * @param request
 	 * @return
 	 */
-	@PostMapping("/insertPassword")
-    public Object insertWechatWalletPassword(HttpServletRequest request){
+	@PostMapping("/updateWechatWalletPassword")
+    public Object updateWechatWalletPassword(HttpServletRequest request){
     	String openId =request.getParameter("open_id");
     	String password =request.getParameter("pwdVal");
     	String pwdByMd5 =null;
@@ -83,7 +83,7 @@ public class walletController {
         	wallet newWallet =new wallet();
         	newWallet.setWechatUserId(wechatUser.getId());
         	newWallet.setPassword(pwdByMd5);
-        	Object obj = walletService.insertWechatWalletPassword(newWallet);
+        	Object obj = walletService.updateWechatWalletPassword(newWallet);
         	return obj;
         }
         
