@@ -67,6 +67,7 @@ public class walletController {
     public Object updateWechatWalletPassword(HttpServletRequest request){
     	String openId =request.getParameter("open_id");
     	String password =request.getParameter("pwdVal");
+    	String oldPassword =request.getParameter("oldPwd");
     	String pwdByMd5 =null;
     	try {
 			pwdByMd5= MD5.EncoderByMd5(password);//md5加密密码
@@ -83,7 +84,7 @@ public class walletController {
         	wallet newWallet =new wallet();
         	newWallet.setWechatUserId(wechatUser.getId());
         	newWallet.setPassword(pwdByMd5);
-        	Object obj = walletService.updateWechatWalletPassword(newWallet);
+        	Object obj = walletService.updateWechatWalletPassword(newWallet,oldPassword);
         	return obj;
         }
         

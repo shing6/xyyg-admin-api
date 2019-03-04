@@ -93,16 +93,35 @@ public class walletServiceImpl implements walletService {
 	
 
 	/**
-	 * 添加用户支付密码
+	 * 修改用户支付密码
 	 */
 	@Override
 	@Transactional(rollbackFor = {IllegalArgumentException.class})
-	public Object updateWechatWalletPassword(wallet wallet) {
-		int rows =this.walletDao.updateWechatWalletPassword(wallet);
-		 if(rows > 0){
-			 return ResponseUtil.ok();
-		 }
-		return ResponseUtil.fail();
+	public Object updateWechatWalletPassword(wallet wallet,String oldPassword) {
+		boolean flag = false;//判断密码是否正确标志
+		 //获取用户密码
+		wallet newwallet= this.walletDao.getWechatPassword(wallet.getWechatUserId());
+		String password=newwallet.getPassword();
+		try {
+			flag = MD5.checkpassword(oldPassword, password);//比较支付密码
+		} catch (NoSuchAlgorithmException e) {
+			
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}
+		if(flag){
+			int rows =this.walletDao.updateWechatWalletPassword(wallet);
+			 if(rows > 0){
+				 return ResponseUtil.ok();
+			 }
+			return ResponseUtil.fail();
+		}
+		else{
+			return ResponseUtil.unOldPwd();
+		}
+		
 	}
     /**
      * 二次支付，详情页支付

@@ -34,7 +34,7 @@ public interface walletService {
 	 * 修改用户支付密码
 	 * @return
 	 */
-	public Object updateWechatWalletPassword(wallet wallet);
+	public Object updateWechatWalletPassword(wallet wallet,String oldPassword);
 	
 	
 	

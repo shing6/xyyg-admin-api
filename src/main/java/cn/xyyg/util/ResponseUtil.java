@@ -95,6 +95,9 @@ public class ResponseUtil {
     public static Object NotUserName() {
         return fail(511, "用户名不存在");
     }
+    public static Object unOldPwd() {
+        return fail(512, "旧密码错误");
+    }
     
 
 }
