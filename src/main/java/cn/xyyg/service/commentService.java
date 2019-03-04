@@ -75,6 +75,13 @@ public interface commentService {
 	public List<commentWithPicture> getCommentWithPictureBySellerId(int pageNum,int pageSize,int sellerId);
 	
 	/**
+	 * 根据商家id查找评论数量
+	 * @param sellerId
+	 * @return
+	 */
+	public int getCommentCountBySellerId(int sellerId);
+	
+	/**
 	 * 商家回复
 	 * @param reply
 	 * @return

@@ -208,6 +208,11 @@
 	    
 	</resultMap>
 	
+    <!-- 根据商家id查询评论数量 -->
+    <select id="getCommentCountBySellerId" parameterType="Integer" resultType="Integer">
+      select count(*) from comment where goodsId in (select id from goods where sellerId = #{sellerId})
+    </select>
+	
      <!-- 添加评论 -->
     <insert id="insertReply" parameterType="cn.xyyg.pojo.reply" >
      INSERT INTO `xyyg`.`reply` (`content`,`commentId`, `createTime`) 

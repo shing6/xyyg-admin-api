@@ -180,5 +180,13 @@ public class commentServiceImpl implements commentService {
 		}
 		
 	}
+    /**
+     * 根据商家id获取商家评论数
+     */
+	@Override
+	public int getCommentCountBySellerId(int sellerId) {
+		
+		return this.commentDao.getCommentCountBySellerId(sellerId);
+	}
 
 }

@@ -144,6 +144,8 @@ public class commentController {
         	
         	user user=userService.getUserById(userId);
         	shop shop=shopService.getShopByUserId(user.getId());
+            int count=commentService.getCommentCountBySellerId(shop.getId());
+        	response.setIntHeader("X-Total-Count",count);
         	List<commentWithPicture> commentWithPictureList = commentService.getCommentWithPictureBySellerId(pageNum, pageSize,shop.getId());
             return commentWithPictureList;
              

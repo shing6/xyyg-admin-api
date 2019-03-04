@@ -97,6 +97,13 @@ public interface commentDao {
 	public List<commentWithPicture> getCommentWithPictureBySellerId(page page);
 	
 	/**
+	 * 根据商家id查找评论数量
+	 * @param sellerId
+	 * @return
+	 */
+	public int getCommentCountBySellerId(int sellerId);
+	
+	/**
 	 * 商家回复
 	 * @param reply
 	 * @return
