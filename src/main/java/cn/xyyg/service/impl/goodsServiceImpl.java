@@ -172,7 +172,7 @@ public class goodsServiceImpl implements goodsService {
 					
 					if(picAddrList.get(i).getId()!=null){
 						//如果图片地址为空则删除
-						if(picAddrList.get(i).getPicAddr()==""){
+						if(picAddrList.get(i).getPicAddr()==null){
 							this.goodsDao.deleteGoodsPic(picAddrList.get(i).getId());
 						}
 						else{
