@@ -206,7 +206,7 @@ public class goodsServiceImpl implements goodsService {
 			for(int i=0;i<goodsDesc.size();i++){
                 //分两种情况，如果数据库已经有的参数就修改，没有就新加
 				if(goodsDesc.get(i).getId()!=null){
-					if(goodsDesc.get(i).getDetail()==""){
+					if(goodsDesc.get(i).getDetail()==null){
 						this.goodsDao.deleteGoodsDesc(goodsDesc.get(i).getId());
 					}
 					else{
