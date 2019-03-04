@@ -43,7 +43,7 @@ public class uploadController {
 			if (type != null) {                
 				if ("GIF".equals(type.toUpperCase())||"PNG".equals(type.toUpperCase())||"JPG".equals(type.toUpperCase())) {
 					// 项目在容器中实际发布运行的根路径                    
-					String realPath = "E:/images";                    
+					String realPath = "C:/images";                    
 					// 自定义的文件名称                    
 					trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;                    
 					// 设置存放图片文件的路径                   
@@ -99,7 +99,7 @@ public class uploadController {
 			if (type != null) {                
 				if ("GIF".equals(type.toUpperCase())||"PNG".equals(type.toUpperCase())||"JPG".equals(type.toUpperCase())) {
 					// 项目在容器中实际发布运行的根路径                    
-					String realPath = "E:/images";                    
+					String realPath = "C:/images";                    
 					// 自定义的文件名称                    
 					trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;                    
 					// 设置存放图片文件的路径                   
@@ -155,7 +155,7 @@ public class uploadController {
 			if (type != null) {                
 				if ("GIF".equals(type.toUpperCase())||"PNG".equals(type.toUpperCase())||"JPG".equals(type.toUpperCase())) {
 					// 项目在容器中实际发布运行的根路径                    
-					String realPath = "E:/images";                    
+					String realPath = "C:/images";                    
 					// 自定义的文件名称                    
 					trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;                    
 					// 设置存放图片文件的路径                   
