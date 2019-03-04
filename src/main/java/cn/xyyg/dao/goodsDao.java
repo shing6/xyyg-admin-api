@@ -126,4 +126,18 @@ public interface goodsDao {
 	 * @return
 	 */
 	public int updateGoodsDesc(goodsDesc goodsDesc);
+	
+	/**
+	 * 根据图片id删除详情图片
+	 * @param id
+	 * @return
+	 */
+	public int deleteGoodsPic(int id);
+	
+	/**
+	 * 删除商品参数
+	 * @param id
+	 * @return
+	 */
+	public int deleteGoodsDesc(int id);
 }

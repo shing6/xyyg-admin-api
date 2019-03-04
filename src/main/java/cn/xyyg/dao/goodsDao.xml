@@ -195,6 +195,16 @@
     <update id="updateGoodsPic" parameterType="cn.xyyg.pojo.goodsPicture" >
          UPDATE `xyyg`.`goods_picture` SET `picAddr`=#{picAddr} WHERE `id`=#{id};
      </update>
+     
+     <!-- 删除商品详情图 -->
+    <delete id="deleteGoodsPic" parameterType="Integer" >
+        delete * from `xyyg`.`goods_picture`  WHERE `id`=#{id};
+     </delete>
+     
+      <!-- 删除商品参数 -->
+    <delete id="deleteGoodsDesc" parameterType="Integer" >
+        delete * from `xyyg`.`goods_desc`  WHERE `id`=#{id};
+     </delete>
     
     
     

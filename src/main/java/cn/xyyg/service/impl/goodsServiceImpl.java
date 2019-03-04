@@ -1,5 +1,7 @@
 package cn.xyyg.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,10 +171,17 @@ public class goodsServiceImpl implements goodsService {
 				for(int i=0;i<picAddrList.size();i++){
 					
 					if(picAddrList.get(i).getId()!=null){
-						goodsPicture goodsPicture=new goodsPicture();
-						goodsPicture.setPicAddr(picAddrList.get(i).getPicAddr());
-						goodsPicture.setId(picAddrList.get(i).getId());
-						this.goodsDao.updateGoodsPic(goodsPicture);
+						//如果图片地址为空则删除
+						if(picAddrList.get(i).getPicAddr()==null){
+							this.goodsDao.deleteGoodsPic(picAddrList.get(i).getId());
+						}
+						else{
+							goodsPicture goodsPicture=new goodsPicture();
+							goodsPicture.setPicAddr(picAddrList.get(i).getPicAddr());
+							goodsPicture.setId(picAddrList.get(i).getId());
+							this.goodsDao.updateGoodsPic(goodsPicture);
+						}
+						
 					}
 					else if(picAddrList.get(i).getId()==null){
 						
@@ -197,11 +206,17 @@ public class goodsServiceImpl implements goodsService {
 			for(int i=0;i<goodsDesc.size();i++){
                 //分两种情况，如果数据库已经有的参数就修改，没有就新加
 				if(goodsDesc.get(i).getId()!=null){
-					goodsDesc goodsDes=new goodsDesc();
-					goodsDes.setId(goodsDesc.get(i).getId());
-					goodsDes.setName(goodsDesc.get(i).getName());
-					goodsDes.setDetail(goodsDesc.get(i).getDetail());
-					this.goodsDao.updateGoodsDesc(goodsDes);
+					if(goodsDesc.get(i).getGoodsId()==null){
+						this.goodsDao.deleteGoodsDesc(goodsDesc.get(i).getId());
+					}
+					else{
+						goodsDesc goodsDes=new goodsDesc();
+						goodsDes.setId(goodsDesc.get(i).getId());
+						goodsDes.setName(goodsDesc.get(i).getName());
+						goodsDes.setDetail(goodsDesc.get(i).getDetail());
+						this.goodsDao.updateGoodsDesc(goodsDes);
+					}
+					
 				}
 				else{
 					goodsDesc goodsDes=new goodsDesc();
