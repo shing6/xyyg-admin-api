@@ -112,6 +112,20 @@ public interface orderDao {
    public int getOrderCountBySellerId(int sellerId);
    
    /**
+    * 根据订单id和状态查询订单
+    * @param order
+    * @return
+    */
+   public List<order> selectOrderByStatus(order order);
+   
+   /**
+    * 根据订单id和状态获取订单数量
+    * @param order
+    * @return
+    */
+   public int selectOrderCountByStatus(order order);
+   
+   /**
     * 支付后根据订单号更改订单状态和支付金额
     * @param order
     * @return

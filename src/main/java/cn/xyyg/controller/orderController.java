@@ -363,4 +363,41 @@ public class orderController {
 
     }
     
+    /**
+     * 根据商家id和状态分页查询订单
+     * @param response
+     * @param request
+     * @return
+     */
+    @PostMapping("/selectOrderByStatus")
+    public Object selectOrderByStatus(HttpServletResponse response,HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	
+    	if (flag){
+    		int userId=Integer.parseInt(request.getParameter("userId"));
+    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+        	int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        	int status=Integer.parseInt(request.getParameter("status"));
+                user user=userService.getUserById(userId);
+                shop shop=shopService.getShopByUserId(user.getId());
+                order order =new order();
+            	order.setId(shop.getId());
+            	order.setStatus(status);
+            	int count =orderService.selectOrderCountByStatus(order);
+            	response.setIntHeader("X-Total-Count",count);
+            	//使用分页插件,核心代码就这一行
+                PageHelper.startPage(pageNum, pageSize);
+             	List<order> orderList =orderService.selectOrderByStatus(order, pageNum, pageSize);
+            	return orderList;
+            
+         }
+    	
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+        
+		
+    	
+    }
+    
 }
