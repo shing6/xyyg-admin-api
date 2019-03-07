@@ -130,7 +130,7 @@ public interface orderDao {
     * @param order
     * @return
     */
-   public order selectOrderByNo(order order);
+   public List<order>  selectOrderByNo(order order);
   
    /**
     * 根据商家id和订单号查订单数量

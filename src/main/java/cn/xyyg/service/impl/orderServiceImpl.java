@@ -380,7 +380,7 @@ public class orderServiceImpl implements orderService {
 	 * 根据商家id和订单号查询订单
 	 */
 	@Override
-	public order selectOrderByNo(order order, int pageNum, int pageSize) {
+	public List<order>  selectOrderByNo(order order, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		return this.orderDao.selectOrderByNo(order);
 	}

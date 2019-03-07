@@ -421,7 +421,7 @@ public class orderController {
             	response.setIntHeader("X-Total-Count",count);
             	//使用分页插件,核心代码就这一行
                 PageHelper.startPage(pageNum, pageSize);
-             	order orderList =orderService.selectOrderByNo(order, pageNum, pageSize);
+             	List<order> orderList =orderService.selectOrderByNo(order, pageNum, pageSize);
             	return orderList;
             
          }

@@ -99,7 +99,7 @@ public interface orderService {
 	    * @param order
 	    * @return
 	    */
-	   public order selectOrderByNo(order order,int pageNum,int pageSize);
+	   public List<order>  selectOrderByNo(order order,int pageNum,int pageSize);
 	  
 	   /**
 	    * 根据商家id和订单号查订单数量
