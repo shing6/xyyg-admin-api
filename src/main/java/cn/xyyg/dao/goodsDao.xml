@@ -205,6 +205,12 @@
     <delete id="deleteGoodsDesc" parameterType="Integer" >
         delete  from `xyyg`.`goods_desc`  WHERE `id`=#{id};
      </delete>
+     
+     <!-- 上下架商品 -->
+    <update id="updateGoodsStatus" parameterType="cn.xyyg.pojo.goods" >
+        UPDATE `xyyg`.`goods` SET  `status`=#{status}
+        WHERE `id`=#{id};
+     </update>
     
     
     

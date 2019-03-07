@@ -140,4 +140,11 @@ public interface goodsDao {
 	 * @return
 	 */
 	public int deleteGoodsDesc(int id);
+	
+	/**
+	 * 上下架商品
+	 * @param goods
+	 * @return
+	 */
+	public int updateGoodsStatus(goods goods);
 }

@@ -276,6 +276,43 @@ public class goodsController {
         
 		
        }
+    
+    /**
+     * 上下架商品商品
+     * @param request
+     * @return
+     */
+    @PostMapping("/updateGoodsStatus")
+    public Object updateGoodsStatus(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		
+    		String goods=request.getParameter("goods");
+    		JSONObject goodsJson = JSONObject.fromObject(goods);
+    		  
+                goods goodsPojo = new goods();
+                
+                goodsPojo.setId(goodsJson.getInt("id"));
+                goodsPojo.setStatus(goodsJson.getInt("status"));
+              
+                boolean updateflag=this.goodsService.updateGoodsStatus(goodsPojo);
+                if(updateflag){
+                	return ResponseUtil.ok();
+                }
+                else{
+                	return ResponseUtil.fail();
+                }
+            
+           
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+        
+        
+		
+       }
   
     
 }

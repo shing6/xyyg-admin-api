@@ -98,4 +98,11 @@ public interface goodsService {
 	 * @return
 	 */
 	public boolean updateGoods(goods goods,List<goodsPicture> picAddrList,List<goodsDesc> goodsDesc);
+	
+	/**
+	 * 上下架商品
+	 * @param goods
+	 * @return
+	 */
+	public boolean updateGoodsStatus(goods goods);
 }

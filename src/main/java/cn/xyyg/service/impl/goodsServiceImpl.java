@@ -242,6 +242,18 @@ public class goodsServiceImpl implements goodsService {
 		
 	}
 	
+	/**
+	 * 上下架商品
+	 */
+	@Override
+	public boolean updateGoodsStatus(goods goods) {
+		int rows = this.goodsDao.updateGoodsStatus(goods);
+		if(rows>0){
+			return true;
+		}
+		return false;
+	}
+	
 	
 	
 
