@@ -269,7 +269,7 @@ public class goodsServiceImpl implements goodsService {
 	@Override
 	public int selectGoodsCountByName(goods goods) {
 	
-		return goodsDao.selectGoodsCountByName(goods);
+		return this.goodsDao.selectGoodsCountByName(goods);
 	}
 	
 	
