@@ -341,6 +341,8 @@ public class goodsController {
             	page page =new page();
             	page.setName(name);
             	page.setSellerId(shop.getId());
+            	page.setPageNum(pageNum);
+            	page.setPageSize(pageSize);
              	List<goodsDescPic> goodsList =goodsService.selectGoodsByName(page);
             	return goodsList;
             
