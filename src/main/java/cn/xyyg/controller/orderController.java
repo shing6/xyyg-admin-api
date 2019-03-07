@@ -380,14 +380,11 @@ public class orderController {
         	int status=Integer.parseInt(request.getParameter("status"));
                 user user=userService.getUserById(userId);
                 shop shop=shopService.getShopByUserId(user.getId());
-                order order =new order();
-            	order.setId(shop.getId());
-            	order.setStatus(status);
-            	int count =orderService.selectOrderCountByStatus(order);
+                int count =orderService.selectOrderCountByStatus(shop.getId(),status);
             	response.setIntHeader("X-Total-Count",count);
             	//使用分页插件,核心代码就这一行
                 PageHelper.startPage(pageNum, pageSize);
-             	List<order> orderList =orderService.selectOrderByStatus(order, pageNum, pageSize);
+             	List<order> orderList =orderService.selectOrderByStatus(shop.getId(),status, pageNum, pageSize);
             	return orderList;
             
          }

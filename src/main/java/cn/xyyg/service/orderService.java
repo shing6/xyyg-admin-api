@@ -85,14 +85,14 @@ public interface orderService {
 	    * @param order
 	    * @return
 	    */
-	   public List<order> selectOrderByStatus(order order,int pageNum,int pageSize);
+	   public List<order> selectOrderByStatus(int sellerId,int status,int pageNum,int pageSize);
 	   
 	   /**
 	    * 根据订单id和状态获取订单数量
 	    * @param order
 	    * @return
 	    */
-	   public int selectOrderCountByStatus(order order);
+	   public int selectOrderCountByStatus(int sellerId,int status);
 	   
 	   /**
 	    * 查找未付款订单

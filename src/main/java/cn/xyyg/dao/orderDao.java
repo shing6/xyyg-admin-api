@@ -116,14 +116,14 @@ public interface orderDao {
     * @param order
     * @return
     */
-   public List<order> selectOrderByStatus(order order);
+   public List<order> selectOrderByStatus(@Param("sellerId")int sellerId,@Param("status")int status);
    
    /**
     * 根据订单id和状态获取订单数量
     * @param order
     * @return
     */
-   public int selectOrderCountByStatus(order order);
+   public int selectOrderCountByStatus(@Param("sellerId")int sellerId,@Param("status")int status);
    
    /**
     * 支付后根据订单号更改订单状态和支付金额

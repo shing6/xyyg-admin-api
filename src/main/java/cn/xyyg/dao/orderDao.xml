@@ -167,12 +167,12 @@
 	</select>
 	
     <!-- 根据商店id和订单状态查询订单 -->
-     <select id="selectOrderByStatus"  resultType="cn.xyyg.pojo.order" parameterType="cn.xyyg.pojo.order">
+     <select id="selectOrderByStatus"  resultType="cn.xyyg.pojo.order" parameterType="Integer">
 		select * from xyyg.order  where sellerId=#{sellerId} and status=#{status}
 	</select>
 	
       <!-- 根据商家id和订单状态获取订单数量 -->
-    <select id="selectOrderCountByStatus"  resultType="Integer"  parameterType="cn.xyyg.pojo.order" >
+    <select id="selectOrderCountByStatus"  resultType="Integer"  parameterType="Integer" >
 		select count(*) from xyyg.order where sellerId=#{sellerId} and status=#{status}
 	</select>
 	
