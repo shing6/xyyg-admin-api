@@ -24,6 +24,7 @@ import cn.xyyg.pojo.goodsDescPic;
 import cn.xyyg.pojo.goodsPicture;
 import cn.xyyg.pojo.goodsWithCounts;
 import cn.xyyg.pojo.order;
+import cn.xyyg.pojo.page;
 import cn.xyyg.pojo.shop;
 import cn.xyyg.pojo.user;
 import cn.xyyg.pojo.wechatUser;
@@ -313,6 +314,45 @@ public class goodsController {
         
 		
        }
+    
+    /**
+     * 根据商家id和name分页模糊查询商品
+     * @param response
+     * @param request
+     * @return
+     */
+    @PostMapping("/selectGoodsByName")
+    public Object selectGoodsByName(HttpServletResponse response,HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	
+    	if (flag){
+    		int userId=Integer.parseInt(request.getParameter("userId"));
+    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+        	int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        	String name = request.getParameter("goodsName");
+        	
+                user user=userService.getUserById(userId);
+                shop shop=shopService.getShopByUserId(user.getId());
+                goods goods =new goods();
+                goods.setSellerId(shop.getId());
+                goods.setGoodsName(name);
+                int count =goodsService.selectGoodsCountByName(goods);
+            	response.setIntHeader("X-Total-Count",count);
+            	page page =new page();
+            	page.setName(name);
+            	page.setSellerId(shop.getId());
+             	List<goodsDescPic> goodsList =goodsService.selectGoodsByName(page);
+            	return goodsList;
+            
+         }
+    	
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+        
+		
+    	
+    }
   
     
 }

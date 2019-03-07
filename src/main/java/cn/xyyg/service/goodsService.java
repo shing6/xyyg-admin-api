@@ -8,6 +8,7 @@ import cn.xyyg.pojo.goods;
 import cn.xyyg.pojo.goodsDescPic;
 import cn.xyyg.pojo.goodsPicture;
 import cn.xyyg.pojo.goodsWithCounts;
+import cn.xyyg.pojo.page;
 import cn.xyyg.pojo.goodsDesc;
 
 public interface goodsService {
@@ -105,4 +106,18 @@ public interface goodsService {
 	 * @return
 	 */
 	public boolean updateGoodsStatus(goods goods);
+	
+	/**
+	 * 商家一对多模糊查询商品
+	 * @param page
+	 * @return
+	 */
+	public List<goodsDescPic> selectGoodsByName(page page);
+	
+	/**
+	 * 商家模糊查询返回数量
+	 * @param goods
+	 * @return
+	 */
+	public int selectGoodsCountByName(goods goods);
 }

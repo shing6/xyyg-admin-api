@@ -12,6 +12,7 @@ public class page {
      private Integer goodsId;
      private Integer sellerId; 
      private Integer wechatUserId;
+     private String name;
      
      
 	public Integer getGoodsId() {
@@ -49,6 +50,12 @@ public class page {
 	}
 	public void setWechatUserId(Integer wechatUserId) {
 		this.wechatUserId = wechatUserId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
      

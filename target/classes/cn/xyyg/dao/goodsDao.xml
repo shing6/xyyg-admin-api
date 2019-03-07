@@ -147,6 +147,46 @@
 		
 	</select>
 	
+    <!-- 根据商家id分页模糊查询商品详细信息  后台使用-->
+    <select id="selectGoodsByName"  parameterType="cn.xyyg.pojo.page" resultMap="selectGoods">
+		
+     select goods.* , goods_desc.id as goodsDescId ,goods_desc.name,goods_desc.detail,
+		goods_picture.id as goodsPictureId ,goods_picture.picAddr
+		from  goods LEFT JOIN goods_desc on goods.id=goods_desc.goodsId LEFT JOIN goods_picture
+    on goods.id=goods_picture.goodsId where goods.id in
+     (SELECT temp.id from (SELECT id from goods where goods.sellerId=#{sellerId} and  goodsName like concat(concat('%',#{name}),'%') order by goods.id  limit #{pageNum},#{pageSize}) as temp)
+		
+	</select>
+	<resultMap type="cn.xyyg.pojo.goodsDescPic" id="selectGoods">
+	    <id property="id" column="id"/>
+	    <result property="goodsName" column="goodsName"/>
+	    <result property="oldPrice" column="oldPrice"/>
+	    <result property="price" column="price"/>
+	    <result property="mainPic" column="mainPic"/>
+	    <result property="createTime" column="createTime"/>
+	    <result property="updateTime" column="updateTime"/>
+	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="stock" column="stock"/>
+	    <result property="status" column="status"/>
+	    <result property="categoryId" column="categoryId"/>
+	    <result property="sellerId" column="sellerId"/>
+	    <collection property="goodsDescList" ofType="cn.xyyg.pojo.goodsDesc">
+	        <id property="id" column="goodsDescId"/>
+	        <result property="name" column="name"/>
+	        <result property="detail" column="detail"/>
+	    </collection>
+	    <collection property="goodsPictureList" ofType="cn.xyyg.pojo.goodsPicture">
+	        <id property="id" column="goodsPictureId"/>
+	        <result property="picAddr" column="picAddr"/>
+	    </collection>
+	</resultMap>
+	
+	<!-- 根据商家id模糊查询商品的数量 -->
+    <select id="selectGoodsCountByName"  parameterType="Integer" resultType="cn.xyyg.pojo.goods">
+		select count(*) from goods where sellerId=#{sellerId} and goodsName like concat(concat('%',#{goodsName}),'%')
+		
+	</select>
+	
      <!-- 添加商品 -->
     <insert id="insertGoods" parameterType="cn.xyyg.pojo.goods" >
      INSERT INTO `xyyg`.`goods` (`goodsName`, `oldPrice`, `price`, `mainPic`, `createTime`, 

@@ -254,6 +254,24 @@ public class goodsServiceImpl implements goodsService {
 		return false;
 	}
 	
+	/**
+	 * 商家模糊查询商品
+	 */
+	@Override
+	public List<goodsDescPic> selectGoodsByName(page page) {
+		
+		return this.goodsDao.selectGoodsByName(page);
+	}
+	
+	/**
+	 * 商家模糊查询商品数量
+	 */
+	@Override
+	public int selectGoodsCountByName(goods goods) {
+	
+		return goodsDao.selectGoodsCountByName(goods);
+	}
+	
 	
 	
 

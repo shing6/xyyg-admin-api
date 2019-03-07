@@ -147,4 +147,18 @@ public interface goodsDao {
 	 * @return
 	 */
 	public int updateGoodsStatus(goods goods);
+	
+	/**
+	 * 商家一对多模糊查询商品
+	 * @param page
+	 * @return
+	 */
+	public List<goodsDescPic> selectGoodsByName(page page);
+	
+	/**
+	 * 商家模糊查询返回数量
+	 * @param goods
+	 * @return
+	 */
+	public int selectGoodsCountByName(goods goods);
 }
