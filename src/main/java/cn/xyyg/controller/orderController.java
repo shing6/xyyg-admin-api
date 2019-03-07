@@ -397,4 +397,41 @@ public class orderController {
     	
     }
     
+    /**
+     * 根据商家id和编号分页查询订单
+     * @param response
+     * @param request
+     * @return
+     */
+    @PostMapping("/selectOrderByNo")
+    public Object selectOrderByNo(HttpServletResponse response,HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	
+    	if (flag){
+    		int userId=Integer.parseInt(request.getParameter("userId"));
+    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+        	int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        	String orderNo=request.getParameter("orderNo");
+                user user=userService.getUserById(userId);
+                shop shop=shopService.getShopByUserId(user.getId());
+                order order =new order();
+                order.setSellerId(shop.getId());
+                order.setOrderNo(orderNo);
+                int count =orderService.selectOrderCountByNo(order);
+            	response.setIntHeader("X-Total-Count",count);
+            	//使用分页插件,核心代码就这一行
+                PageHelper.startPage(pageNum, pageSize);
+             	order orderList =orderService.selectOrderByNo(order, pageNum, pageSize);
+            	return orderList;
+            
+         }
+    	
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+        
+		
+    	
+    }
+    
 }

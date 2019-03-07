@@ -176,6 +176,16 @@
 		select count(*) from xyyg.order where sellerId=#{sellerId} and status=#{status}
 	</select>
 	
+    <!-- 根据商店id和订单号查询订单 -->
+     <select id="selectOrderByNo"  resultType="cn.xyyg.pojo.order" parameterType="cn.xyyg.pojo.order">
+		select * from xyyg.order  where sellerId=#{sellerId} and orderNo=#{orderNo}
+	</select>
+	
+      <!-- 根据商家id和订单号获取订单数量 -->
+    <select id="selectOrderCountByNo"  resultType="Integer"  parameterType="cn.xyyg.pojo.order" >
+		select count(*) from xyyg.order where sellerId=#{sellerId} and orderNo=#{orderNo}
+	</select>
+	
      <!-- 支付后根据订单号更改订单状态 和付款金额-->
 	<update id="updateOrderStausAfterPay" parameterType="String">
 	  UPDATE `xyyg`.`order` SET `payPrice`=needPrice, `status`='2' WHERE `orderNo`=#{orderNo};

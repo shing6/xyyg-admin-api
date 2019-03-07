@@ -376,6 +376,24 @@ public class orderServiceImpl implements orderService {
 		return this.orderDao.selectOrderCountByStatus(sellerId,status);
 	}
 	
+	/**
+	 * 根据商家id和订单号查询订单
+	 */
+	@Override
+	public order selectOrderByNo(order order, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		return this.orderDao.selectOrderByNo(order);
+	}
+	
+	/**
+	 * 根据商家id和订单号查询订单数量
+	 */
+	@Override
+	public int selectOrderCountByNo(order order) {
+		
+		return this.orderDao.selectOrderCountByNo(order);
+	}
+	
 	
 	
 	

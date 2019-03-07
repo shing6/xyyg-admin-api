@@ -95,6 +95,20 @@ public interface orderService {
 	   public int selectOrderCountByStatus(int sellerId,int status);
 	   
 	   /**
+	    * 根据商家id和订单号查订单
+	    * @param order
+	    * @return
+	    */
+	   public order selectOrderByNo(order order,int pageNum,int pageSize);
+	  
+	   /**
+	    * 根据商家id和订单号查订单数量
+	    * @param order
+	    * @return
+	    */
+	   public int selectOrderCountByNo(order order);
+	   
+	   /**
 	    * 查找未付款订单
 	    * @return
 	    */
