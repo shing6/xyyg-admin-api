@@ -91,7 +91,7 @@ public class categoryServiceImpl implements categoryService {
 	@Override
 	public boolean deleteCategory(Integer id) {
 		List<goodsWithCounts> goods = this.goodsDao.getGoodsByCategoryId(id);
-		if(goods!=null){
+		if(goods.size()>0){
 			int rows = this.categoryDao.deleteCategory(id);
 			if(rows>0){
 				return true;
