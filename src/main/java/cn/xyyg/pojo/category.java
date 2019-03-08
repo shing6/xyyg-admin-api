@@ -4,6 +4,7 @@ public class category {
    private Integer id;
    private String categoryName;
    private Integer sellerId;
+   private Integer isDelete;
 public Integer getId() {
 	return id;
 }
@@ -22,5 +23,12 @@ public Integer getSellerId() {
 public void setSellerId(Integer sellerId) {
 	this.sellerId = sellerId;
 }
+public Integer getIsDelete() {
+	return isDelete;
+}
+public void setIsDelete(Integer isDelete) {
+	this.isDelete = isDelete;
+}
+
    
 }

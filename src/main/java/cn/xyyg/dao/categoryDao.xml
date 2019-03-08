@@ -6,12 +6,12 @@
 	
      <!-- 根据id查询商家分类 -->
     <select id="getShopCategoryById"  parameterType="Integer" resultType="cn.xyyg.pojo.category">
-		select * from category where sellerId = #{id}
+		select * from category where sellerId = #{id} and isDelete = 0
 	</select>
 	
      <!-- 根据商家id查询商品分类 -->
     <select id="getCountShopCategoryById"  parameterType="Integer" resultType="Integer">
-		select count(*) from category where sellerId = #{id}
+		select count(*) from category where sellerId = #{id} and isDelete = 0
 	</select>
 	
      <!-- 获取所有商家分类-->
