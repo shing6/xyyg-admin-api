@@ -114,7 +114,7 @@
 		goods_picture.id as goodsPictureId ,goods_picture.picAddr
 		from  goods LEFT JOIN goods_desc on goods.id=goods_desc.goodsId LEFT JOIN goods_picture
     on goods.id=goods_picture.goodsId where goods.id in
-     (SELECT temp.id from (SELECT id from goods where goods.sellerId=#{sellerId} order by goods.id  limit #{pageNum},#{pageSize}) as temp)
+     (SELECT temp.id from (SELECT id from goods where goods.sellerId=#{sellerId} and status !=2 order by goods.id  limit #{pageNum},#{pageSize}) as temp)
 		
 	</select>
 	<resultMap type="cn.xyyg.pojo.goodsDescPic" id="goodsWithDescWithPicBySellerId">
@@ -143,7 +143,7 @@
 	
 	<!-- 根据商家id查询商品的数量 -->
     <select id="getGoodsCountBySellerId"  parameterType="Integer" resultType="Integer">
-		select count(*) from goods where sellerId=#{sellerId}
+		select count(*) from goods where sellerId=#{sellerId} and status !=2
 		
 	</select>
 	
@@ -154,7 +154,7 @@
 		goods_picture.id as goodsPictureId ,goods_picture.picAddr
 		from  goods LEFT JOIN goods_desc on goods.id=goods_desc.goodsId LEFT JOIN goods_picture
     on goods.id=goods_picture.goodsId where goods.id in
-     (SELECT temp.id from (SELECT id from goods where goods.sellerId=#{sellerId} and  goodsName like concat(concat('%',#{name}),'%') order by goods.id  limit #{pageNum},#{pageSize}) as temp)
+     (SELECT temp.id from (SELECT id from goods where goods.sellerId=#{sellerId} and  goodsName like concat(concat('%',#{name}),'%') and status !=2 order by goods.id  limit #{pageNum},#{pageSize}) as temp)
 		
 	</select>
 	<resultMap type="cn.xyyg.pojo.goodsDescPic" id="selectGoods">
@@ -183,7 +183,7 @@
 	
 	<!-- 根据商家id模糊查询商品的数量 -->
     <select id="selectGoodsCountByName"  parameterType="cn.xyyg.pojo.goods" resultType="Integer">
-		select count(*) from goods where sellerId=#{sellerId} and goodsName like concat(concat('%',#{goodsName}),'%')
+		select count(*) from goods where sellerId=#{sellerId} and goodsName like concat(concat('%',#{goodsName}),'%') and status !=2
 		
 	</select>
 	
@@ -250,6 +250,15 @@
     <update id="updateGoodsStatus" parameterType="cn.xyyg.pojo.goods" >
         UPDATE `xyyg`.`goods` SET  `status`=#{status}
         WHERE `id`=#{id};
+     </update>
+     
+     <!-- 删除商品 假删除-->
+    <update id="deleteGoodsByIds" parameterType="cn.xyyg.pojo.goods" >
+        UPDATE `xyyg`.`goods` SET  `status`= 2
+        WHERE `id` in  
+        <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+            #{id}
+        </foreach>
      </update>
     
     

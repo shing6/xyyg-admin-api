@@ -120,4 +120,11 @@ public interface goodsService {
 	 * @return
 	 */
 	public int selectGoodsCountByName(goods goods);
+	
+	/**
+	 * 传入id数组删除商品
+	 * @param ids
+	 * @return
+	 */
+	public boolean deleteGoodsByIds(List<Integer> ids);
 }

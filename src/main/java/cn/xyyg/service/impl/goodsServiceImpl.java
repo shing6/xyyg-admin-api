@@ -272,6 +272,23 @@ public class goodsServiceImpl implements goodsService {
 		return this.goodsDao.selectGoodsCountByName(goods);
 	}
 	
+	/**
+	 * 传入数组删除
+	 */
+	@Override
+	public boolean deleteGoodsByIds(List<Integer> ids) {
+		int rows=this.goodsDao.deleteGoodsByIds(ids);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
+	
+	
 	
 	
 
