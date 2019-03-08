@@ -31,4 +31,11 @@ public interface categoryDao {
 	 * @return
 	 */
 	public int insertCategory(category category);
+	
+	/**
+	 * 商家修改商品分类
+	 * @param category
+	 * @return
+	 */
+	public int updateCategory(category category);
 }

@@ -119,8 +119,37 @@ public class categoryController {
         	shop shop=shopService.getShopByUserId(user.getId());
         	category category = new category();
         	category.setCategoryName(categoryName);
-        	category.setSellerId(shop.getId());;
+        	category.setSellerId(shop.getId());
         	boolean insertFlag=categoryService.insertCategory(category);
+        	if(insertFlag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+             
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+       }
+    
+    /**
+     * 商家后台修改分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/insertCategory")
+    public Object updateCategory(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int id=Integer.parseInt(request.getParameter("id"));
+    		String categoryName=request.getParameter("categoryName");
+    		category category = new category();
+        	category.setCategoryName(categoryName);
+        	category.setId(id);;
+        	boolean insertFlag=categoryService.updateCategory(category);
         	if(insertFlag){
         		return ResponseUtil.ok();
         	}

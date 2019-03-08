@@ -65,5 +65,19 @@ public class categoryServiceImpl implements categoryService {
 		}
 		
 	}
+     /**
+      * 商家修改分类
+      */
+	@Override
+	public boolean updateCategory(category category) {
+		int rows = this.categoryDao.updateCategory(category);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

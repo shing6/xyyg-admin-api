@@ -35,5 +35,12 @@ public interface categoryService {
 		 * @return
 		 */
 		public boolean insertCategory(category category);
+		
+		/**
+		 * 商家修改商品分类
+		 * @param category
+		 * @return
+		 */
+		public boolean updateCategory(category category);
 
 }
