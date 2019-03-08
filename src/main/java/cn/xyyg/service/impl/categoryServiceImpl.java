@@ -50,5 +50,20 @@ public class categoryServiceImpl implements categoryService {
 		PageHelper.startPage(pageNum, pageSize);
 		return this.categoryDao.getShopCategoryById(id);
 	}
+     
+	/**
+	 * 商家添加商品分类
+	 */
+	@Override
+	public boolean insertCategory(category category) {
+		int rows = this.categoryDao.insertCategory(category);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

@@ -90,11 +90,7 @@ public class categoryController {
     		return ResponseUtil.unlogin();
     	}
     	
-        
-        
-		
-    	
-    }
+       }
     
     /**
 	 * 获取所有分类
@@ -107,4 +103,35 @@ public class categoryController {
 		return categoryShopList;
     	
     }
+    
+    /**
+     * 商家后台添加分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/insertCategory")
+    public Object insertCategory(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int userId=Integer.parseInt(request.getParameter("userId"));
+    		String categoryName=request.getParameter("categoryName");
+    		user user=userService.getUserById(userId);
+        	shop shop=shopService.getShopByUserId(user.getId());
+        	category category = new category();
+        	category.setCategoryName(categoryName);
+        	category.setSellerId(shop.getId());;
+        	boolean insertFlag=categoryService.insertCategory(category);
+        	if(insertFlag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+             
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+       }
 }

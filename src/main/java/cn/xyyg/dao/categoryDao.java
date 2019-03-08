@@ -24,4 +24,11 @@ public interface categoryDao {
 	 * @return
 	 */
 	public int getCountShopCategoryById(Integer id);
+	
+	/**
+	 * 商家添加商品分类
+	 * @param category
+	 * @return
+	 */
+	public int insertCategory(category category);
 }

@@ -19,5 +19,12 @@
 		select * from seller_category
 	</select>
 	
+     <!-- 商家添加商品分类 -->
+    <insert id="insertCategory"  parameterType="cn.xyyg.pojo.category" >
+		 INSERT INTO  `xyyg`.`category` (`categoryName`,`sellerId`) VALUES(#{categoryName}, #{sellerId});
+	</insert>
+	
+    
+	
     
 </mapper>
