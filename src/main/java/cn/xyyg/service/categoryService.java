@@ -42,5 +42,12 @@ public interface categoryService {
 		 * @return
 		 */
 		public boolean updateCategory(category category);
+		
+		/**
+		 * 商家删除商品分类
+		 * @param category
+		 * @return
+		 */
+		public boolean deleteCategory(Integer id);
 
 }

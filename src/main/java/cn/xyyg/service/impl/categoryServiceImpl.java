@@ -10,13 +10,19 @@ import com.github.pagehelper.PageHelper;
 
 import cn.xyyg.pojo.category;
 import cn.xyyg.pojo.categoryShop;
+import cn.xyyg.pojo.goods;
+import cn.xyyg.pojo.goodsWithCounts;
 import cn.xyyg.service.categoryService;
 import cn.xyyg.dao.categoryDao;
+import cn.xyyg.dao.goodsDao;
 @Service
 @Transactional
 public class categoryServiceImpl implements categoryService {
      @Autowired
      private categoryDao categoryDao;
+     
+     @Autowired
+     private goodsDao goodsDao;
 	/**
 	 * 根据id查商品分类
 	 */
@@ -73,6 +79,26 @@ public class categoryServiceImpl implements categoryService {
 		int rows = this.categoryDao.updateCategory(category);
 		if(rows>0){
 			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+    /**
+     * 商家删除分类
+     */
+	@Override
+	public boolean deleteCategory(Integer id) {
+		List<goodsWithCounts> goods = this.goodsDao.getGoodsByCategoryId(id);
+		if(goods!=null){
+			int rows = this.categoryDao.deleteCategory(id);
+			if(rows>0){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		else{
 			return false;

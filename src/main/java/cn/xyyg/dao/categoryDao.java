@@ -38,4 +38,11 @@ public interface categoryDao {
 	 * @return
 	 */
 	public int updateCategory(category category);
+	
+	/**
+	 * 商家删除商品分类
+	 * @param category
+	 * @return
+	 */
+	public int deleteCategory(Integer id);
 }

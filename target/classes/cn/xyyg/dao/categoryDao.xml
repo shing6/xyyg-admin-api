@@ -29,6 +29,11 @@
 		 UPDATE  `xyyg`.`category` SET `categoryName` = #{categoryName} WHERE id=#{id} ;
 	</update>
 	
+    <!-- 根据id删除商品分类-->
+    <update id="deleteCategory"  parameterType="Integer" >
+		 UPDATE  `xyyg`.`category` SET `isDelete` = 1 WHERE id=#{id} ;
+	</update>
+	
     
 	
     

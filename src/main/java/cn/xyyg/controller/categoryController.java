@@ -148,8 +148,33 @@ public class categoryController {
     		String categoryName=request.getParameter("categoryName");
     		category category = new category();
         	category.setCategoryName(categoryName);
-        	category.setId(id);;
+        	category.setId(id);
         	boolean insertFlag=categoryService.updateCategory(category);
+        	if(insertFlag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+             
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+       }
+    
+    /**
+     * 商家后台删除分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/deleteCategory")
+    public Object deleteCategory(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int id=Integer.parseInt(request.getParameter("id"));
+    		boolean insertFlag=categoryService.deleteCategory(id);
         	if(insertFlag){
         		return ResponseUtil.ok();
         	}
