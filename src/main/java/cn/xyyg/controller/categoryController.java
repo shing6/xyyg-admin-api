@@ -174,6 +174,7 @@ public class categoryController {
     	boolean  flag= JwtUtil.verify(request.getParameter("token"));
     	if(flag){
     		int id=Integer.parseInt(request.getParameter("id"));
+    		
     		boolean insertFlag=categoryService.deleteCategory(id);
         	if(insertFlag){
         		return ResponseUtil.ok();
