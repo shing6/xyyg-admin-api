@@ -39,7 +39,7 @@
 		
 		select goods.* , (select sum(order_goods.counts) from order_goods ,`order`  where order_goods.id = goods.id
 		and (`order`.status=4 or `order`.`status`=5) and `order`.id=order_goods.orderId) AS counts  
-		from goods where categoryId = #{id}
+		from goods where categoryId = #{id} and status!=2
 	</select>
 	
     <!-- 根据商品id查询商品详细信息 -->
