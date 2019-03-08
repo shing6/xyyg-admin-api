@@ -140,7 +140,7 @@ public class categoryController {
      * @param request
      * @return
      */
-    @PostMapping("/insertCategory")
+    @PostMapping("/updateCategory")
     public Object updateCategory(HttpServletRequest request,HttpServletResponse response){
     	boolean  flag= JwtUtil.verify(request.getParameter("token"));
     	if(flag){
