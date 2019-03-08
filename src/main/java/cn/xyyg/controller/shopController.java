@@ -191,4 +191,24 @@ public class shopController {
     	
     }
     
+    /**
+     * 根据商家id获取商家信息
+     * @param request
+     * @return
+     */
+    @PostMapping("/getShopByUserId")
+    public Object getShopByUserId(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	int userId=Integer.parseInt(request.getParameter("userId")) ;
+    	if(flag){
+    		shop shop = this.shopService.getShopByUserId(userId);
+    		return shop;
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    	
+    }
+    
 }
