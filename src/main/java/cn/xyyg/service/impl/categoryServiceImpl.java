@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+
 import cn.xyyg.pojo.category;
 import cn.xyyg.pojo.categoryShop;
 import cn.xyyg.service.categoryService;
@@ -30,6 +32,23 @@ public class categoryServiceImpl implements categoryService {
 	public List<categoryShop> getShopCategory() {
 		
 		return this.categoryDao.getShopCategory();
+	}
+    
+	/**
+     * 获取分类数量
+     */
+	@Override
+	public int getCountShopCategoryById(Integer id) {
+		
+		return this.categoryDao.getCountShopCategoryById(id);
+	}
+    /**
+     * 分页查询商家分类
+     */
+	@Override
+	public List<category> getShopCategoryByPage(Integer id, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		return this.categoryDao.getShopCategoryById(id);
 	}
 
 }

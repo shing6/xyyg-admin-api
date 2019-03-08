@@ -9,6 +9,11 @@
 		select * from category where sellerId = #{id}
 	</select>
 	
+     <!-- 根据id查询商家分类 -->
+    <select id="getCountShopCategoryById"  parameterType="Integer" resultType="Integer">
+		select count(*) from category where sellerId = #{id}
+	</select>
+	
      <!-- 获取所有商家分类-->
     <select id="getShopCategory"   resultType="cn.xyyg.pojo.categoryShop">
 		select * from seller_category

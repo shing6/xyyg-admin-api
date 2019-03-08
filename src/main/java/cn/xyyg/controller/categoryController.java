@@ -3,6 +3,7 @@ package cn.xyyg.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,8 @@ public class categoryController {
     	
     }
     
+    
+    
     /**
      * 商家后台获取分类
      * @param request
@@ -54,6 +57,32 @@ public class categoryController {
         	user user=userService.getUserById(userId);
         	shop shop=shopService.getShopByUserId(user.getId());
         	List<category> categoryList=categoryService.getShopCategoryById(shop.getId());
+            return categoryList;
+            
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+     }
+    
+    /**
+     * 商家后台分页获取分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/getCategoryByPage")
+    public Object getCategoryByPage(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int userId=Integer.parseInt(request.getParameter("userId"));
+    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+    		int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        	user user=userService.getUserById(userId);
+        	shop shop=shopService.getShopByUserId(user.getId());
+        	int count =categoryService.getCountShopCategoryById(shop.getId());
+          	response.setIntHeader("X-Total-Count",count);
+        	List<category> categoryList=categoryService.getShopCategoryByPage(shop.getId(), pageNum, pageSize);
             return categoryList;
             
     	}
