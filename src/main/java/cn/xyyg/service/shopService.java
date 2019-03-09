@@ -2,6 +2,8 @@ package cn.xyyg.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.xyyg.pojo.exchart;
 import cn.xyyg.pojo.shop;
 import cn.xyyg.pojo.shopWithGoods;
@@ -79,6 +81,22 @@ public interface shopService {
      * @return
      */
     public exchart getShopMoneyByYear(int year,int sellerId);
+    
+    /**
+     * 修改起送费
+     * @param lowPrice
+     * @param userId
+     * @return
+     */
+    public boolean updateLowPrice( int lowPrice, int userId);
+    
+   /**
+    * 修改配送费
+    * @param freight
+    * @param userId
+    * @return
+    */
+    public boolean updateFreight( int freight, int userId);
     
     
 

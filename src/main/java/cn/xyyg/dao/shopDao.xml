@@ -119,6 +119,16 @@
        FROM `order`
        where  YEAR(createTime)=#{year} and sellerId = #{sellerId} and (`status`=4 or `status`=5)
 	</select>
+	
+     <!-- 修改起送费 -->
+    <update id="updateLowPrice"  parameterType="Integer" >
+		 UPDATE `xyyg`.`seller` SET  `lowPrice`=#{lowPrice} WHERE `userId`=#{userId};
+	</update>
+	
+     <!-- 修改配送费 -->
+    <update id="updateFreight"  parameterType="Integer" >
+		 UPDATE `xyyg`.`seller` SET  `freight`=#{freight} WHERE `userId`=#{userId};
+	</update>
     
        
 </mapper>

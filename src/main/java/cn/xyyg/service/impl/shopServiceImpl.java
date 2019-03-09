@@ -150,5 +150,33 @@ public class shopServiceImpl implements shopService {
 		
 		return this.shopDao.getShopMoneyByYear(year,sellerId);
 	}
+	/**
+	 * 修改起送费
+	 */
+	@Override
+	public boolean updateLowPrice(int lowPrice, int userId) {
+		int rows = this.shopDao.updateLowPrice(lowPrice, userId);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
+	/**
+	 * 修改配送费
+	 */
+	@Override
+	public boolean updateFreight(int freight, int userId) {
+		int rows = this.shopDao.updateFreight(freight, userId);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 }

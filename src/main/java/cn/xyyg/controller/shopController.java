@@ -255,4 +255,58 @@ public class shopController {
     	
     }
     
+    /**
+     * 修改起送费
+     * @param request
+     * @return
+     */
+    @PostMapping("/updateLowPrice")
+    public Object  updateLowPrice(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	int userId=Integer.parseInt(request.getParameter("userId")) ;
+    	int lowPrice=Integer.parseInt(request.getParameter("lowPrice")) ;
+    	if(flag){
+    		boolean updateFlag = shopService.updateLowPrice(lowPrice, userId);
+    		if(updateFlag){
+    			return ResponseUtil.ok();
+    		}
+    		else{
+    			return  ResponseUtil.fail();
+    		}
+    		
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    	
+    }
+    
+    /**
+     * 修改配送费
+     * @param request
+     * @return
+     */
+    @PostMapping("/updateFreight")
+    public Object updateFreight(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	int userId=Integer.parseInt(request.getParameter("userId")) ;
+    	int freight=Integer.parseInt(request.getParameter("freight")) ;
+    	if(flag){
+    		boolean updateFlag = shopService.updateFreight(freight, userId);
+    		if(updateFlag){
+    			return ResponseUtil.ok();
+    		}
+    		else{
+    			return  ResponseUtil.fail();
+    		}
+    		
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    	
+    }
+    
 }

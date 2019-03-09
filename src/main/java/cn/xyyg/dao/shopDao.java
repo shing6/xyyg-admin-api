@@ -96,4 +96,20 @@ public interface shopDao {
      * @return
      */
     public exchart getShopMoneyByYear(@Param("year") int year,@Param("sellerId") int sellerId);
+    
+    /**
+     * 修改起送费
+     * @param lowPrice
+     * @param userId
+     * @return
+     */
+    public int updateLowPrice(@Param("lowPrice") int lowPrice,@Param("userId") int userId);
+    
+   /**
+    * 修改配送费
+    * @param freight
+    * @param userId
+    * @return
+    */
+    public int updateFreight(@Param("freight") int freight,@Param("userId") int userId);
 }
