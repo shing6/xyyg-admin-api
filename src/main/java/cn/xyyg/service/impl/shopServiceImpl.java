@@ -111,10 +111,12 @@ public class shopServiceImpl implements shopService {
 	public boolean auditing(Integer id, Integer isPass) {
 		if(isPass==1){
 			this.shopDao.passShop(id);
+			this.userDao.updateUserRole(id);
 			return true;
 		}
 		else{
 			this.shopDao.notPassShop(id);
+			this.userDao.updateUserNoRole(id);
 			return true;
 		}
 		

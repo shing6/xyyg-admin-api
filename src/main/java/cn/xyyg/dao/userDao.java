@@ -79,5 +79,12 @@ public interface userDao {
      */
     public int updateUserRole(Integer id);
     
+    /**
+     * 审核没通过拒绝登陆
+     * @param id
+     * @return
+     */
+    public int updateUserNoRole(Integer id);
+    
     
 }

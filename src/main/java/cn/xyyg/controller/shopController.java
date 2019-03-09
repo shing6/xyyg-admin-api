@@ -180,8 +180,8 @@ public class shopController {
     	if(flag){
     		boolean shopflag = this.shopService.auditing(id, isPass);
     		if(shopflag){
-    			  shop shop= this.shopService.getShopById(id);
-    			  this.userService.updateUserRole(shop.getUserId());
+//    			  shop shop= this.shopService.getShopById(id);
+//    			  this.userService.updateUserRole(shop.getUserId());
     		}
     		return ResponseUtil.ok();
     	}

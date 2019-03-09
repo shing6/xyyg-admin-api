@@ -110,6 +110,11 @@
         UPDATE `xyyg`.`user` SET `role`='2' WHERE `id`=#{id};
     </update>
     
+     <!-- 审核不通过通过拒绝登陆 -->
+    <update id="updateUserNoRole" parameterType="Integer">
+        UPDATE `xyyg`.`user` SET `role`='1' WHERE `id`=#{id};
+    </update>
+    
 	
        
 </mapper>
