@@ -3,9 +3,11 @@ package cn.xyyg.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import cn.xyyg.pojo.shop;
 import cn.xyyg.pojo.shopWithGoods;
+import cn.xyyg.pojo.exchart;
 import cn.xyyg.pojo.page;
 
 @Mapper
@@ -87,4 +89,11 @@ public interface shopDao {
      * @return
      */
     public int getOrderCountById(int sellerId);
+    
+    /**
+     * 根据年份获取每月营业额
+     * @param year
+     * @return
+     */
+    public List<exchart> getShopMoneyByYear(@Param("year") int year,@Param("sellerId") int sellerId);
 }

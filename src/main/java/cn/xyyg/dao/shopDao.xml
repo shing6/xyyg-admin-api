@@ -99,5 +99,14 @@
     <update id="notPassShop"  parameterType="Integer" >
 		 UPDATE `xyyg`.`seller` SET  `status`='0' WHERE `id`=#{id};
 	</update>
+	
+    <!-- 根据商家id查询商家订单数量 -->
+    <select id="getShopMoneyByYear"  parameterType="Integer" resultType="cn.xyyg.pojo.exchart">
+		Select Month(createTime),SUM(payPrice) as price
+        FROM `order`
+        where Year(createTime) = #{year} and sellerId= #{sellerId} and (status=4 or status=5)
+        Group by Month(createTime)
+	</select>
+    
        
 </mapper>

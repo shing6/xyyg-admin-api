@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 
 import cn.xyyg.dao.shopDao;
 import cn.xyyg.dao.userDao;
+import cn.xyyg.pojo.exchart;
 import cn.xyyg.pojo.goods;
 import cn.xyyg.pojo.page;
 import cn.xyyg.pojo.shop;
@@ -139,6 +140,15 @@ public class shopServiceImpl implements shopService {
 		obj.put("goodsCount", goodsCount);
 		obj.put("orderCount", orderCount);
 		return obj;
+	}
+	
+	/**
+	 * 根据年份获取每月营业额
+	 */
+	@Override
+	public List<exchart> getShopMoneyByYear(int year,int sellerId) {
+		
+		return this.shopDao.getShopMoneyByYear(year,sellerId);
 	}
 
 }

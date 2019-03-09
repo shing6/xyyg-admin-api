@@ -2,6 +2,7 @@ package cn.xyyg.service;
 
 import java.util.List;
 
+import cn.xyyg.pojo.exchart;
 import cn.xyyg.pojo.shop;
 import cn.xyyg.pojo.shopWithGoods;
 import cn.xyyg.pojo.user;
@@ -71,6 +72,13 @@ public interface shopService {
      * @return
      */
     public Object getCount(int sellerId);
+    
+    /**
+     * 根据年份获取每月营业额
+     * @param year
+     * @return
+     */
+    public List<exchart> getShopMoneyByYear(int year,int sellerId);
     
     
 

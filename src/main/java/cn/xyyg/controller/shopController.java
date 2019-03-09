@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 
+import cn.xyyg.pojo.exchart;
 import cn.xyyg.pojo.page;
 import cn.xyyg.pojo.shop;
 import cn.xyyg.pojo.shopWithGoods;
@@ -224,6 +225,28 @@ public class shopController {
     		shop shop = this.shopService.getShopByUserId(userId);
     		Object obj = this.shopService.getCount(shop.getId());
     		return obj;
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    	
+    }
+    
+    /**
+     * 根据年份获取每月营业额
+     * @param request
+     * @return
+     */
+    @PostMapping("/getShopMoneyByYear")
+    public Object  getShopMoneyByYear(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	int userId=Integer.parseInt(request.getParameter("userId")) ;
+    	int year=Integer.parseInt(request.getParameter("year")) ;
+    	if(flag){
+    		shop shop = this.shopService.getShopByUserId(userId);
+    		List<exchart> exchartList = this.shopService.getShopMoneyByYear(year, shop.getId());
+    		return exchartList;
     	}
     	else{
     		return ResponseUtil.unlogin();
