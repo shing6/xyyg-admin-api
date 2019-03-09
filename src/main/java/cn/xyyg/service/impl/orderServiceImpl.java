@@ -70,7 +70,7 @@ public class orderServiceImpl implements orderService {
 				throw new IllegalArgumentException(goods.getGoodsName()+"库存不足");
 			}
 			//检测商品是否下架
-			else if(goods.getStatus()==0){
+			else if(goods.getStatus()!=1){
 				isCreate=false;
 				throw new IllegalArgumentException(goods.getGoodsName()+"已下架");
 			}
