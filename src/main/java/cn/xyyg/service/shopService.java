@@ -65,6 +65,13 @@ public interface shopService {
      */
     public List<shop> getShopByCategoryId(Integer sellerCategoryId);
     
+    /**
+     * 根据商家id查询商家商品数量和订单数量
+     * @param sellerId
+     * @return
+     */
+    public Object getCount(int sellerId);
+    
     
 
 }

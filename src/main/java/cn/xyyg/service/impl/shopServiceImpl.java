@@ -1,6 +1,8 @@
 package cn.xyyg.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,6 +126,19 @@ public class shopServiceImpl implements shopService {
 	public List<shop> getShopByCategoryId(Integer sellerCategoryId) {
 		
 		return this.shopDao.getShopByCategoryId(sellerCategoryId);
+	}
+	
+	/**
+	 * 根据商家id查询商家商品数量和订单数量
+	 */
+	@Override
+	public Object getCount(int sellerId) {
+		int goodsCount=this.shopDao.getGoodsCountById(sellerId);
+		int orderCount=this.shopDao.getOrderCountById(sellerId);
+		Map<String, Object> obj = new HashMap<String, Object>();
+		obj.put("goodsCount", goodsCount);
+		obj.put("orderCount", orderCount);
+		return obj;
 	}
 
 }

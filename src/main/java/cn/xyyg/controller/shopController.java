@@ -192,7 +192,7 @@ public class shopController {
     }
     
     /**
-     * 根据商家id获取商家信息
+     * 根据用户id获取商家信息
      * @param request
      * @return
      */
@@ -203,6 +203,27 @@ public class shopController {
     	if(flag){
     		shop shop = this.shopService.getShopByUserId(userId);
     		return shop;
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    	
+    }
+    
+    /**
+     * 根据商家id获取商家信息
+     * @param request
+     * @return
+     */
+    @PostMapping("/getCount")
+    public Object getCount(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	int userId=Integer.parseInt(request.getParameter("userId")) ;
+    	if(flag){
+    		shop shop = this.shopService.getShopByUserId(userId);
+    		Object obj = this.shopService.getCount(shop.getId());
+    		return obj;
     	}
     	else{
     		return ResponseUtil.unlogin();

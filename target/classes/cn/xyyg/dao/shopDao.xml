@@ -70,6 +70,16 @@
 		select * from seller where userId = #{userId}
 	</select>
 	
+    <!-- 根据商家id查询商家商品数量 -->
+    <select id="getGoodsCountById"  parameterType="Integer" resultType="Integer">
+		select count(*) as goodsCount from goods where sellerId =#{sellerId}
+	</select>
+	
+    <!-- 根据商家id查询商家订单数量 -->
+    <select id="getOrderCountById"  parameterType="Integer" resultType="Integer">
+		select count(*) as orderCount from `order` where sellerId =#{sellerId}
+	</select>
+	
     <!-- 根据分类id查询商家 -->
     <select id="getShopByCategoryId"  parameterType="Integer" resultType="cn.xyyg.pojo.shop">
 		select * from seller where sellerCategoryId = #{sellerCategoryId}

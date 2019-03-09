@@ -75,4 +75,16 @@ public interface shopDao {
      * @return
      */
     public List<shop> getShopByCategoryId(Integer sellerCategoryId);
+    
+    /**
+     * 根据商家id查询商家商品数量 
+     * @return
+     */
+    public int getGoodsCountById(int sellerId);
+    
+    /**
+     * 根据商家id查询商家订单数量 
+     * @return
+     */
+    public int getOrderCountById(int sellerId);
 }
