@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
+import com.zhenzi.sms.ZhenziSmsClient;
 
 import cn.xyyg.dao.shopDao;
 import cn.xyyg.dao.userDao;
@@ -110,12 +111,27 @@ public class shopServiceImpl implements shopService {
 	@Override
 	public boolean auditing(Integer id, Integer isPass) {
 		shop shop = shopDao.getShopById(id);
-		if(isPass==1){
+		user user = userDao.getUserById(shop.getUserId());
+		ZhenziSmsClient client = new ZhenziSmsClient("https://sms_developer.zhenzikj.com", "100861", "8419db37-1168-41b2-957d-9ca46863c994");
+		
+       if(isPass==1){
+    	   try {
+   			String result = client.send(user.getPhone(), "您的商家入驻申请已通过");
+   		} catch (Exception e) {
+   			
+   			e.printStackTrace();
+   		}
 			this.shopDao.passShop(id);
 			this.userDao.updateUserRole(shop.getUserId());
 			return true;
 		}
 		else{
+			try {
+				String result = client.send(user.getPhone(), "您的商家入驻申请失败");
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
 			this.shopDao.notPassShop(id);
 			this.userDao.updateUserNoRole(shop.getUserId());
 			return true;
