@@ -109,7 +109,7 @@ public class shopServiceImpl implements shopService {
 	 * 审核商家
 	 */
 	@Override
-	public boolean auditing(Integer id, Integer isPass) {
+	public boolean auditing(Integer id, Integer isPass,String text) {
 		shop shop = shopDao.getShopById(id);
 		user user = userDao.getUserById(shop.getUserId());
 		ZhenziSmsClient client = new ZhenziSmsClient("https://sms_developer.zhenzikj.com", "100861", "8419db37-1168-41b2-957d-9ca46863c994");
@@ -125,9 +125,21 @@ public class shopServiceImpl implements shopService {
 			this.userDao.updateUserRole(shop.getUserId());
 			return true;
 		}
-		else{
+		else if(isPass==0){
 			try {
-				String result = client.send(user.getPhone(), "您的商家入驻申请失败");
+				String result = client.send(user.getPhone(), "您的商家入驻申请失败,原因("+text+")");
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			this.shopDao.notPassShop(id);
+			this.userDao.updateUserNoRole(shop.getUserId());
+			return true;
+		}
+       
+		else {
+			try {
+				String result = client.send(user.getPhone(), "您的店铺已被管理员关闭");
 			} catch (Exception e) {
 				
 				e.printStackTrace();

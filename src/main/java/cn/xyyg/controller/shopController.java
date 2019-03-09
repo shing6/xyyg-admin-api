@@ -177,8 +177,9 @@ public class shopController {
     	boolean  flag= JwtUtil.verify(request.getParameter("token"));
     	int id=Integer.parseInt(request.getParameter("id")) ;
     	int isPass = Integer.parseInt(request.getParameter("isPass"));
+    	String text=request.getParameter("text");
     	if(flag){
-    		boolean shopflag = this.shopService.auditing(id, isPass);
+    		boolean shopflag = this.shopService.auditing(id, isPass,text);
     		if(shopflag){
 //    			  shop shop= this.shopService.getShopById(id);
 //    			  this.userService.updateUserRole(shop.getUserId());

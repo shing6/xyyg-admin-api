@@ -59,7 +59,7 @@ public interface shopService {
      * 审核商家
      * @return
      */
-    public boolean auditing(Integer id,Integer isPass);
+    public boolean auditing(Integer id,Integer isPass,String text);
     
     /**
      * 通过分类id查找商家
