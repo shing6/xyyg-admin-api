@@ -146,7 +146,7 @@ public class shopServiceImpl implements shopService {
 	 * 根据年份获取每月营业额
 	 */
 	@Override
-	public List<exchart> getShopMoneyByYear(int year,int sellerId) {
+	public exchart getShopMoneyByYear(int year,int sellerId) {
 		
 		return this.shopDao.getShopMoneyByYear(year,sellerId);
 	}

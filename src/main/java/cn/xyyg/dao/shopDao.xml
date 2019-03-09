@@ -102,10 +102,22 @@
 	
     <!-- 根据商家id查询商家订单数量 -->
     <select id="getShopMoneyByYear"  parameterType="Integer" resultType="cn.xyyg.pojo.exchart">
-		Select Month(createTime) as name,SUM(payPrice) as value
-        FROM `order`
-        where Year(createTime) = #{year} and sellerId= #{sellerId} and (status=4 or status=5)
-        Group by Month(createTime)
+		
+        SELECT 
+         SUM(CASE WHEN MONTH(createTime) =1 THEN payPrice ELSE 0 END) as `1`,   
+         SUM(CASE WHEN MONTH(createTime) =2 THEN payPrice ELSE 0 END) as `2`,
+         SUM(CASE WHEN MONTH(createTime) =3 THEN payPrice ELSE 0 END) as `3`,
+         SUM(CASE WHEN MONTH(createTime) =4 THEN payPrice ELSE 0 END) as `4`,
+         SUM(CASE WHEN MONTH(createTime) =5 THEN payPrice ELSE 0 END) as `5`,
+         SUM(CASE WHEN MONTH(createTime) =6 THEN payPrice ELSE 0 END) as `6`,
+         SUM(CASE WHEN MONTH(createTime) =7 THEN payPrice ELSE 0 END) as `7`,
+         SUM(CASE WHEN MONTH(createTime) =8 THEN payPrice ELSE 0 END) as `8`,
+         SUM(CASE WHEN MONTH(createTime) =9 THEN payPrice ELSE 0 END) as `9`,
+         SUM(CASE WHEN MONTH(createTime) =10 THEN payPrice ELSE 0 END) as `10`,
+         SUM(CASE WHEN MONTH(createTime) =11 THEN payPrice ELSE 0 END) as `11`,
+         SUM(CASE WHEN MONTH(createTime) =12 THEN payPrice ELSE 0 END) as `12`
+       FROM `order`
+       where  YEAR(createTime)=#{year} and sellerId = #{sellerId} and (`status`=4 or `status`=5)
 	</select>
     
        

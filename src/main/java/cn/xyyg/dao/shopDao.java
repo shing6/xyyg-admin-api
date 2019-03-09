@@ -95,5 +95,5 @@ public interface shopDao {
      * @param year
      * @return
      */
-    public List<exchart> getShopMoneyByYear(@Param("year") int year,@Param("sellerId") int sellerId);
+    public exchart getShopMoneyByYear(@Param("year") int year,@Param("sellerId") int sellerId);
 }

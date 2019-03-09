@@ -245,8 +245,8 @@ public class shopController {
     	int year=Integer.parseInt(request.getParameter("year")) ;
     	if(flag){
     		shop shop = this.shopService.getShopByUserId(userId);
-    		List<exchart> exchartList = this.shopService.getShopMoneyByYear(year, shop.getId());
-    		return exchartList;
+    		exchart exchart = this.shopService.getShopMoneyByYear(year, shop.getId());
+    		return exchart;
     	}
     	else{
     		return ResponseUtil.unlogin();

@@ -78,7 +78,7 @@ public interface shopService {
      * @param year
      * @return
      */
-    public List<exchart> getShopMoneyByYear(int year,int sellerId);
+    public exchart getShopMoneyByYear(int year,int sellerId);
     
     
 
