@@ -178,5 +178,19 @@ public class shopServiceImpl implements shopService {
 			return false;
 		}
 	}
+	/**
+	 * 商家开门或打烊
+	 */
+	@Override
+	public boolean openShop(int status, int userId) {
+		int rows = this.shopDao.openShop(status, userId);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

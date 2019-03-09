@@ -98,6 +98,13 @@ public interface shopService {
     */
     public boolean updateFreight( int freight, int userId);
     
+    /**
+     * 商家开店或打烊
+     * @param status
+     * @param userId
+     * @return
+     */
+    public boolean openShop(int status, int userId);
     
 
 }

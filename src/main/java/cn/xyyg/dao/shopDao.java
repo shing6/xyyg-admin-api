@@ -112,4 +112,12 @@ public interface shopDao {
     * @return
     */
     public int updateFreight(@Param("freight") int freight,@Param("userId") int userId);
+    
+    /**
+     * 商家开店或打烊
+     * @param status
+     * @param userId
+     * @return
+     */
+    public int openShop(@Param("status") int status,@Param("userId") int userId);
 }

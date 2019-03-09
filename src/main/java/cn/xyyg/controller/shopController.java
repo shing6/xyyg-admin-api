@@ -309,4 +309,31 @@ public class shopController {
     	
     }
     
+    /**
+     * 商家开店或打烊
+     * @param request
+     * @return
+     */
+    @PostMapping("/openShop")
+    public Object openShop(HttpServletRequest request){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	int userId=Integer.parseInt(request.getParameter("userId")) ;
+    	int status=Integer.parseInt(request.getParameter("status")) ;
+    	if(flag){
+    		boolean updateFlag = shopService.openShop(status, userId);
+    		if(updateFlag){
+    			return ResponseUtil.ok();
+    		}
+    		else{
+    			return  ResponseUtil.fail();
+    		}
+    		
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    	
+    }
+    
 }

@@ -129,6 +129,11 @@
     <update id="updateFreight"  parameterType="Integer" >
 		 UPDATE `xyyg`.`seller` SET  `freight`=#{freight} WHERE `userId`=#{userId};
 	</update>
+	
+      <!-- 商家营业或打烊 -->
+    <update id="openShop"  parameterType="Integer" >
+		 UPDATE `xyyg`.`seller` SET  `status`=#{status} WHERE `userId`=#{userId};
+	</update>
     
        
 </mapper>
