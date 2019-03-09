@@ -102,7 +102,7 @@
 	
     <!-- 根据商家id查询商家订单数量 -->
     <select id="getShopMoneyByYear"  parameterType="Integer" resultType="cn.xyyg.pojo.exchart">
-		Select Month(createTime),SUM(payPrice) as price
+		Select Month(createTime) as name,SUM(payPrice) as value
         FROM `order`
         where Year(createTime) = #{year} and sellerId= #{sellerId} and (status=4 or status=5)
         Group by Month(createTime)
