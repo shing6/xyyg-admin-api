@@ -139,7 +139,7 @@ public class shopServiceImpl implements shopService {
        
 		else {
 			try {
-				String result = client.send(user.getPhone(), "您的店铺已被管理员关闭");
+				String result = client.send(user.getPhone(), "您的店铺已被管理员关闭,原因("+text+")");
 			} catch (Exception e) {
 				
 				e.printStackTrace();
