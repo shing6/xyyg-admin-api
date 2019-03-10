@@ -54,12 +54,12 @@ public class workController {
     }
     
     /**
-     * 添加轮播图
+     * 发布兼职
      * @param request
      * @return
      */
     @PostMapping("/insertWork")
-    public Object insertBanner(HttpServletRequest request,HttpServletResponse response){
+    public Object insertWork(HttpServletRequest request,HttpServletResponse response){
     	boolean  flag= JwtUtil.verify(request.getParameter("token"));
 	     if(flag){
 	       String work=request.getParameter("work");
