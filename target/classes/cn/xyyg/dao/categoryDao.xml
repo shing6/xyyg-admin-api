@@ -46,7 +46,7 @@
 	
     <!-- 管理员根据id修改商品分类-->
     <update id="updateCategoryShop"  parameterType="cn.xyyg.pojo.categoryShop" >
-		 UPDATE  `xyyg`.`category` SET `name` = #{name} WHERE id=#{id} ;
+		 UPDATE  `xyyg`.`seller_category` SET `name` = #{name} WHERE id=#{id} ;
 	</update>
 	
     
