@@ -14,9 +14,11 @@ import cn.xyyg.pojo.category;
 import cn.xyyg.pojo.categoryShop;
 import cn.xyyg.pojo.goods;
 import cn.xyyg.pojo.goodsWithCounts;
+import cn.xyyg.pojo.shop;
 import cn.xyyg.service.categoryService;
 import cn.xyyg.dao.categoryDao;
 import cn.xyyg.dao.goodsDao;
+import cn.xyyg.dao.shopDao;
 @Service
 @Transactional
 public class categoryServiceImpl implements categoryService {
@@ -25,6 +27,9 @@ public class categoryServiceImpl implements categoryService {
      
      @Autowired
      private goodsDao goodsDao;
+     
+     @Autowired
+     private shopDao shopDao;
 	/**
 	 * 根据id查商品分类
 	 */
@@ -158,13 +163,20 @@ public class categoryServiceImpl implements categoryService {
 	 */
 	@Override
 	public boolean deleteCategoryShop(Integer id) {
-		int rows = categoryDao.deleteCategoryShop(id);
-		if(rows>0){
-			   return true;
+		List<shop> shopList = this.shopDao.getShopByCategoryId(id);
+		if(shopList.size()<=0){
+			int rows = categoryDao.deleteCategoryShop(id);
+			if(rows>0){
+				return true;
 			}
 			else{
 				return false;
 			}
+		}
+		else{
+			return false;
+		}
+		
 	}
 	
 	

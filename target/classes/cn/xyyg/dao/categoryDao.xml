@@ -16,7 +16,7 @@
 	
      <!-- 获取所有商家分类-->
     <select id="getShopCategory"   resultType="cn.xyyg.pojo.categoryShop">
-		select * from seller_category and isDelete = 0
+		select * from seller_category  WHERE isDelete = 0
 	</select>
 	
      <!-- 获取所有商家分类数量-->
