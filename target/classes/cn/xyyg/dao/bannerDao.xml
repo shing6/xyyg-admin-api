@@ -17,5 +17,13 @@
     <insert id="insertBanner" parameterType="cn.xyyg.pojo.banner">
         INSERT INTO `xyyg`.`banner` (`toUrl`, `picAddr`) VALUES (#{toUrl}, #{picAddr});
     </insert>
+    
+     <!-- 删除轮播图-->
+    <delete id="deleteBanner" parameterType="Integer">
+        delete * from `xyyg`.`banner` where id in
+         <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+            #{id}
+        </foreach>
+    </delete>
 	
 </mapper>

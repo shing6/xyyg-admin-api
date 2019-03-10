@@ -96,4 +96,40 @@ public class bannerController {
            return bannerList;
 	 }
     
+    /**
+     * 根据id数组删除轮播图
+     * @param request
+     * @return
+     */
+    @PostMapping("/deleteBanner")
+    public Object deleteBanner(HttpServletRequest request){
+    	     boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	     if(flag){
+    	    	 String items = request.getParameter("ids");
+            	 //正则表达式去掉首尾非数字字符 []
+                 Pattern pattern = Pattern.compile("^\\D+|\\D+$");
+                 Matcher matcher = pattern.matcher(items);
+                 items = matcher.replaceAll("");
+                 String[] stuList = items.split(",");
+                 List<Integer> ids = new ArrayList<Integer>();
+                 for(String str : stuList){
+                	 ids.add(new Integer(str));
+                 }
+                boolean deleteflag = bannerService.deleteBanner(ids);
+                if(deleteflag){
+                	return ResponseUtil.ok();
+                }
+                else{
+                	return ResponseUtil.fail();
+                }
+    	     }
+    	     else{
+    	    	 return ResponseUtil.unlogin();
+    	     }
+    		
+            
+     		
+    	
+    	
+  	}
 }

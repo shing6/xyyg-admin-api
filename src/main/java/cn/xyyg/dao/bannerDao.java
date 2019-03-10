@@ -26,5 +26,11 @@ public interface bannerDao {
 	 * @return
 	 */
 	public int insertBanner(banner banner);
+	
+	/**
+	 * 删除轮播图
+	 * @return
+	 */
+	public int deleteBanner(List<Integer> ids);
 
 }

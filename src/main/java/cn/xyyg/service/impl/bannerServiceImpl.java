@@ -58,4 +58,19 @@ public class bannerServiceImpl implements bannerService {
 		return this.bannerDao.getBanner();
 	}
 
+	/**
+	 * 删除轮播图
+	 */
+	@Override
+	public boolean deleteBanner(List<Integer> ids) {
+		int rows = this.bannerDao.deleteBanner(ids);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+
 }

@@ -33,5 +33,11 @@ public interface bannerService {
 	 * @return
 	 */
 	public boolean insertBanner(banner banner);
+	
+	/**
+	 * 删除轮播图
+	 * @return
+	 */
+	public boolean deleteBanner(List<Integer> ids);
 
 }
