@@ -20,7 +20,7 @@
     
      <!-- 删除轮播图-->
     <delete id="deleteBanner" >
-        delete * from `xyyg`.`banner` where id in
+        delete  from `xyyg`.`banner` where id in
          <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
             #{id}
         </foreach>
