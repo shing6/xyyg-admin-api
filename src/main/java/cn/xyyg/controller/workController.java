@@ -70,6 +70,7 @@ public class workController {
 	       workPojo.setDetail(workJson.getString("detail"));
 	       workPojo.setCreateTime(createTimeUtil.getTime());
 	       workPojo.setSalary(workJson.getString("salary"));
+	       workPojo.setType(workJson.getInt("type"));
 	       workPojo.setCounts(workJson.getInt("counts"));
 	       workPojo.setStartTime(workJson.getString("startTime"));
 	       workPojo.setEndTime(workJson.getString("endTime"));
