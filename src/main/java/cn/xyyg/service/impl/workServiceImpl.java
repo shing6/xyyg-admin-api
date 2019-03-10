@@ -34,5 +34,19 @@ public class workServiceImpl implements workService{
 		
 		return this.workDao.getWorkCount();
 	}
+    /**
+     * 添加兼职
+     */
+	@Override
+	public boolean insertWork(work work) {
+		int rows = this.workDao.insertWork(work);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

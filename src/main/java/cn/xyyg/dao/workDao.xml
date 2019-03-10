@@ -15,4 +15,12 @@
 	
     
 	
+     <!-- 添加兼职-->
+    <insert id="insertWork" parameterType="cn.xyyg.pojo.work">
+        INSERT INTO `xyyg`.`work` (`title`, `detail`, `createTime`, `deleteTime`, `salary`, `counts`, 
+        `type`, `startTime`, `endTime`, `address`, `userId`) 
+        VALUES (#{title}, #{detail}, #{createTime}, #{deleteTime}, #{salary}, #{counts}, #{type}, #{startTime}, #{endTime}, #{address}, #{userId});
+    </insert>
+    
+	
 </mapper>

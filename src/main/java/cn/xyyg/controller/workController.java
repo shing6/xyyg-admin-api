@@ -1,5 +1,6 @@
 package cn.xyyg.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import cn.xyyg.pojo.work;
 import cn.xyyg.service. workService;
 import cn.xyyg.util.JwtUtil;
 import cn.xyyg.util.ResponseUtil;
+import cn.xyyg.util.createTimeUtil;
+import net.sf.json.JSONObject;
 
 @RestController
 @RequestMapping("/work")
@@ -25,7 +28,7 @@ public class workController {
     private workService  workService;
 	
 	/**
-     * 获取所有轮播图
+     * 分页获取所有兼职
      * @param request
      * @return
      */
@@ -41,6 +44,45 @@ public class workController {
            PageHelper.startPage(pageNum, pageSize);
            List<work> workList = workService.getWork(pageNum, pageSize);
            return workList;
+	     }
+	     else{
+	    	 return ResponseUtil.unlogin();
+	     }
+		
+    		
+    	
+    }
+    
+    /**
+     * 添加轮播图
+     * @param request
+     * @return
+     */
+    @PostMapping("/insertWork")
+    public Object insertBanner(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+	     if(flag){
+	       String work=request.getParameter("work");
+	       int userId=Integer.parseInt(request.getParameter("userId"));
+	       JSONObject workJson = JSONObject.fromObject(work);
+	       work workPojo = new work();
+	       workPojo.setTitle(workJson.getString("title"));
+	       workPojo.setDetail(workJson.getString("detail"));
+	       workPojo.setCreateTime(createTimeUtil.getTime());
+	       workPojo.setSalary(workJson.getString("salary"));
+	       workPojo.setCounts(workJson.getInt("counts"));
+	       workPojo.setStartTime((Timestamp) workJson.get("startTime"));
+	       workPojo.setEndTime((Timestamp) workJson.get("endTime"));
+	       workPojo.setAddress(workJson.getString("address"));
+	       workPojo.setUserId(userId);;
+           boolean iFlag = workService.insertWork(workPojo);
+           if(iFlag){
+        	   return ResponseUtil.ok();
+           }
+           else{
+        	   return ResponseUtil.fail();
+           }
+           
 	     }
 	     else{
 	    	 return ResponseUtil.unlogin();

@@ -17,4 +17,11 @@ public interface workService {
 	 * @return
 	 */
 	public int getWorkCount();
+	
+	/**
+	 * 添加兼职
+	 * @param work
+	 * @return
+	 */
+	public boolean insertWork(work work);
 }

@@ -19,5 +19,12 @@ public interface workDao {
 	 * @return
 	 */
 	public int getWorkCount();
+	
+	/**
+	 * 添加兼职
+	 * @param work
+	 * @return
+	 */
+	public int insertWork(work work);
 
 }

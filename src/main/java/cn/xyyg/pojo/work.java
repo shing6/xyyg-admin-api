@@ -10,6 +10,7 @@ public class work {
      private Timestamp createTime;
      private Timestamp deleteTime;
      private String salary;
+     private Integer counts;
      private Integer type;
      private Timestamp startTime;
      private Timestamp endTime;
@@ -52,6 +53,13 @@ public class work {
 	}
 	public void setSalary(String salary) {
 		this.salary = salary;
+	}
+	
+	public Integer getCounts() {
+		return counts;
+	}
+	public void setCounts(Integer counts) {
+		this.counts = counts;
 	}
 	public Integer getType() {
 		return type;
