@@ -71,8 +71,8 @@ public class workController {
 	       workPojo.setCreateTime(createTimeUtil.getTime());
 	       workPojo.setSalary(workJson.getString("salary"));
 	       workPojo.setCounts(workJson.getInt("counts"));
-	       workPojo.setStartTime((Timestamp) workJson.get("startTime"));
-	       workPojo.setEndTime((Timestamp) workJson.get("endTime"));
+	       workPojo.setStartTime(workJson.getString("startTime"));
+	       workPojo.setEndTime(workJson.getString("endTime"));
 	       workPojo.setAddress(workJson.getString("address"));
 	       workPojo.setUserId(userId);;
            boolean iFlag = workService.insertWork(workPojo);

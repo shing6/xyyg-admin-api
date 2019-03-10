@@ -12,8 +12,8 @@ public class work {
      private String salary;
      private Integer counts;
      private Integer type;
-     private Timestamp startTime;
-     private Timestamp endTime;
+     private String startTime;
+     private String endTime;
      private String address;
      private Integer userId;
      private Integer isDelete;
@@ -67,16 +67,17 @@ public class work {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Timestamp getStartTime() {
+	
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Timestamp getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public String getAddress() {
