@@ -34,5 +34,20 @@ public class bannerServiceImpl implements bannerService {
 		
 		return this.bannerDao.getBannerCount();
 	}
+     
+	/**
+	 * 添加轮播图
+	 */
+	@Override
+	public boolean insertBanner(banner banner) {
+		int rows = this.bannerDao.insertBanner(banner);
+		if(rows > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

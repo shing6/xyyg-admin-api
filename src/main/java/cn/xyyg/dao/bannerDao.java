@@ -19,5 +19,12 @@ public interface bannerDao {
 	 * @return
 	 */
 	public int getBannerCount();
+	
+	/**
+	 * 添加轮播图
+	 * @param banner
+	 * @return
+	 */
+	public int insertBanner(banner banner);
 
 }

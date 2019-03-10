@@ -53,4 +53,35 @@ public class bannerController {
     	
     }
     
+    /**
+     * 添加轮播图
+     * @param request
+     * @return
+     */
+    @PostMapping("/insertBanner")
+    public Object insertBanner(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+	     if(flag){
+	       String toUrl=request.getParameter("toUrl");
+	       String picAddr=request.getParameter("picAddr");
+	       banner banner = new banner();
+	       banner.setToUrl(toUrl);
+	       banner.setPicAddr(picAddr);
+           boolean iFlag = bannerService.insertBanner(banner);
+           if(iFlag){
+        	   return ResponseUtil.ok();
+           }
+           else{
+        	   return ResponseUtil.fail();
+           }
+           
+	     }
+	     else{
+	    	 return ResponseUtil.unlogin();
+	     }
+		
+    		
+    	
+    }
+    
 }

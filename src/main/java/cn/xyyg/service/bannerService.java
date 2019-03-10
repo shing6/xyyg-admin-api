@@ -18,5 +18,12 @@ public interface bannerService {
 	 * @return
 	 */
 	public int getBannerCount();
+	
+	/**
+	 * 添加轮播图
+	 * @param banner
+	 * @return
+	 */
+	public boolean insertBanner(banner banner);
 
 }

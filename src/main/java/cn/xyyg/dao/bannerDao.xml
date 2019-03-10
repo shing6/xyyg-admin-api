@@ -13,4 +13,9 @@
 		select count(*) from banner
 	</select>
 	
+    <!-- 添加轮播图-->
+    <insert id="insertBanner" parameterType="cn.xyyg.pojo.banner">
+        INSERT INTO `xyyg`.`banner` (`toUrl`, `picAddr`) VALUES (#{toUrl}, #{picAddr});
+    </insert>
+	
 </mapper>
