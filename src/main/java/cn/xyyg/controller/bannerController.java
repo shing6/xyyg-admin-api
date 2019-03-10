@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,5 +84,16 @@ public class bannerController {
     		
     	
     }
+    
+    /**
+     * 获取所有轮播图
+     * @param request
+     * @return
+     */
+    @GetMapping("/getBannerForwx")
+    public Object getBannerForwx(HttpServletRequest request,HttpServletResponse response){
+           List<banner> bannerList = bannerService.getBannerForwx();
+           return bannerList;
+	 }
     
 }

@@ -49,5 +49,13 @@ public class bannerServiceImpl implements bannerService {
 		}
 		
 	}
+     /**
+      * 获取所有轮播图
+      */
+	@Override
+	public List<banner> getBannerForwx() {
+		
+		return this.bannerDao.getBanner();
+	}
 
 }

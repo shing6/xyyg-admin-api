@@ -14,6 +14,14 @@ public interface bannerService {
 	public List<banner> getBanner(int pageNum, int pageSize);
 	
 	/**
+	 * 获取所有轮播图微信端
+	 * @param pageSize 
+	 * @param pageNum 
+	 * @return
+	 */
+	public List<banner> getBannerForwx();
+	
+	/**
 	 * 获取广告数量
 	 * @return
 	 */
