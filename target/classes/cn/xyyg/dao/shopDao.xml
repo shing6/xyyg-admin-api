@@ -82,7 +82,7 @@
 	
     <!-- 根据分类id查询商家 -->
     <select id="getShopByCategoryId"  parameterType="Integer" resultType="cn.xyyg.pojo.shop">
-		select * from seller where sellerCategoryId = #{sellerCategoryId}
+		select * from seller where sellerCategoryId = #{sellerCategoryId} and (status=2 or status=3)
 	</select>
 	
     <!-- 商家入驻 -->
