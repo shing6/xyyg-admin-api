@@ -1,5 +1,7 @@
 package cn.xyyg.service.impl;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,6 +123,21 @@ public class categoryServiceImpl implements categoryService {
 	public int getShopCategoryCount() {
 		
 		return this.categoryDao.getShopCategoryCount();
+	}
+     
+	/**
+	 * 管理员添加商家分类
+	 */
+	@Override
+	public boolean insertCategoryShop(categoryShop categoryShop) {
+		int rows = categoryDao.insertCategoryShop(categoryShop);
+		if(rows>0){
+		   return true;
+		}
+		else{
+			return false;
+		}
+		
 	}
 	
 	

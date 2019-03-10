@@ -214,4 +214,33 @@ public class categoryController {
         
     	
     }
+	
+	/**
+     * 管理员添加商家分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/insertCategoryShop")
+    public Object insertCategoryShop(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		String name=request.getParameter("name");
+    		String desc=request.getParameter("desc");
+        	categoryShop categoryShop = new categoryShop();
+        	categoryShop.setName(name);
+        	categoryShop.setDesc(desc);;
+        	boolean insertFlag=categoryService.insertCategoryShop(categoryShop);
+        	if(insertFlag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+             
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+       }
 }

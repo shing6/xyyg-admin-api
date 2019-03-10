@@ -39,6 +39,11 @@
 		 UPDATE  `xyyg`.`category` SET `isDelete` = 1 WHERE id=#{id} ;
 	</update>
 	
+      <!-- 管理员添加商家分类 -->
+    <insert id="insertCategoryShop"  parameterType="cn.xyyg.pojo.categoryShop" >
+		 INSERT INTO  `xyyg`.`seller_category` (`name`,`desc`) VALUES(#{name}, #{desc});
+	</insert>
+	
     
 	
     

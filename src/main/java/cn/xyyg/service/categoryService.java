@@ -63,5 +63,12 @@ public interface categoryService {
 		 * @return
 		 */
 		public List<categoryShop> getShopCategoryByPage(int pageNum,int pageSize);
+		
+		/**
+		 * 管理员添加商家分类
+		 * @param categoryShop
+		 * @return
+		 */
+		public boolean insertCategoryShop(categoryShop categoryShop);
 
 }
