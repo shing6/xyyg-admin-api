@@ -19,10 +19,10 @@
     </insert>
     
      <!-- 删除轮播图-->
-    <delete id="deleteBanner" parameterType="Integer">
+    <delete id="deleteBanner" >
         delete * from `xyyg`.`banner` where id in
          <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
-            #{ids}
+            #{id}
         </foreach>
     </delete>
 	
