@@ -93,7 +93,7 @@ public class categoryController {
        }
     
     /**
-	 * 获取所有分类
+	 * 获取所有商家分类
 	 * @param id
 	 * @return
 	 */
@@ -189,4 +189,29 @@ public class categoryController {
     	}
     	
        }
+    
+    /**
+     * 商家后台分页获取所有商家分类
+     * @param request
+     * @param response
+     * @return
+     */
+	@PostMapping("/getShopCategoryByPage")
+    public Object getShopCategoryByPage(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+    		int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        	int count =categoryService.getShopCategoryCount();
+          	response.setIntHeader("X-Total-Count",count);
+        	List<categoryShop> categoryShopList=categoryService.getShopCategoryByPage(pageNum, pageSize);
+            return categoryShopList;
+            
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+        
+    	
+    }
 }

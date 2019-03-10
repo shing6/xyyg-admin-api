@@ -19,6 +19,11 @@
 		select * from seller_category
 	</select>
 	
+     <!-- 获取所有商家分类数量-->
+    <select id="getShopCategoryCount"   resultType="Integer">
+		select count(*) from seller_category
+	</select>
+	
      <!-- 商家添加商品分类 -->
     <insert id="insertCategory"  parameterType="cn.xyyg.pojo.category" >
 		 INSERT INTO  `xyyg`.`category` (`categoryName`,`sellerId`) VALUES(#{categoryName}, #{sellerId});

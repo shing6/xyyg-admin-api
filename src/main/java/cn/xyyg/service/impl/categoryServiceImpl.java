@@ -105,5 +105,24 @@ public class categoryServiceImpl implements categoryService {
 		}
 		
 	}
+    /**
+     * 获取所有商家分类
+     */
+	@Override
+	public List<categoryShop> getShopCategoryByPage(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		return this.categoryDao.getShopCategory();
+	}
+     
+	 /**
+      * 获取所有商家分类数量
+      */
+	@Override
+	public int getShopCategoryCount() {
+		
+		return this.categoryDao.getShopCategoryCount();
+	}
+	
+	
 
 }

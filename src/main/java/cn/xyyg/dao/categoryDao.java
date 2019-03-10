@@ -14,10 +14,16 @@ public interface categoryDao {
 	public List<category> getShopCategoryById(Integer id);
 	
 	/**
-	 * 获取所有分类
+	 * 获取所有商家分类
 	 * @return
 	 */
 	public List<categoryShop> getShopCategory();
+	
+	/**
+	 * 获取所有商家分类数量
+	 * @return
+	 */
+	public int getShopCategoryCount();
 	
 	/**
 	 * 获取商家分类数量

@@ -18,7 +18,7 @@ public interface categoryService {
 			public List<category> getShopCategoryByPage(Integer id, int pageNum, int pageSize);
 		
 		/**
-		 * 获取所有分类
+		 * 获取所有商家分类
 		 * @return
 		 */
 		public List<categoryShop> getShopCategory();
@@ -44,10 +44,24 @@ public interface categoryService {
 		public boolean updateCategory(category category);
 		
 		/**
+		 * 获取所有商家分类数量
+		 * @return
+		 */
+		public int getShopCategoryCount();
+		
+		/**
 		 * 商家删除商品分类
 		 * @param category
 		 * @return
 		 */
 		public boolean deleteCategory(Integer id);
+		
+		/**
+		 * 分页获取所有商家分类
+		 * @param pageNum
+		 * @param pageSize
+		 * @return
+		 */
+		public List<categoryShop> getShopCategoryByPage(int pageNum,int pageSize);
 
 }
