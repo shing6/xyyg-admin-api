@@ -13,7 +13,7 @@ public class work {
      private Integer type;
      private Timestamp startTime;
      private Timestamp endTime;
-     private String adress;
+     private String address;
      private Integer userId;
      private Integer isDelete;
 	public Integer getId() {
@@ -71,11 +71,11 @@ public class work {
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public Integer getUserId() {
 		return userId;
