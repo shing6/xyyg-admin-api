@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.workDao">
+     
+     <!-- 分页获取兼职列表-->
+    <select id="getWork"   resultType="cn.xyyg.pojo.work">
+		select * from work
+	</select>
+	
+      <!-- 获取兼职数量-->
+    <select id="getWorkCount"   resultType="Integer">
+		select count(*) from work
+	</select>
+	
+    
+	
+</mapper>
