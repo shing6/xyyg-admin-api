@@ -243,4 +243,34 @@ public class categoryController {
     	}
     	
        }
+    
+    /**
+     * 管理员后台修改分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/updateCategoryShop")
+    public Object updateCategoryShop(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int id=Integer.parseInt(request.getParameter("id"));
+    		String name=request.getParameter("name");
+    		categoryShop categoryShop = new categoryShop();
+        	categoryShop.setName(name);
+        	categoryShop.setId(id);
+        	boolean insertFlag=categoryService.updateCategoryShop(categoryShop);
+        	if(insertFlag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+             
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+       }
+    
 }

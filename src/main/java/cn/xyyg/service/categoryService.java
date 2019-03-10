@@ -70,5 +70,12 @@ public interface categoryService {
 		 * @return
 		 */
 		public boolean insertCategoryShop(categoryShop categoryShop);
+		
+		/**
+		 * 管理员修改商家分类
+		 * @param categoryShop
+		 * @return
+		 */
+		public boolean updateCategoryShop(categoryShop categoryShop);
 
 }
