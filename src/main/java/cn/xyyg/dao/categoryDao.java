@@ -64,4 +64,10 @@ public interface categoryDao {
 	 * @return
 	 */
 	public int updateCategoryShop(categoryShop categoryShop);
+	
+	/**
+	 * 管理员删除商家分类
+	 * @return
+	 */
+	public int deleteCategoryShop(Integer id);
 }

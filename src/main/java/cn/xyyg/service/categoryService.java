@@ -77,5 +77,11 @@ public interface categoryService {
 		 * @return
 		 */
 		public boolean updateCategoryShop(categoryShop categoryShop);
+		
+		/**
+		 * 管理员删除商家分类
+		 * @return
+		 */
+		public boolean deleteCategoryShop(Integer id);
 
 }

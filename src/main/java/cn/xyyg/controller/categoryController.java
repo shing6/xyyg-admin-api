@@ -273,4 +273,30 @@ public class categoryController {
     	
        }
     
+    /**
+     * 管理员删除商家分类
+     * @param request
+     * @return
+     */
+    @PostMapping("/deleteCategoryShop")
+    public Object deleteCategoryShop(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int id=Integer.parseInt(request.getParameter("id"));
+    		
+    		boolean insertFlag=categoryService.deleteCategoryShop(id);
+        	if(insertFlag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+             
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+       }
+    
 }

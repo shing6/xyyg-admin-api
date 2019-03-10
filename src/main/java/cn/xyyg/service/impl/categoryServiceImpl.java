@@ -152,6 +152,20 @@ public class categoryServiceImpl implements categoryService {
 			return false;
 		}
 	}
+    
+	/**
+	 * 管理员删除商家分类
+	 */
+	@Override
+	public boolean deleteCategoryShop(Integer id) {
+		int rows = categoryDao.deleteCategoryShop(id);
+		if(rows>0){
+			   return true;
+			}
+			else{
+				return false;
+			}
+	}
 	
 	
 
