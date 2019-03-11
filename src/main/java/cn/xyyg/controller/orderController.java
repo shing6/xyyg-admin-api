@@ -435,7 +435,7 @@ public class orderController {
     }
     
     /**
-     * 买家删除或取消订单
+     * 买家取消订单
      * @param response
      * @param request
      * @return
@@ -449,6 +449,34 @@ public class orderController {
         wechatUser wechatUser = userService.getUserByOpenId(openId);
         if(wechatUser != null){
         	boolean flag = orderService.updateOrderStaus(orderId, status);
+        	if(flag){
+        		return ResponseUtil.ok();
+        	}
+        	else{
+        		return ResponseUtil.fail();
+        	}
+        }
+        
+        else{
+        	return ResponseUtil.unlogin();
+        }
+    	
+    }
+    
+    /**
+     * 买家删除订单
+     * @param response
+     * @param request
+     * @return
+     */
+    @PostMapping("/deleteOrder")
+    public Object deleteOrder(HttpServletResponse response,HttpServletRequest request){
+    	String openId=request.getParameter("open_id");
+    	int orderId=Integer.parseInt(request.getParameter("orderId"));
+    	//查看用户是否存在
+        wechatUser wechatUser = userService.getUserByOpenId(openId);
+        if(wechatUser != null){
+        	boolean flag = orderService.deleteOrder(orderId);
         	if(flag){
         		return ResponseUtil.ok();
         	}

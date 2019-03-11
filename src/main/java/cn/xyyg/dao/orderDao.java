@@ -201,5 +201,12 @@ public interface orderDao {
    */
   public int agreeRefund(String orderNo);
   
+  /**
+   * 用户删除订单
+   * @param orderId
+   * @return
+   */
+  public int deleteOrder(int orderId);
+  
  
 }

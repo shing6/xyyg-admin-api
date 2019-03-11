@@ -25,6 +25,7 @@ public class order {
       private String fromId2;
       private Integer wechatUserId;
       private Integer sellerId;
+      private Integer isDelete;
 	public Integer getId() {
 		return id;
 	}
@@ -122,6 +123,14 @@ public class order {
 	public void setSellerId(Integer sellerId) {
 		this.sellerId = sellerId;
 	}
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+	
+	
       
       
 }

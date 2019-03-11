@@ -409,6 +409,21 @@ public class orderServiceImpl implements orderService {
 		
 	}
 	
+	/**
+	 * 用户删除订单
+	 */
+	@Override
+	public boolean deleteOrder(int orderId) {
+		
+		int rows = this.orderDao.deleteOrder(orderId);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	
 	
 	

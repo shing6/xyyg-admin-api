@@ -6,8 +6,8 @@
 	
      <!-- 创建订单-->
     <insert id="createOrder"  parameterType="cn.xyyg.pojo.order" >
-		INSERT INTO `xyyg`.`order` ( `orderNo`, `snapAddr`, `freight`, `totalCount`, `totalPrice`, `needPrice`,`createTime`, `status`, `fromId`,`fromId2`,`wechatUserId`, `sellerId`) 
-		VALUES ( #{orderNo}, #{snapAddr}, #{freight}, #{totalCount}, #{totalPrice},#{needPrice}, #{createTime}, #{status},#{fromId},#{fromId2}, #{wechatUserId}, #{sellerId});
+		INSERT INTO `xyyg`.`order` ( `orderNo`, `snapAddr`, `freight`, `totalCount`, `totalPrice`, `needPrice`,`createTime`, `status`, `fromId`,`fromId2`,`wechatUserId`, `sellerId`,`isDelete`) 
+		VALUES ( #{orderNo}, #{snapAddr}, #{freight}, #{totalCount}, #{totalPrice},#{needPrice}, #{createTime}, #{status},#{fromId},#{fromId2}, #{wechatUserId}, #{sellerId},#{isDelete});
 
 	</insert>
 	
@@ -49,6 +49,7 @@
 	    <result property="longitude" column="longitude"/>
 	    <result property="status" column="status"/>
 	    <result property="sellerId" column="sellerId"/>
+	    <result property="isDelete" column="isDelete"/>
 	    <collection property="orderGoodsList" ofType="cn.xyyg.pojo.orderGoods">
 	       <id property="orderId" column="orderId"/>
 	       <id property="id" column="goodsId"/>
@@ -88,6 +89,7 @@
 	    <result property="longitude" column="longitude"/>
 	    <result property="status" column="status"/>
 	    <result property="sellerId" column="sellerId"/>
+	    <result property="isDelete" column="isDelete"/>
 	    <collection property="orderGoodsList" ofType="cn.xyyg.pojo.orderGoods">
 	       <id property="orderId" column="orderId"/>
 	       <id property="id" column="goodsId"/>
@@ -153,6 +155,11 @@
      <!-- 更改订单状态 -->
 	<update id="updateOrderStaus" parameterType="Integer">
 	  UPDATE `xyyg`.`order` SET `status`=#{status} WHERE `id`=#{orderId};
+    </update>
+    
+	<!-- 用户删除订单 -->
+	<update id="deleteOrder" parameterType="Integer">
+	  UPDATE `xyyg`.`order` SET `isDelete`=1 WHERE `id`=#{orderId};
     </update>
     
 	

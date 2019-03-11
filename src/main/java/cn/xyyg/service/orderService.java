@@ -177,5 +177,12 @@ public interface orderService {
 	    * @return
 	    */
 	   public boolean updateOrderStaus(int orderId,int status);
+	   
+	   /**
+	    * 用户删除订单
+	    * @param orderId
+	    * @return
+	    */
+	   public boolean deleteOrder(int orderId);
   
 }
