@@ -169,5 +169,13 @@ public interface orderService {
 	    * @return
 	    */
 	   public boolean agreeRefund(String orderNo,int wechatUserId);
+	   
+	   /**
+	    * 用户更改订单状态
+	    * @param orderId
+	    * @param status
+	    * @return
+	    */
+	   public boolean updateOrderStaus(int orderId,int status);
   
 }

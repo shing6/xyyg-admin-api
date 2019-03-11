@@ -394,6 +394,21 @@ public class orderServiceImpl implements orderService {
 		return this.orderDao.selectOrderCountByNo(order);
 	}
 	
+	/**
+	 * 用户更改订单状态
+	 */
+	@Override
+	public boolean updateOrderStaus(int orderId, int status) {
+		int rows = this.orderDao.updateOrderStaus(orderId, status);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
 	
 	
 	
