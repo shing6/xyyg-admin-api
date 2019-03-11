@@ -139,6 +139,7 @@ public class shopController {
     	     String phone = request.getParameter("phone");
     	     String username = request.getParameter("username");
     	     String password = request.getParameter("password");
+    	     int caregoryId =Integer.parseInt(request.getParameter("caregoryId"));
     	     double longitude = Double.parseDouble(request.getParameter("longitude"));
     	     double latitude = Double.parseDouble(request.getParameter("latitude"));
     	     String pwdByMd5 =null;
@@ -163,6 +164,7 @@ public class shopController {
     	     shop.setLogoPic(imgUrl);
     	     shop.setLongitude(longitude);
     	     shop.setLatitude(latitude);
+    	     shop.setSellerCategoryId(caregoryId);
     	     shop.setCreateTime(createTimeUtil.getTime());
     	     Object obj = this.shopService.insertShop(shop, user);
     	     return obj;
