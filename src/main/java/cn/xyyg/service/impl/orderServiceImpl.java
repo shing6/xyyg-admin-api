@@ -111,6 +111,7 @@ public class orderServiceImpl implements orderService {
 				order.setFreight(shop.getFreight());
 				order.setFromId(formId.get(f));
 				order.setFromId2(formId.get(f+1));
+				order.setIsDelete(0);
 				f+=3;
 				
 				
