@@ -65,5 +65,12 @@ public interface userService {
      * @return
      */
     public boolean updateUserRole(Integer id);
+    
+    /**
+     * 通过商家id获取用户信息
+     * @param id
+     * @return
+     */
+    public String getPhoneBySellerId(Integer id);
 
 }

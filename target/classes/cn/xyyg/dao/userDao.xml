@@ -115,6 +115,12 @@
         UPDATE `xyyg`.`user` SET `role`='1' WHERE `id`=#{id};
     </update>
     
+     <!-- 通过商家id获取用户手机信息 -->
+    <select id="getPhoneBySellerId"  resultType="String" parameterType="Integer">
+		select `user`.phone from `user`,seller  where seller.id=#{id} and seller.userId=`user`.id
+	</select>
+    
+    
 	
        
 </mapper>

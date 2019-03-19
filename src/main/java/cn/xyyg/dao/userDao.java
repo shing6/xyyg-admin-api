@@ -86,5 +86,12 @@ public interface userDao {
      */
     public int updateUserNoRole(Integer id);
     
+    /**
+     * 通过商家id获取用户信息
+     * @param id
+     * @return
+     */
+    public String getPhoneBySellerId(Integer id);
+    
     
 }

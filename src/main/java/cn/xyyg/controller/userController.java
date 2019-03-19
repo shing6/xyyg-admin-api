@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 
+import cn.xyyg.pojo.goodsDescPic;
 import cn.xyyg.pojo.userWithShop;
 import cn.xyyg.pojo.wechatUser;
 import cn.xyyg.util.HttpClientUtil;
@@ -128,6 +129,19 @@ public class userController {
 	    	}
 	      
 
+	    }
+	    
+	    /**
+	     * 根据商家id获取用户手机
+	     * @param request
+	     * @return
+	     */
+		@PostMapping("/getPhoneBySellerId")
+	    public String getPhoneBySellerId(HttpServletRequest request){
+			int id=Integer.parseInt(request.getParameter("id"));
+	        String phone = userService.getPhoneBySellerId(id);
+			return phone;
+	    	
 	    }
 	
 

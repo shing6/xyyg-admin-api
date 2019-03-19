@@ -171,6 +171,15 @@ public class userServiceImpl implements userService {
 		
 	}
 	
+	/**
+	 * 通过商家id获取用户信息
+	 */
+	@Override
+	public String getPhoneBySellerId(Integer id) {
+		
+		return this.userDao.getPhoneBySellerId(id);
+	}
+	
 	
 
 }
