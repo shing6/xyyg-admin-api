@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+
 import cn.xyyg.dao.userDao;
 import cn.xyyg.dao.shopDao;
 import cn.xyyg.dao.walletDao;
@@ -140,8 +142,8 @@ public class userServiceImpl implements userService {
 	 * 查询商家信息用于审核
 	 */
 	@Override
-	public List<userWithShop> getUserWithShop() {
-		
+	public List<userWithShop> getUserWithShop(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
 		return this.userDao.getUserWithShop();
 	}
 	

@@ -57,7 +57,7 @@ public interface userService {
      * 查询商家信息用于审核
      * @return
      */
-    public List<userWithShop> getUserWithShop();
+    public List<userWithShop> getUserWithShop(int pageNum, int pageSize);
     
     /**
      * 审核通过后可登陆

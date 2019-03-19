@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageHelper;
+
 import cn.xyyg.pojo.userWithShop;
 import cn.xyyg.pojo.wechatUser;
 import cn.xyyg.util.HttpClientUtil;
@@ -112,9 +114,13 @@ public class userController {
 	    public Object getUserWithShop(HttpServletRequest request,HttpServletResponse response){
 	    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
 	    	if(flag){
+	    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+	        	int pageSize=Integer.parseInt(request.getParameter("pageSize"));
 	    		int count = shopService.getAllShopCount();
 	    		response.setIntHeader("X-Total-Count",count);
-	    		List<userWithShop>  userWithShopList = userService.getUserWithShop();
+	    		//使用分页插件,核心代码就这一行
+                PageHelper.startPage(pageNum, pageSize);
+	    		List<userWithShop>  userWithShopList = userService.getUserWithShop(pageNum,pageSize);
 	    	    return userWithShopList;
 	    	}
 	    	else{

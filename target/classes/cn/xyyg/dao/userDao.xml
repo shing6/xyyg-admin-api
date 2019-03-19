@@ -54,7 +54,7 @@
 
 	</insert>
 	
-     <!-- 查询订单关联查询用户信息，使用resultMap -->
+     <!-- 查询商家关联查询用户信息，使用resultMap -->
     <select id="getUserWithShop" resultMap="userWithShop">
         SELECT
             seller.*,
