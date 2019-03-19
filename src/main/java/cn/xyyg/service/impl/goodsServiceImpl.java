@@ -124,13 +124,16 @@ public class goodsServiceImpl implements goodsService {
 		if(counts>0){
 			//图片
 			List<goodsPicture> goodsPictureList=new ArrayList<>();
-			for(int i=0;i<picAddrList.size();i++){
-				goodsPicture goodsPicture=new goodsPicture();
-				goodsPicture.setPicAddr(picAddrList.get(i));
-				goodsPicture.setGoodsId(goods.getId());;
-				goodsPictureList.add(goodsPicture);
-			    
+			if(picAddrList.size()>0){
+				for(int i=0;i<picAddrList.size();i++){
+					goodsPicture goodsPicture=new goodsPicture();
+					goodsPicture.setPicAddr(picAddrList.get(i));
+					goodsPicture.setGoodsId(goods.getId());;
+					goodsPictureList.add(goodsPicture);
+				    
+				}
 			}
+			
 			//如果有图片
 			if(goodsPictureList.size()>0){
 				//批量添加图片
