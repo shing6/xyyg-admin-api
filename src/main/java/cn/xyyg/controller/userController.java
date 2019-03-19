@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +25,15 @@ import cn.xyyg.util.UserConstantInterface;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import cn.xyyg.service.userService;
+import cn.xyyg.service.shopService;
 @RestController
 @RequestMapping("/user")
 public class userController {
 	   @Autowired
 	    private userService userService;
+	   @Autowired
+	    private shopService shopService;
+	   
 
         /**
          * 微信用户登录
@@ -104,9 +109,11 @@ public class userController {
 	     * @return
 	     */
 	    @PostMapping("/getUserWithShop")
-	    public Object getUserWithShop(HttpServletRequest request){
+	    public Object getUserWithShop(HttpServletRequest request,HttpServletResponse response){
 	    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
 	    	if(flag){
+	    		int count = shopService.getAllShopCount();
+	    		response.setIntHeader("X-Total-Count",count);
 	    		List<userWithShop>  userWithShopList = userService.getUserWithShop();
 	    	    return userWithShopList;
 	    	}
