@@ -182,7 +182,7 @@ public class goodsController {
     		int userId=Integer.parseInt(request.getParameter("userId"));
     		String[] stuList = picAddr.split(",");
     		List<String> picAddrList = new ArrayList<String>();
-    		if(picAddr.isEmpty()){
+    		if(!picAddr.isEmpty()){
     			System.out.println("picAddr1"+picAddr);
     		}
     		
