@@ -8,6 +8,7 @@ public class orderGoods {
     private String mainPic;
     private String goodsName;
     private BigDecimal price;
+    private BigDecimal oldPrice;
     private Integer counts;
     private Integer isComment;
     
@@ -49,6 +50,13 @@ public class orderGoods {
 	}
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	
+	public BigDecimal getOldPrice() {
+		return oldPrice;
+	}
+	public void setOldPrice(BigDecimal oldPrice) {
+		this.oldPrice = oldPrice;
 	}
 	public Integer getCounts() {
 		return counts;

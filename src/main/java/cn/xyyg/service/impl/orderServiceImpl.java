@@ -122,7 +122,13 @@ public class orderServiceImpl implements orderService {
 						 totalCount = totalCount+goodsList.get(j).getCounts();
 						 count = goodsList.get(j).getCounts();
 						 BigDecimal priceCount = new BigDecimal(count);
-						 totalPrice=totalPrice.add(goodsList.get(j).getPrice().multiply(priceCount));
+						 if(goodsList.get(j).getPrice().compareTo(new BigDecimal(0))==1){
+							 totalPrice=totalPrice.add(goodsList.get(j).getPrice().multiply(priceCount));
+						 }
+						 else{
+							 totalPrice=totalPrice.add(goodsList.get(j).getOldPrice().multiply(priceCount));
+						 }
+						 
 						 
 					}
 					
@@ -152,7 +158,13 @@ public class orderServiceImpl implements orderService {
 						 orderGoods.setId(goodsList.get(k).getId());
 						 orderGoods.setMainPic(goodsList.get(k).getMainPic());
 						 orderGoods.setGoodsName(goodsList.get(k).getGoodsName());
-						 orderGoods.setPrice(goodsList.get(k).getPrice());
+						 if(goodsList.get(k).getPrice().compareTo(new BigDecimal(0))==1){
+							 orderGoods.setPrice(goodsList.get(k).getPrice());
+						 }
+						 else{
+							 orderGoods.setPrice(goodsList.get(k).getOldPrice());
+						 }
+					
 						 orderGoods.setCounts(goodsList.get(k).getCounts());
 						 orderGoods.setIsComment(0);
 						 this.orderDao.createOrderGoods(orderGoods);
