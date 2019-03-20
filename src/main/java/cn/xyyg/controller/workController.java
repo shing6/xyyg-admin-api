@@ -109,9 +109,18 @@ public class workController {
            PageHelper.startPage(pageNum, pageSize);
            List<work> workList = workService.getWork(pageNum, pageSize);
            return workList;
-	     
-	     
-    		
+	 }
+    
+    /**
+     * 小程序端分页获取兼职详情
+     * @param request
+     * @return
+     */
+    @PostMapping("/getWorkById")
+    public Object getWorkById(HttpServletRequest request,HttpServletResponse response){
     	
-    }
+    	   int id=Integer.parseInt(request.getParameter("id"));
+           work work=workService.getWorkById(id);
+           return work;
+	 }
 }

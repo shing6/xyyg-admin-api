@@ -26,5 +26,12 @@ public interface workDao {
 	 * @return
 	 */
 	public int insertWork(work work);
+	
+	/**
+	 * 获取兼职详情
+	 * @param id
+	 * @return
+	 */
+	public work getWorkById(int id);
 
 }

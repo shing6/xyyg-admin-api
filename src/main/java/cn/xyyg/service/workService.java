@@ -24,4 +24,11 @@ public interface workService {
 	 * @return
 	 */
 	public boolean insertWork(work work);
+	
+	/**
+	 * 获取兼职详情
+	 * @param id
+	 * @return
+	 */
+	public work getWorkById(int id);
 }

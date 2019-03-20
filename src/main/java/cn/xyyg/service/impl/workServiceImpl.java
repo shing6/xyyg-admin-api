@@ -48,5 +48,13 @@ public class workServiceImpl implements workService{
 		}
 		
 	}
+     /**
+      * 根据id获取兼职详情
+      */
+	@Override
+	public work getWorkById(int id) {
+		
+		return this.workDao.getWorkById(id);
+	}
 
 }
