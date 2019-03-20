@@ -200,7 +200,9 @@ public class goodsController {
                 int oldPrice=goodsJson.getInt("oldPrice");
                 goodsPojo.setGoodsName(goodsJson.getString("goodsName"));
                 goodsPojo.setOldPrice(new BigDecimal(oldPrice));
-                goodsPojo.setPrice(new BigDecimal(price));
+                if(price>0){
+                	goodsPojo.setPrice(new BigDecimal(price));
+                }
                 goodsPojo.setMainPic(goodsJson.getString("picUrl"));
                 goodsPojo.setCreateTime(createTimeUtil.getTime());
                 goodsPojo.setStock(goodsJson.getInt("stock"));
