@@ -183,15 +183,11 @@ public class goodsController {
     		String[] stuList = picAddr.split(",");
     		List<String> picAddrList = new ArrayList<String>();
     		if(!picAddr.isEmpty()){
-    			System.out.println("picAddr1"+picAddr);
-    		}
-    		
     			for(String str : stuList){
-    	           	 
+   	           	 
         			picAddrList.add(new String(str));
                 }
-    		
-    		
+    		}
     		JSONObject goodsJson = JSONObject.fromObject(goods);
     		JSONArray attributesJson = JSONArray.fromObject(attributes);
     		List<goodsDesc> goodsDescList =JSONArray.toList(attributesJson, new goodsDesc(), new JsonConfig());
