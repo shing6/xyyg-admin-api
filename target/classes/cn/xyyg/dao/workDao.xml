@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xyyg.dao.workDao">
+     
+     <!-- 分页获取兼职列表-->
+    <select id="getWork"   resultType="cn.xyyg.pojo.work">
+		select * from work
+	</select>
+	
+      <!-- 获取兼职数量-->
+    <select id="getWorkCount"   resultType="Integer">
+		select count(*) from work
+	</select>
+	
+    
+	
+     <!-- 添加兼职-->
+    <insert id="insertWork" parameterType="cn.xyyg.pojo.work">
+        INSERT INTO `xyyg`.`work` (`title`, `detail`, `createTime`, `deleteTime`, `salary`, `counts`, 
+        `type`, `startTime`, `endTime`, `address`, `userId`) 
+        VALUES (#{title}, #{detail}, #{createTime}, #{deleteTime}, #{salary}, #{counts}, #{type}, #{startTime}, #{endTime}, #{address}, #{userId});
+    </insert>
+    
+    <!-- 获取兼职详情-->
+    <select id="getWorkById"   resultType="cn.xyyg.pojo.work" parameterType="Integer">
+		select * from work where id=#{id}
+	</select>
+    
+	
+</mapper>
