@@ -121,6 +121,6 @@ public class workController {
     	
     	   int id=Integer.parseInt(request.getParameter("id"));
            work work=workService.getWorkById(id);
-           return work;
+           return work;//123
 	 }
 }
