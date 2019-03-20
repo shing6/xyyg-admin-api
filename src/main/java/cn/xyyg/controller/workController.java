@@ -28,7 +28,7 @@ public class workController {
     private workService  workService;
 	
 	/**
-     * 分页获取所有兼职
+     * 后台分页获取所有兼职
      * @param request
      * @return
      */
@@ -89,6 +89,28 @@ public class workController {
 	    	 return ResponseUtil.unlogin();
 	     }
 		
+    		
+    	
+    }
+    
+    /**
+     * 小程序端分页获取所有兼职
+     * @param request
+     * @return
+     */
+    @PostMapping("/getWorkForWx")
+    public Object getWorkForWx(HttpServletRequest request,HttpServletResponse response){
+    	
+	       int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+	       int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+	       int count = workService.getWorkCount();
+	       response.setIntHeader("X-Total-Count",count);
+	       //使用分页插件,核心代码就这一行
+           PageHelper.startPage(pageNum, pageSize);
+           List<work> workList = workService.getWork(pageNum, pageSize);
+           return workList;
+	     
+	     
     		
     	
     }
