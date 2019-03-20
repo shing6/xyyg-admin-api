@@ -122,7 +122,7 @@ public class orderServiceImpl implements orderService {
 						 totalCount = totalCount+goodsList.get(j).getCounts();
 						 count = goodsList.get(j).getCounts();
 						 BigDecimal priceCount = new BigDecimal(count);
-						 if(goodsList.get(j).getPrice().compareTo(new BigDecimal(0))==1){
+						 if(goodsList.get(j).getPrice()!=null&&goodsList.get(j).getPrice().compareTo(new BigDecimal(0))==1){
 							 totalPrice=totalPrice.add(goodsList.get(j).getPrice().multiply(priceCount));
 						 }
 						 else{
@@ -158,7 +158,7 @@ public class orderServiceImpl implements orderService {
 						 orderGoods.setId(goodsList.get(k).getId());
 						 orderGoods.setMainPic(goodsList.get(k).getMainPic());
 						 orderGoods.setGoodsName(goodsList.get(k).getGoodsName());
-						 if(goodsList.get(k).getPrice().compareTo(new BigDecimal(0))==1){
+						 if(goodsList.get(k).getPrice() != null&&goodsList.get(k).getPrice().compareTo(new BigDecimal(0))==1){
 							 orderGoods.setPrice(goodsList.get(k).getPrice());
 						 }
 						 else{
