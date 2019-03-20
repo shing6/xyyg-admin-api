@@ -21,7 +21,11 @@
         `type`, `startTime`, `endTime`, `address`, `userId`) 
         VALUES (#{title}, #{detail}, #{createTime}, #{deleteTime}, #{salary}, #{counts}, #{type}, #{startTime}, #{endTime}, #{address}, #{userId});
     </insert>
-   
+    
+    <!-- 获取兼职详情-->
+    <select id="getWorkById"   resultType="cn.xyyg.pojo.work" parameterType="Integer">
+		select * from work where id=#{id}
+	</select>
     
 	
 </mapper>
