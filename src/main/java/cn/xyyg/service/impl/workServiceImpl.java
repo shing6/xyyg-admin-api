@@ -56,5 +56,19 @@ public class workServiceImpl implements workService{
 		
 		return this.workDao.getWorkById(id);
 	}
+     /**
+      * 批量删除兼职
+      */
+	@Override
+	public boolean deleteWork(List<Integer> ids) {
+		int rows = this.workDao.deleteWork(ids);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

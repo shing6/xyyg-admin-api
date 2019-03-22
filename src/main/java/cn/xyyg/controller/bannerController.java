@@ -126,10 +126,6 @@ public class bannerController {
     	     else{
     	    	 return ResponseUtil.unlogin();
     	     }
-    		
-            
-     		
-    	
     	
   	}
 }

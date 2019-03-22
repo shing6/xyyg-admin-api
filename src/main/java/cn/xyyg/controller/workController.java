@@ -1,7 +1,10 @@
 package cn.xyyg.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -123,4 +126,37 @@ public class workController {
            work work=workService.getWorkById(id);
            return work;//12
 	 }
+    
+    /**
+     * 根据id数组删除兼职
+     * @param request
+     * @return
+     */
+    @PostMapping("/deleteWork")
+    public Object deleteWork(HttpServletRequest request){
+    	     boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	     if(flag){
+    	    	 String items = request.getParameter("ids");
+            	 //正则表达式去掉首尾非数字字符 []
+                 Pattern pattern = Pattern.compile("^\\D+|\\D+$");
+                 Matcher matcher = pattern.matcher(items);
+                 items = matcher.replaceAll("");
+                 String[] stuList = items.split(",");
+                 List<Integer> ids = new ArrayList<Integer>();
+                 for(String str : stuList){
+                	 ids.add(new Integer(str));
+                 }
+                boolean deleteflag = workService.deleteWork(ids);
+                if(deleteflag){
+                	return ResponseUtil.ok();
+                }
+                else{
+                	return ResponseUtil.fail();
+                }
+    	     }
+    	     else{
+    	    	 return ResponseUtil.unlogin();
+    	     }
+    	
+  	}
 }

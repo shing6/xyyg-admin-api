@@ -31,4 +31,9 @@ public interface workService {
 	 * @return
 	 */
 	public work getWorkById(int id);
+	
+	/**
+	 * 批量删除兼职
+	 */
+	public boolean deleteWork(List<Integer >ids);
 }

@@ -33,5 +33,10 @@ public interface workDao {
 	 * @return
 	 */
 	public work getWorkById(int id);
+	
+	/**
+	 * 批量删除兼职
+	 */
+	public int deleteWork(List<Integer >ids);
 
 }

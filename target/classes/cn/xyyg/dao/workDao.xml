@@ -26,6 +26,14 @@
     <select id="getWorkById"   resultType="cn.xyyg.pojo.work" parameterType="Integer">
 		select * from work where id=#{id}
 	</select>
+	
+    <!-- 删除兼职-->
+    <delete id="deleteWork" >
+        delete  from `xyyg`.`work` where id in
+         <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+            #{id}
+        </foreach>
+    </delete>
     
 	
 </mapper>
