@@ -12,6 +12,7 @@ public class page {
      private Integer goodsId;
      private Integer sellerId; 
      private Integer wechatUserId;
+     private Integer categoryId;
      private String name;
      
      
@@ -56,6 +57,12 @@ public class page {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 	
      

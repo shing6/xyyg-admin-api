@@ -396,6 +396,29 @@ public class goodsController {
     	
     	
   	}
+    
+    /**
+     * 根据分类id分页查询商品信息信息
+     * @param request
+     * @return
+     */
+    @PostMapping("/getGoodsByCategory")
+    public Object getGoodsByCategory(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+    	if(flag){
+    		int categoryId=Integer.parseInt(request.getParameter("categoryId"));
+    		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+        	int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        	int count =goodsService.getGoodsCountByCategory(categoryId);
+        	response.setIntHeader("X-Total-Count",count);
+        	List<goods> goodsList=goodsService.getGoodsByCategoty(pageNum, pageSize, categoryId);
+        	return goodsList;
+    	}
+    	else{
+    		return ResponseUtil.unlogin();
+    	}
+    	
+    }
   
     
 }

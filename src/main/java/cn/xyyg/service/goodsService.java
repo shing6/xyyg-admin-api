@@ -127,4 +127,18 @@ public interface goodsService {
 	 * @return
 	 */
 	public boolean deleteGoodsByIds(List<Integer> ids);
+	
+	/**
+	 * 根据分类id分页查询商品详细信息
+	 * @param page
+	 * @return
+	 */
+	public List<goods> getGoodsByCategoty(int pageNum,int pageSize,int categoryId);
+	
+	/**
+	 * 根据分类id分页查询商品数量
+	 * @param categoryId
+	 * @return
+	 */
+	public int getGoodsCountByCategory(int categoryId);
 }

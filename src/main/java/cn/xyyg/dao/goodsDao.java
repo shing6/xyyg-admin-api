@@ -73,10 +73,12 @@ public interface goodsDao {
 	
 	/**
 	 * 根据商家id分页查询商品详细信息
-	 * @param sellerId
+	 * @param page
 	 * @return
 	 */
 	public List<goods> getGoodsBySellerId(page page);
+	
+	
 	
 	/**
 	 * 根据商家id查询商品数量
@@ -84,6 +86,20 @@ public interface goodsDao {
 	 * @return
 	 */
 	public int getGoodsCountBySellerId(int sellerId);
+	
+	/**
+	 * 根据分类id分页查询商品详细信息
+	 * @param page
+	 * @return
+	 */
+	public List<goods> getGoodsByCategoty(page page);
+	
+	/**
+	 * 根据分类id分页查询商品数量
+	 * @param categoryId
+	 * @return
+	 */
+	public int getGoodsCountByCategory(int categoryId);
 	
 	/**
 	 * 添加商品

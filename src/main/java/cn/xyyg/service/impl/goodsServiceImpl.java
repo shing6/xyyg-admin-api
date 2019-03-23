@@ -290,6 +290,32 @@ public class goodsServiceImpl implements goodsService {
 		
 	}
 	
+	/**
+	 * 根据分类id分页查询商品信息
+	 * @param page
+	 * @return
+	 */
+	@Override
+	public List<goods> getGoodsByCategoty(int pageNum,int pageSize,int categoryId) {
+		int newPageNum=pageNum*pageSize;
+        page page=new page();
+		page.setPageNum(newPageNum);
+		page.setPageSize(pageSize);
+		page.setCategoryId(categoryId);;
+		return this.goodsDao.getGoodsByCategoty(page);
+	}
+	
+	/**
+	 * 根据分类id查询商品数量
+	 * @param categoryId
+	 * @return
+	 */
+	@Override
+	public int getGoodsCountByCategory(int categoryId) {
+		
+		return this.goodsDao.getGoodsCountByCategory(categoryId);
+	}
+	
 	
 	
 	
