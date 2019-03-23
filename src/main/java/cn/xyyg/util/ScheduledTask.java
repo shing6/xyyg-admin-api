@@ -26,7 +26,7 @@ public class ScheduledTask {
 	   
 	    private Integer count2 = 1;
 
-	    @Scheduled(cron = "*/10 * * * * *")        //cron = "*/5 * * * * * *"提供了一种通用的定时任务表达式，这里表示每隔5秒执行一次
+	    @Scheduled(cron = "*/10 * * * * *")        //10秒执行一次
 	    public void reportCurrentTimeCron() throws InterruptedException {
 	        System.out.println(String.format("+++第%s次执行，当前时间为：%s", count2++, dateFormat.format(new Date())));
 	        List<order> orderList =orderService.getNotPayOrder();
@@ -42,6 +42,17 @@ public class ScheduledTask {
 	        			int stock=goods.getStock()+orderGoodsList.get(j).getCounts();
 	        			orderService.updateStockById(orderGoodsList.get(j).getId(), stock);
 	        		}
+	        	}
+	        }
+	        //收货
+	        List<order> NotRecevierOrderList =orderService.getNotReceiveOrder();
+	        
+	        for(int j=0;j<NotRecevierOrderList.size();j++){
+	        	long time2=createTimeUtil.getTime().getTime()-NotRecevierOrderList.get(j).getCreateTime().getTime();
+	        	long minute2=time2/(1000* 60);
+	        	//超过24小时自动收货
+	        	if(minute2>1440){
+	        		orderService.takeGoods(NotRecevierOrderList.get(j).getOrderNo());
 	        	}
 	        }
 	        

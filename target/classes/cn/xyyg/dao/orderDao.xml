@@ -208,6 +208,11 @@
 		select * from `order` where `status` = 1
 	</select>
 	
+      <!-- 查找待收货订单 -->
+    <select id="getNotReceiveOrder"  resultType="cn.xyyg.pojo.order" >
+		select * from `order` where `status` = 3
+	</select>
+	
       <!-- 自动取消超时未付款订单 -->
     <update id="cancelOrder"  parameterType="String" >
 		 UPDATE `xyyg`.`order` SET  `status`='6' WHERE `orderNo`=#{orderNo};

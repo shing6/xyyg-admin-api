@@ -160,6 +160,12 @@ public interface orderDao {
    public List<order> getNotPayOrder();
    
    /**
+    * 查找待收货订单
+    * @return
+    */
+   public List<order> getNotReceiveOrder();
+   
+   /**
     * 取消超时未支付订单
     * @param orderNo
     * @return

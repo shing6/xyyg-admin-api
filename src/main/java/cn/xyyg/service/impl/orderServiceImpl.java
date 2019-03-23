@@ -436,6 +436,15 @@ public class orderServiceImpl implements orderService {
 			return false;
 		}
 	}
+	/**
+	 * 查找待收货订单
+	 * @return
+	 */
+	@Override
+	public List<order> getNotReceiveOrder() {
+		
+		return this.orderDao.getNotReceiveOrder();
+	}
 	
 	
 	
