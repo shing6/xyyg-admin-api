@@ -44,6 +44,13 @@ public interface walletService {
 	 */
 	public boolean insertRechange(rechange rechange);
 	
+	/**
+	 * 充值
+	 * @param wallet
+	 * @return
+	 */
+	public Object rechange(int wechatUserId,String no);
+	
 	
 	
 

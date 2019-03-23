@@ -59,4 +59,19 @@
        INSERT INTO `xyyg`.`rechange` ( `no`,`money`,`isUse`) VALUES ( #{no},#{money},#{isUse});
     </insert>
     
+    <!-- 余额充值 -->
+    <insert id="rechange" parameterType="cn.xyyg.pojo.wallet" >
+        UPDATE `xyyg`.`wallet` SET `money`=`money` + #{money} WHERE `wechatUserId`=#{wechatUserId}
+    </insert>
+    
+    <!-- 充值完使充值卡号失效 -->
+    <update id="updateRechange" parameterType="String" >
+       UPDATE `xyyg`.`rechange` SET `isUse`=1  WHERE `no`=#{no}
+    </update>
+    
+    <!-- 获取卡号判断 -->
+    <select id="getRechangeNo"  resultType="cn.xyyg.pojo.rechange" parameterType="String">
+		select * from `xyyg`.`rechange` where no = #{no};
+	</select>
+    
 </mapper>

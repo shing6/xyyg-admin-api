@@ -164,6 +164,29 @@ public class walletController {
     	
     }
 	
+	/**
+	 * 充值
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/rechange")
+    public Object rechange(HttpServletRequest request){
+    	String openId =request.getParameter("open_id");
+    	String no=request.getParameter("no");
+    	//查看用户是否存在
+        wechatUser wechatUser = userService.getUserByOpenId(openId);
+        if(wechatUser != null){
+        	Object obj = walletService.rechange(wechatUser.getId(), no);
+        	return obj;
+        }
+        
+        else{
+        	return ResponseUtil.unlogin();
+        }
+		
+    	
+    }
+	
 	
 	
 	

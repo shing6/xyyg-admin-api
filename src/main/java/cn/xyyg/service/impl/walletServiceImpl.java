@@ -186,5 +186,47 @@ public class walletServiceImpl implements walletService {
 	    }
 		
 	}
+    /**
+     * 充值
+     */
+	@Override
+	@Transactional(rollbackFor = {IllegalArgumentException.class})
+	public Object rechange(int wechatUserId,String no) {
+		String MD5No = null;
+		try {
+			MD5No = MD5.EncoderByMd5(no);
+		} catch (NoSuchAlgorithmException e) {
+			
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}
+		rechange rechange = this.walletDao.getRechangeNo(MD5No);
+		if(rechange.getIsUse()==0){
+			int rows = this.walletDao.updateRechange(MD5No);
+			if(rows>0){
+				wallet wallet = new wallet();
+				wallet.setMoney(rechange.getMoney());
+				wallet.setWechatUserId(wechatUserId);;
+				int row = this.walletDao.rechange(wallet);
+				if(row>0){
+					return ResponseUtil.ok();
+				}
+				else{
+					throw new IllegalArgumentException("充值失败");
+				}
+				
+			}
+			else{
+				return ResponseUtil.fail();
+			}
+		}
+		else{
+			return ResponseUtil.isUse();
+		}
+		
+		
+	}
 
 }

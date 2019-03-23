@@ -85,4 +85,25 @@ public interface walletDao {
 	 * @return
 	 */
 	public int insertRechange(rechange rechange);
+	
+	/**
+	 * 充值
+	 * @param wallet
+	 * @return
+	 */
+	public int rechange(wallet wallet);
+	
+	/**
+	 * 充值完成使卡号失效
+	 * @param no
+	 * @return
+	 */
+	public int updateRechange(String no);
+	
+	/**
+	 * 判断卡号是否正确
+	 * @param no
+	 * @return
+	 */
+	public rechange getRechangeNo(String no);
 }

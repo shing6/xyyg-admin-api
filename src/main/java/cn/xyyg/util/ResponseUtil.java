@@ -98,6 +98,9 @@ public class ResponseUtil {
     public static Object unOldPwd() {
         return fail(512, "旧密码错误");
     }
+    public static Object isUse() {
+        return fail(513, "卡号已使用");
+    }
     
 
 }
