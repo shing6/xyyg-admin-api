@@ -18,7 +18,7 @@
 				</div>
 				<form action="/alipay/pay" class="am-form" >
 					<div class="tr_rechbox">
-						
+						 钱包卡号：<input type="text" name="walletId">
 						<div class="tr_rechli am-form-group">
 							<ul class="ui-choose am-form-group" id="uc_01">
 								<li>
@@ -98,7 +98,7 @@
 				$('#uc_01 li:eq(2)').click(function() {
 					$('.tr_rechoth').hide();
 					$('.rechnum').text('50.00元');
-					$('.am-radio-inline input ').val('');
+					$('.othbox').val('');
 					$('.othbox').removeAttr('required')
 					$('.othbox').val('')
 				})
