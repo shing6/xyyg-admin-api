@@ -2,6 +2,7 @@ package cn.xyyg.service;
 
 import java.util.List;
 
+import cn.xyyg.pojo.rechange;
 import cn.xyyg.pojo.wallet;
 
 public interface walletService {
@@ -35,6 +36,13 @@ public interface walletService {
 	 * @return
 	 */
 	public Object updateWechatWalletPassword(wallet wallet,String oldPassword);
+	
+	/**
+	 * 添加卡号
+	 * @param rechange
+	 * @return
+	 */
+	public boolean insertRechange(rechange rechange);
 	
 	
 	

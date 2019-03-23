@@ -54,4 +54,9 @@
 	  UPDATE `xyyg`.`admin_wallet` SET `money`=`money`-#{money} WHERE  `userId`=11001
     </update>
     
+	<!-- 添加充值卡号 -->
+    <insert id="insertRechange" parameterType="cn.xyyg.pojo.rechange" >
+       INSERT INTO `xyyg`.`rechange` ( `no`,`isUse`) VALUES ( #{no},#{isUse});
+    </insert>
+    
 </mapper>

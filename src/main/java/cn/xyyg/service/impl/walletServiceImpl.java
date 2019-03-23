@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.xyyg.dao.walletDao;
 import cn.xyyg.dao.orderDao;
 import cn.xyyg.pojo.order;
+import cn.xyyg.pojo.rechange;
 import cn.xyyg.pojo.wallet;
 import cn.xyyg.service.walletService;
 import cn.xyyg.util.MD5;
@@ -169,6 +170,21 @@ public class walletServiceImpl implements walletService {
 		else{
 			return ResponseUtil.payFailed();
 		}
+	}
+     
+	/**
+	 * 添加卡号
+	 */
+	@Override
+	public boolean insertRechange(rechange rechange) {
+	    int rows = this.walletDao.insertRechange(rechange);
+	    if(rows>0){
+	    	return true;
+	    }
+	    else{
+	    	return false;
+	    }
+		
 	}
 
 }

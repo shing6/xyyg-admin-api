@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.xyyg.pojo.adminWallet;
+import cn.xyyg.pojo.rechange;
 import cn.xyyg.pojo.wallet;
 @Mapper
 public interface walletDao {
@@ -77,4 +78,11 @@ public interface walletDao {
 	 * @return
 	 */
 	public int shopRefund(BigDecimal money);
+	
+	/**
+	 * 添加卡号
+	 * @param rechange
+	 * @return
+	 */
+	public int insertRechange(rechange rechange);
 }

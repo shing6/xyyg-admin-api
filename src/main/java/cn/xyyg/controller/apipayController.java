@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,11 +19,17 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 
 import cn.xyyg.config.AlipayConfig;
+import cn.xyyg.pojo.rechange;
+import cn.xyyg.service.walletService;
+import cn.xyyg.util.MD5;
 import cn.xyyg.util.orderNoUtil;
 
 @RestController
 @RequestMapping("/alipay")
 public class apipayController {
+	
+	@Autowired
+	private walletService walletService;
 	
 	// 获取配置文件的信息
 		String app_id = AlipayConfig.app_id;
@@ -142,8 +149,12 @@ public class apipayController {
 				String out_trade_no = request.getParameter("out_trade_no");
 				// 交易状态
 				String trade_status = request.getParameter("trade_status");
-				System.out.println(out_trade_no);
 				// 修改数据库
+				String no = MD5.EncoderByMd5(out_trade_no);
+				rechange rechange =new rechange();
+				rechange.setNo(no);
+				rechange.setIsUse(0);
+				walletService.insertRechange(rechange);
 			} else {
 				System.out.println("异步通知失败");
 			}
