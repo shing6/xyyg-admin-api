@@ -285,7 +285,7 @@ public class orderController {
 
                 wxMssVo.setTouser(wechatUser.getOpenId());
 
-                wxMssVo.setPage("pages/profile/orderDetail/orderDetail?id="+orderNo);
+                wxMssVo.setPage("pages/profile/orderDetail/orderDetail?id="+order.getId());
 
                 wxMssVo.setRequest_url("https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + token.getAccessToken());
 
