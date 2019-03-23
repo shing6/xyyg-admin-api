@@ -36,8 +36,8 @@
     </delete>
     
     <update id="updateWork" parameterType="cn.xyyg.pojo.work">
-    UPDATE `xyyg`.`work` SET `title`='#{title}', `detail`='#{detail}', `salary`='#{salary}', `counts`='#{counts}', 
-    `type`='#{type}', `startTime`='#{startTime}', `endTime`='#{endTime}', `address`='#{address}' WHERE `id`='#{id}';
+    UPDATE `xyyg`.`work` SET `title`=#{title}, `detail`=#{detail}, `salary`=#{salary}, `counts`=#{counts}, 
+    `type`=#{type}, `startTime`=#{startTime}, `endTime`=#{endTime}, `address`=#{address} WHERE `id`='#{id}';
         
     </update>
 	
