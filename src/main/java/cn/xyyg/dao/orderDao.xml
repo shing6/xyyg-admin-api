@@ -224,8 +224,8 @@
 	</select>
 	
      <!-- 卖家发货-->
-	<update id="sendGoods" parameterType="String">
-	  UPDATE `xyyg`.`order` SET  `status`='3' WHERE `orderNo`=#{orderNo};
+	<update id="sendGoods" parameterType="cn.xyyg.pojo.order">
+	  UPDATE `xyyg`.`order` SET  `status`='3' ,`sendTime`=#{sendTime} WHERE `orderNo`=#{orderNo};
     </update>
 	
      <!-- 买家确认收货-->

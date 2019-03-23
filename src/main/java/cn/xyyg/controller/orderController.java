@@ -260,7 +260,7 @@ public class orderController {
     }
     
     /**
-     * 商家發貨
+     * 商家发货
      * @param request
      * @param response
      * @return
@@ -272,7 +272,10 @@ public class orderController {
     		String orderNo = request.getParameter("orderNo");
     		order order = this.orderService.getOrderByNo(orderNo);
     		wechatUser  wechatUser =  this.userService.getWechatUserById(order.getWechatUserId());
-            boolean sendflag = this.orderService.sendGoods(orderNo);
+    		order sendOrder=new order();
+    		sendOrder.setSendTime(createTimeUtil.getTime());
+    		sendOrder.setOrderNo(orderNo);
+            boolean sendflag = this.orderService.sendGoods(sendOrder);
             if(sendflag){
             	Token token = CommonUtil.getToken("wx7671a8f065d92af5","a78afeab52d6212d45eb3f9e8c762d79");
 
@@ -282,7 +285,7 @@ public class orderController {
 
                 wxMssVo.setTouser(wechatUser.getOpenId());
 
-                wxMssVo.setPage("pages/profile/order/order");
+                wxMssVo.setPage("pages/profile/orderDetail/orderDetail?id="+orderNo);
 
                 wxMssVo.setRequest_url("https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=" + token.getAccessToken());
 

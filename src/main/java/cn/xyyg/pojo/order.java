@@ -20,6 +20,7 @@ public class order {
       private BigDecimal payPrice;
       private Timestamp createTime;
       private Timestamp deleteTime;
+      private Timestamp sendTime;
       private Integer status;
       private String fromId;
       private String fromId2;
@@ -128,6 +129,12 @@ public class order {
 	}
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
+	}
+	public Timestamp getSendTime() {
+		return sendTime;
+	}
+	public void setSendTime(Timestamp sendTime) {
+		this.sendTime = sendTime;
 	}
 	
 	

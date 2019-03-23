@@ -184,7 +184,7 @@ public interface orderDao {
    * @param orderNo
    * @return
    */
-  public int sendGoods(String orderNo);
+  public int sendGoods(order order);
   
   /**
    * 买家确认收货

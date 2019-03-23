@@ -48,7 +48,7 @@ public class ScheduledTask {
 	        List<order> NotRecevierOrderList =orderService.getNotReceiveOrder();
 	        
 	        for(int j=0;j<NotRecevierOrderList.size();j++){
-	        	long time2=createTimeUtil.getTime().getTime()-NotRecevierOrderList.get(j).getCreateTime().getTime();
+	        	long time2=createTimeUtil.getTime().getTime()-NotRecevierOrderList.get(j).getSendTime().getTime();
 	        	long minute2=time2/(1000* 60);
 	        	//超过24小时自动收货
 	        	if(minute2>1440){

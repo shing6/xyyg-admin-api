@@ -302,8 +302,8 @@ public class orderServiceImpl implements orderService {
 	 * 卖家发货
 	 */
 	@Override
-	public boolean sendGoods(String orderNo) {
-		int rows = this.orderDao.sendGoods(orderNo);
+	public boolean sendGoods(order order) {
+		int rows = this.orderDao.sendGoods(order);
 		if(rows>0){
 			return true;
 		}

@@ -146,7 +146,7 @@ public interface orderService {
 	    * @param orderNo
 	    * @return
 	    */
-	   public boolean sendGoods(String orderNo);
+	   public boolean sendGoods(order order);
 	   
 	   
 	   /**
