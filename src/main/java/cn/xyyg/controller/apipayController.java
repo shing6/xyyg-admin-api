@@ -102,11 +102,11 @@ public class apipayController {
 
 			// 返回界面
 			if (signVerified) {
-				System.out.println("前往支付成功页面");
-				System.out.println(params);
+				//System.out.println("前往支付成功页面");
+				//System.out.println(params);
 				
 			} else {
-				System.out.println("前往支付失败页面");
+				//System.out.println("前往支付失败页面");
 				
 			}
 			
@@ -142,7 +142,7 @@ public class apipayController {
 				String out_trade_no = request.getParameter("out_trade_no");
 				// 交易状态
 				String trade_status = request.getParameter("trade_status");
-				System.out.println(params);
+				System.out.println(out_trade_no);
 				// 修改数据库
 			} else {
 				System.out.println("异步通知失败");
