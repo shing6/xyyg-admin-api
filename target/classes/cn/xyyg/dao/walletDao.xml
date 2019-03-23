@@ -56,7 +56,7 @@
     
 	<!-- 添加充值卡号 -->
     <insert id="insertRechange" parameterType="cn.xyyg.pojo.rechange" >
-       INSERT INTO `xyyg`.`rechange` ( `no`,`isUse`) VALUES ( #{no},#{isUse});
+       INSERT INTO `xyyg`.`rechange` ( `no`,`money`,`isUse`) VALUES ( #{no},#{money},#{isUse});
     </insert>
     
 </mapper>

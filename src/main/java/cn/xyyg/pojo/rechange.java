@@ -1,8 +1,11 @@
 package cn.xyyg.pojo;
 
+import java.math.BigDecimal;
+
 public class rechange {
      private Integer id;
      private String no;
+     private BigDecimal money;
      private Integer isUse;
 	public Integer getId() {
 		return id;
@@ -22,5 +25,13 @@ public class rechange {
 	public void setIsUse(Integer isUse) {
 		this.isUse = isUse;
 	}
+	public BigDecimal getMoney() {
+		return money;
+	}
+	public void setMoney(BigDecimal money) {
+		this.money = money;
+	}
+	
+	
      
 }

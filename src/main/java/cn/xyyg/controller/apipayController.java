@@ -1,5 +1,6 @@
 package cn.xyyg.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -153,8 +154,10 @@ public class apipayController {
 				String no = MD5.EncoderByMd5(out_trade_no);
 				rechange rechange =new rechange();
 				rechange.setNo(no);
+				rechange.setMoney(new BigDecimal(50));
 				rechange.setIsUse(0);
-				walletService.insertRechange(rechange);
+				System.out.println(params);
+				//walletService.insertRechange(rechange);
 			} else {
 				System.out.println("异步通知失败");
 			}
