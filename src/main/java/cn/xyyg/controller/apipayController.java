@@ -91,7 +91,7 @@ public class apipayController {
 		 * @throws Exception
 		 */
 		@RequestMapping("/returnUrl")
-		public void returnUrl(HttpServletRequest request) throws Exception {
+		public void returnUrl(HttpServletRequest request,HttpServletResponse resp) throws Exception {
 			//ModelAndView mav = new ModelAndView();
 			 
 			// 获取支付宝GET过来反馈信息（官方固定代码）
@@ -110,8 +110,7 @@ public class apipayController {
 
 			// 返回界面
 			if (signVerified) {
-				//System.out.println("前往支付成功页面");
-				//System.out.println(params);
+				resp.sendRedirect("https://www.shing6.cn:8081/");
 				
 			} else {
 				//System.out.println("前往支付失败页面");
