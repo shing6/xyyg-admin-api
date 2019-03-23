@@ -130,7 +130,7 @@ public class bannerController {
   	}
     
     /**
-     * 添加轮播图
+     * 修改轮播图
      * @param request
      * @return
      */
@@ -140,7 +140,9 @@ public class bannerController {
 	     if(flag){
 	       String toUrl=request.getParameter("toUrl");
 	       String picAddr=request.getParameter("picAddr");
+	       int id=Integer.parseInt(request.getParameter("id"));
 	       banner banner = new banner();
+	       banner.setId(id);
 	       banner.setToUrl(toUrl);
 	       banner.setPicAddr(picAddr);
            boolean iFlag = bannerService.updateBanner(banner);
