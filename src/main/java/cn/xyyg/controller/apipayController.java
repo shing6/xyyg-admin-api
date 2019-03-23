@@ -154,10 +154,10 @@ public class apipayController {
 				String no = MD5.EncoderByMd5(out_trade_no);
 				rechange rechange =new rechange();
 				rechange.setNo(no);
-				rechange.setMoney(new BigDecimal(50));
+				rechange.setMoney(new BigDecimal(request.getParameter("receipt_amount")));
 				rechange.setIsUse(0);
-				System.out.println(params);
-				//walletService.insertRechange(rechange);
+				System.out.println(request.getParameter("receipt_amount"));
+				walletService.insertRechange(rechange);
 			} else {
 				System.out.println("异步通知失败");
 			}
