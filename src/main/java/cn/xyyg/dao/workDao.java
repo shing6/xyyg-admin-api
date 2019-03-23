@@ -38,5 +38,12 @@ public interface workDao {
 	 * 批量删除兼职
 	 */
 	public int deleteWork(List<Integer >ids);
+	
+	/**
+	 * 修改兼职
+	 * @param work
+	 * @return
+	 */
+	public int updateWork(work work);
 
 }

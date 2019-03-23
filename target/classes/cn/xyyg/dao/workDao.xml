@@ -35,5 +35,10 @@
         </foreach>
     </delete>
     
+    <update id="updateWork" parameterType="cn.xyyg.pojo.work">
+    UPDATE `xyyg`.`work` SET `title`='#{title}', `detail`='#{detail}', `salary`='#{salary}', `counts`='#{conuts}', 
+    `type`='#{type}', `startTime`='#{startTime}', `endTime`='#{endTime}', `address`='#{address}' WHERE `id`='#{id}';
+        
+    </update>
 	
 </mapper>

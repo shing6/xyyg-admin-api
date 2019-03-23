@@ -159,4 +159,42 @@ public class workController {
     	     }
     	
   	}
+    
+    /**
+     * 修改兼职
+     * @param request
+     * @return
+     */
+    @PostMapping("/updateWork")
+    public Object updateWork(HttpServletRequest request,HttpServletResponse response){
+    	boolean  flag= JwtUtil.verify(request.getParameter("token"));
+	     if(flag){
+	       String work=request.getParameter("work");
+	       JSONObject workJson = JSONObject.fromObject(work);
+	       work workPojo = new work();
+	       workPojo.setId(workJson.getInt("id"));
+	       workPojo.setTitle(workJson.getString("title"));
+	       workPojo.setDetail(workJson.getString("detail"));
+	       workPojo.setSalary(workJson.getString("salary"));
+	       workPojo.setType(workJson.getInt("type"));
+	       workPojo.setCounts(workJson.getInt("counts"));
+	       workPojo.setStartTime(workJson.getString("startTime"));
+	       workPojo.setEndTime(workJson.getString("endTime"));
+	       workPojo.setAddress(workJson.getString("address"));
+           boolean iFlag = workService.updateWork(workPojo);
+           if(iFlag){
+        	   return ResponseUtil.ok();
+           }
+           else{
+        	   return ResponseUtil.fail();
+           }
+           
+	     }
+	     else{
+	    	 return ResponseUtil.unlogin();
+	     }
+		
+    		
+    	
+    }
 }

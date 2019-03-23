@@ -70,5 +70,20 @@ public class workServiceImpl implements workService{
 		}
 		
 	}
+    
+	/**
+	 * 修改兼职
+	 */
+	@Override
+	public boolean updateWork(work work) {
+		int rows = this.workDao.updateWork(work);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 }

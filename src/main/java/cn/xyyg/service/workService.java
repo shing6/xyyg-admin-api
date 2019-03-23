@@ -36,4 +36,11 @@ public interface workService {
 	 * 批量删除兼职
 	 */
 	public boolean deleteWork(List<Integer >ids);
+	
+	/**
+	 * 修改兼职
+	 * @param work
+	 * @return
+	 */
+	public boolean updateWork(work work);
 }
