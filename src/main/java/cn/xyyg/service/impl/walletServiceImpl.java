@@ -202,28 +202,33 @@ public class walletServiceImpl implements walletService {
 			
 			e.printStackTrace();
 		}
-		rechange rechange = this.walletDao.getRechangeNo(MD5No);
-		if(rechange.getIsUse()==0){
-			int rows = this.walletDao.updateRechange(MD5No);
-			if(rows>0){
-				wallet wallet = new wallet();
-				wallet.setMoney(rechange.getMoney());
-				wallet.setWechatUserId(wechatUserId);;
-				int row = this.walletDao.rechange(wallet);
-				if(row>0){
-					return ResponseUtil.ok();
+		rechange rechange = this.walletDao.getRechangeNo(MD5No);//查询是否有此卡号
+		if(rechange!=null){
+			if(rechange.getIsUse()==0){
+				int rows = this.walletDao.updateRechange(MD5No);//充值后使卡号失效
+				if(rows>0){
+					wallet wallet = new wallet();
+					wallet.setMoney(rechange.getMoney());
+					wallet.setWechatUserId(wechatUserId);;
+					int row = this.walletDao.rechange(wallet);
+					if(row>0){
+						return ResponseUtil.ok();
+					}
+					else{
+						throw new IllegalArgumentException("充值失败");
+					}
+					
 				}
 				else{
-					throw new IllegalArgumentException("充值失败");
+					return ResponseUtil.fail();
 				}
-				
 			}
 			else{
-				return ResponseUtil.fail();
+				return ResponseUtil.isUse();
 			}
 		}
 		else{
-			return ResponseUtil.isUse();
+			return ResponseUtil.faileNo();
 		}
 		
 		

@@ -101,6 +101,9 @@ public class ResponseUtil {
     public static Object isUse() {
         return fail(513, "卡号已使用");
     }
+    public static Object faileNo() {
+        return fail(514, "卡号错误");
+    }
     
 
 }
