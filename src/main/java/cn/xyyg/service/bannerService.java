@@ -14,6 +14,13 @@ public interface bannerService {
 	public List<banner> getBanner(int pageNum, int pageSize);
 	
 	/**
+	 * 根据id获取轮播图
+	 * @param id
+	 * @return
+	 */
+	public banner getBannerById(int id);
+	
+	/**
 	 * 获取所有轮播图微信端
 	 * @param pageSize 
 	 * @param pageNum 
@@ -39,5 +46,12 @@ public interface bannerService {
 	 * @return
 	 */
 	public boolean deleteBanner(List<Integer> ids);
+	
+	/**
+	 * 修改伦比图
+	 * @param banner
+	 * @return
+	 */
+	public boolean updateBanner(banner banner);
 
 }

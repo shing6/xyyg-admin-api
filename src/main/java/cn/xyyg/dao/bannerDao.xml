@@ -8,6 +8,11 @@
 		select * from banner
 	</select>
 	
+     <!-- 根据id获取广告-->
+    <select id="getBannerById"   resultType="cn.xyyg.pojo.banner" parameterType="Integer">
+		select * from banner where id=#{id}
+	</select>
+	
     <!-- 获取广告数量-->
     <select id="getBannerCount"   resultType="Integer">
 		select count(*) from banner
@@ -25,5 +30,9 @@
             #{id}
         </foreach>
     </delete>
+    <!-- 修改轮播图 -->
+    <update id="updateBanner" parameterType="cn.xyyg.pojo.banner">
+        update `xyyg`.`banner` set `toUrl`=#{toUrl},`picAddr`=#{picAddr} where id=#{id}
+    </update>
 	
 </mapper>

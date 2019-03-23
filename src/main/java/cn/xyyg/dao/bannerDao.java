@@ -15,6 +15,13 @@ public interface bannerDao {
 	public List<banner> getBanner();
 	
 	/**
+	 * 根据id获取轮播图
+	 * @param id
+	 * @return
+	 */
+	public banner getBannerById(int id);
+	
+	/**
 	 * 获取广告数量
 	 * @return
 	 */
@@ -32,5 +39,12 @@ public interface bannerDao {
 	 * @return
 	 */
 	public int deleteBanner(List<Integer> ids);
+	
+	/**
+	 * 修改伦比图
+	 * @param banner
+	 * @return
+	 */
+	public int updateBanner(banner banner);
 
 }

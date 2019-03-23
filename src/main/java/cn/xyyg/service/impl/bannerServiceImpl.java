@@ -72,5 +72,27 @@ public class bannerServiceImpl implements bannerService {
 		}
 		
 	}
+    /**
+     *  修改轮播图
+     */
+	@Override
+	public boolean updateBanner(banner banner) {
+		int rows = this.bannerDao.updateBanner(banner);
+		if(rows>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+    /**
+     * 根据id获取轮播图
+     */
+	@Override
+	public banner getBannerById(int id) {
+		
+		return this.bannerDao.getBannerById(id);
+	}
 
 }
