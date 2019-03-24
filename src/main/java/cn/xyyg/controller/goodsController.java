@@ -419,6 +419,18 @@ public class goodsController {
     	}
     	
     }
+    
+    /**
+     * 查找热销商品
+     * 
+     * @return
+     */
+    @GetMapping("/selectHotGoods")
+    public List<goodsWithCounts> selectHotGoods(){
+        List<goodsWithCounts> goodsList=goodsService.selectHotGoods();
+		return goodsList;
+    	
+    }
   
     
 }

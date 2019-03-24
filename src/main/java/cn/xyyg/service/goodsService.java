@@ -141,4 +141,10 @@ public interface goodsService {
 	 * @return
 	 */
 	public int getGoodsCountByCategory(int categoryId);
+	
+	/**
+	 * 查询热销商品
+	 * @return
+	 */
+	public List<goodsWithCounts> selectHotGoods();
 }

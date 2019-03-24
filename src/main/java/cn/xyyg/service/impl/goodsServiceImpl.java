@@ -316,6 +316,15 @@ public class goodsServiceImpl implements goodsService {
 		return this.goodsDao.getGoodsCountByCategory(categoryId);
 	}
 	
+	/**
+	 * 查询热销商品
+	 */
+	@Override
+	public List<goodsWithCounts> selectHotGoods() {
+		
+		return this.goodsDao.selectHotGoods();
+	}
+	
 	
 	
 	

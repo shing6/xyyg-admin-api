@@ -301,6 +301,15 @@
             #{id}
         </foreach>
      </update>
+     
+    <!-- 查询热销商品 -->
+    <select id="selectHotGoods"  resultType="cn.xyyg.pojo.goodsWithCounts">
+		select goods.* , (select sum(order_goods.counts)from order_goods ,`order`  where order_goods.id = goods.id
+		and (`order`.status=4 or `order`.`status`=5) and `order`.id=order_goods.orderId) AS counts  
+		from goods ORDER BY counts DESC LIMIT 20
+		
+	</select>
+     
     
     
     

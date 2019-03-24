@@ -184,4 +184,10 @@ public interface goodsDao {
 	 * @return
 	 */
 	public int deleteGoodsByIds(List<Integer> ids);
+	
+	/**
+	 * 查询热销商品
+	 * @return
+	 */
+	public List<goodsWithCounts> selectHotGoods();
 }
