@@ -125,6 +125,7 @@
 	    <result property="payPrice" column="payPrice"/>
 	    <result property="createTime" column="createTime"/>
 	    <result property="deleteTime" column="deleteTime"/>
+	    <result property="sendTime" column="sendTime"/>
 	    <result property="longitude" column="longitude"/>
 	    <result property="status" column="status"/>
 	    <result property="sellerId" column="sellerId"/>
