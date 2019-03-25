@@ -72,5 +72,12 @@ public interface userService {
      * @return
      */
     public String getPhoneBySellerId(Integer id);
+    
+    /**
+     * 查找手机是否已注册
+     * @param phone
+     * @return
+     */
+    public boolean getPhone(String phone);
 
 }

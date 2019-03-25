@@ -93,5 +93,12 @@ public interface userDao {
      */
     public String getPhoneBySellerId(Integer id);
     
+    /**
+     * 查找手机是否已注册
+     * @param phone
+     * @return
+     */
+    public user getPhone(String phone);
+    
     
 }

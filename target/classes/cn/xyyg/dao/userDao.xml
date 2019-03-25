@@ -119,6 +119,11 @@
     <select id="getPhoneBySellerId"  resultType="String" parameterType="Integer">
 		select `user`.phone from `user`,seller  where seller.id=#{id} and seller.userId=`user`.id
 	</select>
+	
+     <!-- 查找手机是否已注册 -->
+    <select id="getPhone"  resultType="cn.xyyg.pojo.user" parameterType="String">
+		select user from `user`  where phone=#{phone}
+	</select>
     
     
 	

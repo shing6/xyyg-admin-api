@@ -180,6 +180,21 @@ public class userServiceImpl implements userService {
 		return this.userDao.getPhoneBySellerId(id);
 	}
 	
+	/**
+	 * 查找手机是否已注册
+	 */
+	@Override
+	public boolean getPhone(String phone) {
+		user user = this.userDao.getPhone(phone);
+		if(user!=null){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
 	
 
 }

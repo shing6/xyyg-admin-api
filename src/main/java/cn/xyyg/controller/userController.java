@@ -143,6 +143,25 @@ public class userController {
 			return phone;
 	    	
 	    }
+		
+		/**
+	     * 查看手机是否已注册
+	     * @param request
+	     * @return
+	     */
+		@PostMapping("/getPhone")
+	    public Object getPhone(HttpServletRequest request){
+	        String phone = request.getParameter("phone");
+	        boolean flag = userService.getPhone(phone);
+	        if(flag){
+	        	return ResponseUtil.ok();
+	        }
+	        else{
+	        	return ResponseUtil.fail();
+	        }
+	        
+	    	
+	    }
 	
 
 }
