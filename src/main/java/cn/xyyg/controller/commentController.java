@@ -57,14 +57,14 @@ public class commentController {
 		int orderId=Integer.parseInt(request.getParameter("orderId"));
 		int score=Integer.parseInt(request.getParameter("score"));
         String[] stuList = picAddr.split(",");
-		List<String> picAddrList = new ArrayList<String>();	
+		List<String> picAddrList = new ArrayList<String>();
+		if(!picAddr.isEmpty()){
 		for(String str : stuList){
        	 
 			picAddrList.add(new String(str));
         }
+		}
 		
-		
-	
 		// 根据返回的user实体类，判断用户是否存在
         wechatUser wechatUser = userService.getUserByOpenId(openId);
         if(wechatUser!=null){

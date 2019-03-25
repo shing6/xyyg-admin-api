@@ -38,6 +38,7 @@ public class commentServiceImpl implements commentService {
 			List<Integer> isCommentList=this.orderDao.getIsCommentById(orderId);
 			//图片
 			List<commentPicture> commentPictureList=new ArrayList<>();
+			if(picAddrList.size()>0){
 			for(int i=0;i<picAddrList.size();i++){
 				commentPicture commentPicture=new commentPicture();
 				commentPicture.setPicAddr(picAddrList.get(i));
@@ -45,8 +46,11 @@ public class commentServiceImpl implements commentService {
 				commentPictureList.add(commentPicture);
 			    
 			}
-			
+			}
+			//如果有图片
+			if(commentPictureList.size()>0){
 			this.commentDao.insertCommentPicture(commentPictureList);
+			}
 			for(int i=0;i<isCommentList.size();i++){
 				if(isCommentList.get(i)==0){
 					flag=false;
