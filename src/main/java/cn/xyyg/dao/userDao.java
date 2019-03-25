@@ -98,7 +98,7 @@ public interface userDao {
      * @param phone
      * @return
      */
-    public user getPhone(String phone);
+    public List<user> getPhone(String phone);
     
     
 }

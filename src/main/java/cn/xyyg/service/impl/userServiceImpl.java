@@ -185,8 +185,8 @@ public class userServiceImpl implements userService {
 	 */
 	@Override
 	public boolean getPhone(String phone) {
-		user user = this.userDao.getPhone(phone);
-		if(user!=null){
+		List<user> userList = this.userDao.getPhone(phone);
+		if(userList.size()>0){
 			return true;
 		}
 		else{
