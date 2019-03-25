@@ -122,7 +122,7 @@
 	
      <!-- 查找手机是否已注册 -->
     <select id="getPhone"  resultType="cn.xyyg.pojo.user" parameterType="String">
-		select user from `user`  where phone=#{phone}
+		select * from `user`  where phone=#{phone}
 	</select>
     
     
